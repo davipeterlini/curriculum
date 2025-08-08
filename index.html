@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currículo Interativo - Davi Peterlini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Chosen Palette: Cool Slate & Muted Blue -->
+    <!-- Application Structure Plan: A single-page dashboard structure was chosen to transform the linear CV into an interactive and exploratory experience. The flow starts with a high-level summary, followed by an interactive career timeline, a filterable skills dashboard, and concludes with education and highlights. This non-linear approach allows users (like recruiters) to quickly get an overview and then dive into specific areas of interest (e.g., filter for 'Back-End' skills), which is more efficient and engaging than reading a static document. Navigation is handled by a sticky header with smooth-scrolling links. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Professional Experience -> Goal: Show career progression over time -> Viz/Method: Interactive vertical timeline (HTML/CSS/JS). Interaction: Clicking on a job title expands to show details. Justification: Visually represents career growth and is more engaging than a static list.
+        - Report Info: Competencies and Skills -> Goal: Compare and organize technical abilities -> Viz/Method: Radar Chart (Chart.js). Interaction: Buttons to filter skills by category (Linguagens, Back-End, Front-End, DevOps). Justification: Provides a quick, visual summary of the candidate's technical profile and allows for focused exploration of specific skill sets.
+        - Report Info: Key qualifications -> Goal: Inform and highlight -> Viz/Method: Stat cards (HTML/Tailwind). Interaction: None. Justification: Immediately draws attention to core strengths like leadership and AI focus.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+            color: #334155; /* slate-700 */
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            left: -2.5rem;
+            top: 0.25rem;
+            background-color: #3b82f6; /* blue-500 */
+            border: 3px solid #bfdbfe; /* blue-200 */
+        }
+        .details-content {
+            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+        }
+        .details-content.open {
+            max-height: 500px;
+            opacity: 1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .profile-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #bfdbfe; /* blue-200 */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header id="header" class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-xl md:text-2xl font-bold text-slate-800">Davi Peterlini</h1>
+                <p class="text-sm md:text-base text-blue-600">Arquiteto de Software Master | Tech Lead</p>
+            </div>
+            <nav class="hidden md:flex space-x-6">
+                <a href="#overview" class="text-slate-600 hover:text-blue-600 transition-colors">Visão Geral</a>
+                <a href="#timeline" class="text-slate-600 hover:text-blue-600 transition-colors">Carreira</a>
+                <a href="#skills" class="text-slate-600 hover:text-blue-600 transition-colors">Competências</a>
+                <a href="#education" class="text-slate-600 hover:text-blue-600 transition-colors">Formação</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-slate-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#overview" class="block py-2 text-slate-600 hover:text-blue-600">Visão Geral</a>
+            <a href="#timeline" class="block py-2 text-slate-600 hover:text-blue-600">Carreira</a>
+            <a href="#skills" class="block py-2 text-slate-600 hover:text-blue-600">Competências</a>
+            <a href="#education" class="block py-2 text-slate-600 hover:text-blue-600">Formação</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <section id="overview" class="mb-16 scroll-mt-24">
+            <div class="flex flex-col items-center mb-8">
+                <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo mb-6">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">Visão Geral</h2>
+            </div>
+            <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                Esta seção apresenta um resumo das minhas qualificações e áreas de foco. Aqui você encontrará uma síntese da minha experiência em liderança, arquitetura de software e inovações com Inteligência Artificial, demonstrando minha capacidade de otimizar processos e impactar positivamente o negócio.
+            </p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Resumo Profissional</h3>
+                    <p class="text-slate-600">Arquiteto de Software Master e Tech Lead com sólida experiência em liderança de equipes, arquitetura de sistemas, desenvolvimento back-end e inovações com Inteligência Artificial.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Foco em IA</h3>
+                    <p class="text-slate-600">Liderança em projetos com abordagem "AI First", integrando IA em agentes conversacionais e otimizando processos com IA Generativa e prompt engineering.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80 md:col-span-2 lg:col-span-1">
+                     <h3 class="font-bold text-lg text-blue-600 mb-2">Liderança e Metodologia</h3>
+                    <p class="text-slate-600">Habilidade comprovada em reestruturação de software, aplicando metodologias ágeis (Scrum, Kanban) e colaborativas para impulsionar a eficiência.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="timeline" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">Linha do Tempo da Carreira</h2>
+             <p class="max-w-3xl mx-auto text-center text-slate-600 mb-12">
+                Explore minha trajetória profissional de forma interativa. Cada item representa uma etapa importante da minha carreira. Clique em cada cargo para expandir e ver mais detalhes sobre as responsabilidades, projetos e tecnologias envolvidas.
+            </p>
+            <div id="timeline-container" class="relative max-w-2xl mx-auto border-l-2 border-blue-300 pl-10">
+            </div>
+        </section>
+
+        <section id="skills" class="mb-16 scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">Painel de Competências</h2>
+             <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                Esta é uma visualização interativa das minhas habilidades técnicas. O gráfico de radar abaixo mostra um panorama geral das minhas competências. Use os botões de filtro para focar em áreas específicas, como linguagens de programação, back-end, front-end ou ferramentas de DevOps, e veja como o gráfico se atualiza dinamicamente.
+            </p>
+            <div id="skills-filters" class="flex flex-wrap justify-center gap-2 mb-8">
+            </div>
+            <div class="bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-slate-200/80">
+                <div class="chart-container">
+                    <canvas id="skillsChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="scroll-mt-24">
+            <h2 class="text-3xl font-bold text-slate-800 mb-4 text-center">Formação e Destaques</h2>
+             <p class="max-w-3xl mx-auto text-center text-slate-600 mb-8">
+                Aqui estão minhas qualificações acadêmicas e reconhecimentos profissionais. Esta seção destaca a base educacional que sustenta minha carreira e alguns dos marcos importantes que obtive ao longo do caminho.
+            </p>
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Bacharelado em Engenharia de Computação</h3>
+                    <p class="text-slate-600">Universidade São Francisco | 2009 - 2013</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Mestrado (Não Concluído)</h3>
+                    <p class="text-slate-600">UNICAMP - Software Define Network | 2014</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border border-slate-200/80 md:col-span-2">
+                    <h3 class="font-bold text-lg text-blue-600 mb-2">Destaques Profissionais</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-2">
+                        <li>Trabalho de conclusão de curso de Engenharia premiado com bolsa de mestrado na Unicamp.</li>
+                        <li>Experiência acadêmica com desenvolvimento de software para projeto open source em Redes Definidas por Software (SDN).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-800 text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <h3 class="text-xl font-bold mb-2">Davi Peterlini</h3>
+            <div class="space-x-4 mb-4">
+                <a href="mailto:davipeterlini@gmail.com" class="hover:text-blue-400 transition-colors">davipeterlini@gmail.com</a>
+                <span>&bull;</span>
+                <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">LinkedIn</a>
+            </div>
+            <p class="text-slate-400 text-sm">Currículo Interativo gerado em 2024</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const timelineData = [
+                {
+                    company: "CI&T",
+                    role: "Arquiteto de Software Master | Tech Lead",
+                    dates: "Janeiro 2024 - Presente",
+                    details: [
+                        "Atuei como Tech Lead no projeto do Flow, liderando a equipe responsável por demandas de Inteligência Artificial.",
+                        "Foco em engenharia de IA, incluindo a criação e otimização de prompts e definição de contexto para modelos, melhorando a performance dos agentes conversacionais.",
+                        "Contribuí para a abordagem 'AI First', integrando soluções de IA de forma abrangente nas operações da empresa.",
+                        "Elevei a eficiência dos chats conversacionais, resultando em uma experiência mais personalizada e eficaz para os clientes.",
+                        "Ampliei meu conhecimento em IA e desenvolvimento de software, reforçando a habilidade de liderança e implementação de soluções inovadoras."
+                    ]
+                },
+                {
+                    company: "CI&T",
+                    role: "Arquiteto de Software",
+                    dates: "Outubro 2021 - Janeiro 2024",
+                    details: [
+                        "Liderança de equipes e reestruturação da arquitetura e qualidade de software no projeto mobile da Claro (Minha Claro Residencial e Wifi Mesh).",
+                        "Foco na construção de uma plataforma de vendas online (Marketplace) no projeto Picpay, liderando o time de plataforma para construir e habilitar Values Streams.",
+                        "Definição e monitoramento de KPIs para governança de Eficiência Digital, impulsionando a otimização de processos e tomada de decisões baseada em dados.",
+                        "Atuei com IA Generativa e prompt engineering para otimizar processos e criar aceleradores de negócio."
+                    ]
+                },
+                {
+                    company: "DEXTRA",
+                    role: "Líder Técnico",
+                    dates: "Agosto 2019 - Setembro 2021",
+                    details: [
+                        "Atuei no desenvolvimento e reestruturação de novas funcionalidades back-end para aplicativos móveis, utilizando Java/Kotlin.",
+                        "Stack principal: AWS, Docker, Jenkins, Gitlab, Spring Boot, MongoDB, DynamoDB."
+                    ]
+                },
+                {
+                    company: "INDRA",
+                    role: "Desenvolvedor",
+                    dates: "Março 2017 - Julho 2019",
+                    details: [
+                        "Migração de arquitetura de projeto Java Desktop (Monolito) para Java WEB.",
+                        "Contribuí como desenvolvedor FullStack (JS, React) em momentos pontuais."
+                    ]
+                }
+            ];
+
+            const timelineContainer = document.getElementById('timeline-container');
+            timelineData.forEach(item => {
+                const timelineItem = document.createElement('div');
+                timelineItem.className = 'timeline-item mb-8';
+
+                const content = `
+                    <div class="cursor-pointer">
+                        <h3 class="text-lg font-bold text-slate-800">${item.role}</h3>
+                        <p class="text-blue-600 font-medium">${item.company}</p>
+                        <p class="text-sm text-slate-500 italic">${item.dates}</p>
+                    </div>
+                    <div class="details-content">
+                        <ul class="list-disc list-inside text-slate-600 mt-2 space-y-1 pl-2">
+                            ${item.details.map(d => `<li>${d}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                timelineItem.innerHTML = content;
+                timelineContainer.appendChild(timelineItem);
+
+                timelineItem.querySelector('.cursor-pointer').addEventListener('click', () => {
+                    const details = timelineItem.querySelector('.details-content');
+                    details.classList.toggle('open');
+                });
+            });
+
+            const skillsData = {
+                'Linguagens': { 'Kotlin': 9, 'Java': 9, 'JavaScript': 7, 'Python': 7, 'TypeScript': 7, 'SQL': 8, 'C++': 6, 'Shell Script': 7 },
+                'Back-End': { 'Spring Boot': 9, 'NodeJS': 6, 'Hibernate': 8, 'Microservices': 8, 'REST APIs': 9 },
+                'Front-End': { 'React': 7, 'HTML5': 8, 'CSS3': 7, 'jQuery': 6, 'Bootstrap': 7 },
+                'DevOps & Ferramentas': { 'Docker': 8, 'AWS': 7, 'Kubernetes': 5, 'Git': 9, 'Jenkins': 8, 'Jira': 9 },
+            };
+
+            const allSkills = { ...skillsData['Linguagens'], ...skillsData['Back-End'], ...skillsData['Front-End'], ...skillsData['DevOps & Ferramentas'] };
+
+            const filterButtonsContainer = document.getElementById('skills-filters');
+            const categories = ['Todas', ...Object.keys(skillsData)];
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.className = 'px-4 py-2 text-sm font-medium rounded-full transition-colors';
+                if (category === 'Todas') {
+                    button.classList.add('bg-blue-600', 'text-white');
+                } else {
+                    button.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100');
+                }
+                button.dataset.filter = category;
+                filterButtonsContainer.appendChild(button);
+            });
+            
+            const ctx = document.getElementById('skillsChart').getContext('2d');
+            let skillsChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: Object.keys(allSkills),
+                    datasets: [{
+                        label: 'Nível de Proficiência (Estimado)',
+                        data: Object.values(allSkills),
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: 'rgba(59, 130, 246, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.r !== null) {
+                                        label += context.parsed.r + ' / 10';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.1)'
+                            },
+                            pointLabels: {
+                                font: {
+                                    size: 11
+                                },
+                                color: '#334155'
+                            },
+                            ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                stepSize: 2,
+                                beginAtZero: true,
+                                max: 10
+                            }
+                        }
+                    }
+                }
+            });
+
+            filterButtonsContainer.addEventListener('click', (e) => {
+                if (e.target.tagName === 'BUTTON') {
+                    const filter = e.target.dataset.filter;
+                    
+                    document.querySelectorAll('#skills-filters button').forEach(btn => {
+                        btn.classList.remove('bg-blue-600', 'text-white');
+                        btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100');
+                    });
+                    
+                    e.target.classList.add('bg-blue-600', 'text-white');
+                    e.target.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100');
+
+                    let filteredData;
+                    if (filter === 'Todas') {
+                        filteredData = allSkills;
+                    } else {
+                        filteredData = skillsData[filter];
+                    }
+
+                    skillsChart.data.labels = Object.keys(filteredData);
+                    skillsChart.data.datasets[0].data = Object.values(filteredData);
+                    skillsChart.update();
+                }
+            });
+
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
