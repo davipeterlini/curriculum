@@ -1,8 +1,8 @@
-// PDF Export functionality using print-friendly approach
+// Abordagem alternativa para exportação de PDF usando iframe e impressão direta
 
 // Função para exportar o currículo para PDF
 function exportToPDF() {
-    console.log('Iniciando exportação para PDF');
+    console.log('Iniciando exportação para PDF (método alternativo)');
     
     try {
         // Mostrar indicador de carregamento
@@ -15,18 +15,18 @@ function exportToPDF() {
         // Obter o idioma atual
         const currentLanguage = document.documentElement.lang;
         
-        // Criar uma nova janela para o conteúdo de impressão
-        const printWindow = window.open('', '_blank', 'width=800,height=600');
+        // Criar um iframe oculto
+        const iframe = document.createElement('iframe');
+        iframe.style.visibility = 'hidden';
+        iframe.style.position = 'absolute';
+        iframe.style.left = '-9999px';
+        iframe.style.height = '0';
+        document.body.appendChild(iframe);
         
-        if (!printWindow) {
-            alert('Por favor, permita pop-ups para este site para gerar o PDF.');
-            if (loadingIndicator) loadingIndicator.classList.add('hidden');
-            if (exportButton) exportButton.classList.remove('hidden');
-            return;
-        }
-        
-        // Escrever o conteúdo HTML na nova janela
-        printWindow.document.write(`
+        // Escrever o conteúdo HTML no iframe
+        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+        iframeDoc.open();
+        iframeDoc.write(`
             <!DOCTYPE html>
             <html lang="${currentLanguage}">
             <head>
@@ -34,13 +34,16 @@ function exportToPDF() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>${currentLanguage === 'pt-BR' ? 'Currículo - Davi Peterlini' : 'Resume - Davi Peterlini'}</title>
                 <style>
+                    @page {
+                        size: A4;
+                        margin: 20mm;
+                    }
                     body {
                         font-family: Arial, sans-serif;
                         line-height: 1.6;
                         color: #333;
-                        max-width: 210mm;
-                        margin: 0 auto;
-                        padding: 20mm;
+                        margin: 0;
+                        padding: 0;
                     }
                     h1, h2, h3 {
                         margin-top: 0;
@@ -111,21 +114,6 @@ function exportToPDF() {
                         margin-top: 30px;
                         color: #666;
                     }
-                    @media print {
-                        body {
-                            padding: 0;
-                            font-size: 12px;
-                        }
-                        h1 {
-                            font-size: 18px;
-                        }
-                        h2 {
-                            font-size: 16px;
-                        }
-                        h3 {
-                            font-size: 14px;
-                        }
-                    }
                 </style>
             </head>
             <body>
@@ -175,38 +163,101 @@ function exportToPDF() {
                 <div class="footer">
                     ${document.querySelector('[data-i18n="footer_year"]').textContent}
                 </div>
+                
+                <script>
+                    // Imprimir automaticamente quando o conteúdo estiver carregado
+                    window.onload = function() {
+                        setTimeout(function() {
+                            window.print();
+                            window.parent.postMessage('print-complete', '*');
+                        }, 1000);
+                    };
+                </script>
             </body>
             </html>
         `);
+        iframeDoc.close();
         
-        // Fechar o documento para finalizar a escrita
-        printWindow.document.close();
+        // Função para gerar o HTML da timeline
+        function generateTimelineHTML(lang) {
+            let html = '';
+            
+            timelineData[lang].forEach(item => {
+                html += `
+                    <div class="job">
+                        <h3 class="job-title">${item.role}</h3>
+                        <p class="job-company">${item.company}</p>
+                        <p class="job-date">${item.dates}</p>
+                        <ul>
+                            ${item.details.map(detail => `<li>${detail}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            });
+            
+            return html;
+        }
         
-        // Aguardar o carregamento completo da página
-        printWindow.onload = function() {
-            setTimeout(function() {
-                try {
-                    // Imprimir a página como PDF
-                    printWindow.print();
-                    
-                    // Restaurar a interface após um tempo
-                    setTimeout(function() {
-                        if (loadingIndicator) loadingIndicator.classList.add('hidden');
-                        if (exportButton) exportButton.classList.remove('hidden');
-                    }, 1000);
-                    
-                    console.log('PDF gerado com sucesso');
-                } catch (error) {
-                    console.error('Erro ao imprimir:', error);
-                    alert('Erro ao gerar o PDF. Por favor, tente novamente.');
-                    
-                    if (loadingIndicator) loadingIndicator.classList.add('hidden');
-                    if (exportButton) exportButton.classList.remove('hidden');
+        // Função para gerar o HTML das habilidades
+        function generateSkillsHTML(lang) {
+            let html = '';
+            
+            const skillsCategories = skillsData[lang];
+            
+            Object.keys(skillsCategories).forEach(category => {
+                html += `
+                    <div class="skills-category">
+                        <h3>${category}</h3>
+                        <div class="skills-grid">
+                `;
+                
+                const skills = skillsCategories[category];
+                Object.entries(skills).forEach(([skill, level]) => {
+                    html += `<div>${skill}: ${level}/10</div>`;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return html;
+        }
+        
+        // Ouvir mensagem de conclusão da impressão
+        window.addEventListener('message', function(event) {
+            if (event.data === 'print-complete') {
+                // Remover o iframe
+                if (document.body.contains(iframe)) {
+                    document.body.removeChild(iframe);
                 }
-            }, 1000);
-        };
+                
+                // Restaurar a interface
+                if (loadingIndicator) loadingIndicator.classList.add('hidden');
+                if (exportButton) exportButton.classList.remove('hidden');
+                
+                console.log('PDF gerado com sucesso (método iframe)');
+            }
+        });
+        
+        // Timeout de segurança para restaurar a interface caso algo dê errado
+        setTimeout(function() {
+            if (document.body.contains(iframe)) {
+                document.body.removeChild(iframe);
+            }
+            
+            if (loadingIndicator && loadingIndicator.classList.contains('hidden') === false) {
+                loadingIndicator.classList.add('hidden');
+            }
+            
+            if (exportButton && exportButton.classList.contains('hidden') === true) {
+                exportButton.classList.remove('hidden');
+            }
+        }, 10000);
+        
     } catch (error) {
-        console.error('Erro na função exportToPDF:', error);
+        console.error('Erro na função exportToPDF (método alternativo):', error);
         alert('Erro ao gerar o PDF. Por favor, tente novamente.');
         
         // Restaurar a interface
@@ -214,59 +265,34 @@ function exportToPDF() {
         const exportButton = document.getElementById('export-pdf-btn');
         if (loadingIndicator) loadingIndicator.classList.add('hidden');
         if (exportButton) exportButton.classList.remove('hidden');
+        
+        // Tentar método de fallback
+        tryFallbackExport();
     }
 }
 
-// Função para gerar o HTML da timeline
-function generateTimelineHTML(lang) {
-    let html = '';
+// Método de fallback para exportação de PDF
+function tryFallbackExport() {
+    console.log('Tentando método de fallback para exportação de PDF');
     
-    timelineData[lang].forEach(item => {
-        html += `
-            <div class="job">
-                <h3 class="job-title">${item.role}</h3>
-                <p class="job-company">${item.company}</p>
-                <p class="job-date">${item.dates}</p>
-                <ul>
-                    ${item.details.map(detail => `<li>${detail}</li>`).join('')}
-                </ul>
-            </div>
-        `;
-    });
-    
-    return html;
-}
-
-// Função para gerar o HTML das habilidades
-function generateSkillsHTML(lang) {
-    let html = '';
-    
-    const skillsCategories = skillsData[lang];
-    
-    Object.keys(skillsCategories).forEach(category => {
-        html += `
-            <div class="skills-category">
-                <h3>${category}</h3>
-                <div class="skills-grid">
-        `;
+    try {
+        // Criar um link para uma versão estática do currículo
+        const staticURL = 'version/index-curriculum-full.html';
+        const link = document.createElement('a');
+        link.href = staticURL;
+        link.target = '_blank';
+        link.click();
         
-        const skills = skillsCategories[category];
-        Object.entries(skills).forEach(([skill, level]) => {
-            html += `<div>${skill}: ${level}/10</div>`;
-        });
-        
-        html += `
-                </div>
-            </div>
-        `;
-    });
-    
-    return html;
+        alert('Não foi possível gerar o PDF automaticamente. Uma versão para impressão será aberta em uma nova aba. Use a função de impressão do navegador (Ctrl+P ou Cmd+P) para salvar como PDF.');
+    } catch (error) {
+        console.error('Erro no método de fallback:', error);
+        alert('Não foi possível gerar o PDF. Por favor, tente novamente mais tarde.');
+    }
 }
 
 // Inicializar botões de exportação
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('Inicializando botões de exportação PDF');
+    console.log('Inicializando botões de exportação PDF (método alternativo)');
     
     // Adicionar event listeners aos botões
     const exportButton = document.getElementById('export-pdf-btn');
