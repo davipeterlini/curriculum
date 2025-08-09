@@ -1,4 +1,4 @@
-// PDF Export functionality with improved error handling
+// PDF Export functionality with improved error handling and rendering
 
 // Função para exportar o currículo para PDF
 function exportToPDF() {
@@ -23,21 +23,19 @@ function exportToPDF() {
         const currentLanguage = document.documentElement.lang;
         const fileName = currentLanguage === 'pt-BR' ? 'Curriculo_Davi_Peterlini.pdf' : 'Resume_Davi_Peterlini.pdf';
         
-        // Criar um container temporário para o conteúdo do PDF
-        const pdfContainer = document.createElement('div');
-        pdfContainer.className = 'pdf-container';
-        pdfContainer.style.width = '210mm'; // Tamanho A4
-        pdfContainer.style.padding = '15mm';
-        pdfContainer.style.backgroundColor = 'white';
-        pdfContainer.style.color = 'black';
-        
-        // Clonar o conteúdo principal
-        const mainContent = document.querySelector('main').cloneNode(true);
+        // Criar um elemento para o conteúdo do PDF
+        const pdfContent = document.createElement('div');
+        pdfContent.id = 'pdf-content';
+        pdfContent.style.width = '210mm'; // Tamanho A4
+        pdfContent.style.backgroundColor = 'white';
+        pdfContent.style.color = 'black';
+        pdfContent.style.padding = '20mm';
+        pdfContent.style.fontFamily = 'Arial, sans-serif';
         
         // Adicionar cabeçalho
         const header = document.createElement('div');
-        header.style.marginBottom = '20px';
         header.style.textAlign = 'center';
+        header.style.marginBottom = '20px';
         
         const name = document.createElement('h1');
         name.textContent = 'Davi Peterlini';
@@ -58,29 +56,192 @@ function exportToPDF() {
         header.appendChild(name);
         header.appendChild(role);
         header.appendChild(contact);
+        pdfContent.appendChild(header);
         
-        // Adicionar o cabeçalho e o conteúdo principal ao container
-        pdfContainer.appendChild(header);
-        pdfContainer.appendChild(mainContent);
+        // Adicionar seção de visão geral
+        const overviewSection = document.createElement('div');
+        overviewSection.style.marginBottom = '30px';
         
-        // Expandir todos os detalhes para o PDF
-        const detailsContents = pdfContainer.querySelectorAll('.details-content');
-        detailsContents.forEach(detail => {
-            detail.classList.add('open');
-            detail.style.maxHeight = 'none';
-            detail.style.opacity = '1';
+        const overviewTitle = document.createElement('h2');
+        overviewTitle.textContent = document.querySelector('[data-i18n="overview_title"]').textContent;
+        overviewTitle.style.fontSize = '20px';
+        overviewTitle.style.fontWeight = 'bold';
+        overviewTitle.style.marginBottom = '10px';
+        overviewTitle.style.color = '#1e3a8a';
+        
+        const overviewText = document.createElement('p');
+        overviewText.textContent = document.querySelector('[data-i18n="professional_summary_text"]').textContent;
+        overviewText.style.marginBottom = '15px';
+        
+        overviewSection.appendChild(overviewTitle);
+        overviewSection.appendChild(overviewText);
+        pdfContent.appendChild(overviewSection);
+        
+        // Adicionar seção de carreira
+        const careerSection = document.createElement('div');
+        careerSection.style.marginBottom = '30px';
+        
+        const careerTitle = document.createElement('h2');
+        careerTitle.textContent = document.querySelector('[data-i18n="timeline_title"]').textContent;
+        careerTitle.style.fontSize = '20px';
+        careerTitle.style.fontWeight = 'bold';
+        careerTitle.style.marginBottom = '15px';
+        careerTitle.style.color = '#1e3a8a';
+        
+        careerSection.appendChild(careerTitle);
+        
+        // Obter dados da timeline no idioma atual
+        const currentLanguage = document.documentElement.lang;
+        const timelineItems = timelineData[currentLanguage];
+        
+        // Adicionar cada item da timeline
+        timelineItems.forEach(item => {
+            const jobItem = document.createElement('div');
+            jobItem.style.marginBottom = '20px';
+            
+            const jobTitle = document.createElement('h3');
+            jobTitle.textContent = item.role;
+            jobTitle.style.fontSize = '18px';
+            jobTitle.style.fontWeight = 'bold';
+            jobTitle.style.marginBottom = '5px';
+            
+            const jobCompany = document.createElement('p');
+            jobCompany.textContent = item.company;
+            jobCompany.style.fontWeight = 'bold';
+            jobCompany.style.color = '#3b82f6';
+            jobCompany.style.marginBottom = '3px';
+            
+            const jobDates = document.createElement('p');
+            jobDates.textContent = item.dates;
+            jobDates.style.fontStyle = 'italic';
+            jobDates.style.marginBottom = '10px';
+            
+            const jobDetails = document.createElement('ul');
+            jobDetails.style.paddingLeft = '20px';
+            
+            item.details.forEach(detail => {
+                const detailItem = document.createElement('li');
+                detailItem.textContent = detail;
+                detailItem.style.marginBottom = '5px';
+                jobDetails.appendChild(detailItem);
+            });
+            
+            jobItem.appendChild(jobTitle);
+            jobItem.appendChild(jobCompany);
+            jobItem.appendChild(jobDates);
+            jobItem.appendChild(jobDetails);
+            
+            careerSection.appendChild(jobItem);
         });
         
-        // Remover elementos interativos e desnecessários
-        const elementsToRemove = pdfContainer.querySelectorAll('#skills-filters button, canvas');
-        elementsToRemove.forEach(el => {
-            if (el && el.parentNode) el.parentNode.removeChild(el);
+        pdfContent.appendChild(careerSection);
+        
+        // Adicionar seção de competências
+        const skillsSection = document.createElement('div');
+        skillsSection.style.marginBottom = '30px';
+        
+        const skillsTitle = document.createElement('h2');
+        skillsTitle.textContent = document.querySelector('[data-i18n="skills_title"]').textContent;
+        skillsTitle.style.fontSize = '20px';
+        skillsTitle.style.fontWeight = 'bold';
+        skillsTitle.style.marginBottom = '15px';
+        skillsTitle.style.color = '#1e3a8a';
+        
+        skillsSection.appendChild(skillsTitle);
+        
+        // Obter dados de habilidades no idioma atual
+        const skillsData = window.skillsData[currentLanguage];
+        
+        // Adicionar cada categoria de habilidades
+        Object.keys(skillsData).forEach(category => {
+            const categoryTitle = document.createElement('h3');
+            categoryTitle.textContent = category;
+            categoryTitle.style.fontSize = '16px';
+            categoryTitle.style.fontWeight = 'bold';
+            categoryTitle.style.marginTop = '10px';
+            categoryTitle.style.marginBottom = '5px';
+            
+            const skillsList = document.createElement('ul');
+            skillsList.style.columns = '2';
+            skillsList.style.paddingLeft = '20px';
+            
+            Object.entries(skillsData[category]).forEach(([skill, level]) => {
+                const skillItem = document.createElement('li');
+                skillItem.textContent = `${skill}: ${level}/10`;
+                skillItem.style.marginBottom = '3px';
+                skillsList.appendChild(skillItem);
+            });
+            
+            skillsSection.appendChild(categoryTitle);
+            skillsSection.appendChild(skillsList);
         });
+        
+        pdfContent.appendChild(skillsSection);
+        
+        // Adicionar seção de educação
+        const educationSection = document.createElement('div');
+        
+        const educationTitle = document.createElement('h2');
+        educationTitle.textContent = document.querySelector('[data-i18n="education_title"]').textContent;
+        educationTitle.style.fontSize = '20px';
+        educationTitle.style.fontWeight = 'bold';
+        educationTitle.style.marginBottom = '15px';
+        educationTitle.style.color = '#1e3a8a';
+        
+        const bachelorTitle = document.createElement('h3');
+        bachelorTitle.textContent = document.querySelector('[data-i18n="bachelor"]').textContent;
+        bachelorTitle.style.fontSize = '16px';
+        bachelorTitle.style.fontWeight = 'bold';
+        bachelorTitle.style.marginBottom = '5px';
+        
+        const university = document.createElement('p');
+        university.textContent = document.querySelector('[data-i18n="university"]').textContent;
+        university.style.marginBottom = '15px';
+        
+        const mastersTitle = document.createElement('h3');
+        mastersTitle.textContent = document.querySelector('[data-i18n="masters"]').textContent;
+        mastersTitle.style.fontSize = '16px';
+        mastersTitle.style.fontWeight = 'bold';
+        mastersTitle.style.marginBottom = '5px';
+        
+        const mastersDetails = document.createElement('p');
+        mastersDetails.textContent = document.querySelector('[data-i18n="masters_details"]').textContent;
+        mastersDetails.style.marginBottom = '15px';
+        
+        const highlightsTitle = document.createElement('h3');
+        highlightsTitle.textContent = document.querySelector('[data-i18n="highlights"]').textContent;
+        highlightsTitle.style.fontSize = '16px';
+        highlightsTitle.style.fontWeight = 'bold';
+        highlightsTitle.style.marginBottom = '5px';
+        
+        const highlightsList = document.createElement('ul');
+        highlightsList.style.paddingLeft = '20px';
+        
+        const highlight1 = document.createElement('li');
+        highlight1.textContent = document.querySelector('[data-i18n="highlight1"]').textContent;
+        highlight1.style.marginBottom = '5px';
+        
+        const highlight2 = document.createElement('li');
+        highlight2.textContent = document.querySelector('[data-i18n="highlight2"]').textContent;
+        highlight2.style.marginBottom = '5px';
+        
+        highlightsList.appendChild(highlight1);
+        highlightsList.appendChild(highlight2);
+        
+        educationSection.appendChild(educationTitle);
+        educationSection.appendChild(bachelorTitle);
+        educationSection.appendChild(university);
+        educationSection.appendChild(mastersTitle);
+        educationSection.appendChild(mastersDetails);
+        educationSection.appendChild(highlightsTitle);
+        educationSection.appendChild(highlightsList);
+        
+        pdfContent.appendChild(educationSection);
         
         // Adicionar o container ao documento temporariamente
-        document.body.appendChild(pdfContainer);
-        pdfContainer.style.position = 'absolute';
-        pdfContainer.style.left = '-9999px';
+        document.body.appendChild(pdfContent);
+        pdfContent.style.position = 'absolute';
+        pdfContent.style.left = '-9999px';
         
         // Configurar opções do html2pdf
         const opt = {
@@ -90,7 +251,7 @@ function exportToPDF() {
             html2canvas: { 
                 scale: 2,
                 useCORS: true,
-                logging: true,
+                logging: false,
                 allowTaint: true,
                 letterRendering: true
             },
@@ -103,11 +264,13 @@ function exportToPDF() {
         };
         
         // Gerar PDF com tratamento de erros aprimorado
-        html2pdf().from(pdfContainer).set(opt).save()
+        html2pdf().from(pdfContent).set(opt).save()
             .then(() => {
                 console.log('PDF gerado com sucesso');
                 // Remover o container temporário
-                document.body.removeChild(pdfContainer);
+                if (document.body.contains(pdfContent)) {
+                    document.body.removeChild(pdfContent);
+                }
                 // Restaurar a interface
                 if (loadingIndicator) loadingIndicator.classList.add('hidden');
                 if (exportButton) exportButton.classList.remove('hidden');
@@ -116,123 +279,16 @@ function exportToPDF() {
                 console.error('Erro ao gerar PDF:', error);
                 alert('Erro ao gerar o PDF. Por favor, tente novamente.');
                 // Remover o container temporário
-                if (document.body.contains(pdfContainer)) {
-                    document.body.removeChild(pdfContainer);
+                if (document.body.contains(pdfContent)) {
+                    document.body.removeChild(pdfContent);
                 }
                 // Restaurar a interface
                 if (loadingIndicator) loadingIndicator.classList.add('hidden');
                 if (exportButton) exportButton.classList.remove('hidden');
-                
-                // Tentar método alternativo se o primeiro falhar
-                tryAlternativeExport();
             });
     } catch (error) {
         console.error('Erro na função exportToPDF:', error);
         alert('Erro ao gerar o PDF. Por favor, tente novamente.');
-        
-        // Restaurar a interface
-        const loadingIndicator = document.getElementById('pdf-loading');
-        const exportButton = document.getElementById('export-pdf-btn');
-        if (loadingIndicator) loadingIndicator.classList.add('hidden');
-        if (exportButton) exportButton.classList.remove('hidden');
-        
-        // Tentar método alternativo
-        tryAlternativeExport();
-    }
-}
-
-// Método alternativo de exportação para PDF (mais simples)
-function tryAlternativeExport() {
-    console.log('Tentando método alternativo de exportação');
-    
-    try {
-        // Mostrar indicador de carregamento
-        const loadingIndicator = document.getElementById('pdf-loading');
-        const exportButton = document.getElementById('export-pdf-btn');
-        
-        if (loadingIndicator) loadingIndicator.classList.remove('hidden');
-        if (exportButton) exportButton.classList.add('hidden');
-        
-        // Obter o idioma atual para definir o nome do arquivo
-        const currentLanguage = document.documentElement.lang;
-        const fileName = currentLanguage === 'pt-BR' ? 'Curriculo_Davi_Peterlini.pdf' : 'Resume_Davi_Peterlini.pdf';
-        
-        // Criar um elemento simples com apenas texto
-        const simpleContent = document.createElement('div');
-        simpleContent.style.padding = '20px';
-        simpleContent.style.fontFamily = 'Arial, sans-serif';
-        
-        // Adicionar informações básicas
-        simpleContent.innerHTML = `
-            <h1 style="font-size: 24px; margin-bottom: 10px;">Davi Peterlini</h1>
-            <p style="font-size: 16px; color: #3b82f6; margin-bottom: 20px;">${document.querySelector('[data-i18n="role"]').textContent}</p>
-            <p style="margin-bottom: 20px;">Email: davipeterlini@gmail.com | LinkedIn: linkedin.com/in/davi-peterlini-7aa0b737</p>
-            
-            <h2 style="font-size: 20px; margin-top: 30px; margin-bottom: 10px;">${document.querySelector('[data-i18n="overview_title"]').textContent}</h2>
-            <p style="margin-bottom: 20px;">${document.querySelector('[data-i18n="professional_summary_text"]').textContent}</p>
-            
-            <h2 style="font-size: 20px; margin-top: 30px; margin-bottom: 10px;">${document.querySelector('[data-i18n="timeline_title"]').textContent}</h2>
-        `;
-        
-        // Adicionar experiência profissional
-        const timelineItems = document.querySelectorAll('#timeline-container .timeline-item');
-        timelineItems.forEach(item => {
-            const role = item.querySelector('h3').textContent;
-            const company = item.querySelector('p:nth-child(1)').textContent;
-            const dates = item.querySelector('p:nth-child(2)').textContent;
-            
-            simpleContent.innerHTML += `
-                <div style="margin-bottom: 15px;">
-                    <h3 style="font-size: 18px; margin-bottom: 5px;">${role}</h3>
-                    <p style="font-weight: bold; color: #3b82f6; margin-bottom: 3px;">${company}</p>
-                    <p style="font-style: italic; margin-bottom: 10px;">${dates}</p>
-                </div>
-            `;
-        });
-        
-        // Adicionar educação
-        simpleContent.innerHTML += `
-            <h2 style="font-size: 20px; margin-top: 30px; margin-bottom: 10px;">${document.querySelector('[data-i18n="education_title"]').textContent}</h2>
-            <p style="font-weight: bold; margin-bottom: 5px;">${document.querySelector('[data-i18n="bachelor"]').textContent}</p>
-            <p style="margin-bottom: 15px;">${document.querySelector('[data-i18n="university"]').textContent}</p>
-        `;
-        
-        // Adicionar o elemento ao documento temporariamente
-        document.body.appendChild(simpleContent);
-        simpleContent.style.position = 'absolute';
-        simpleContent.style.left = '-9999px';
-        
-        // Configurar opções simplificadas
-        const opt = {
-            margin: 15,
-            filename: fileName,
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        
-        // Gerar PDF simplificado
-        html2pdf().from(simpleContent).set(opt).save()
-            .then(() => {
-                console.log('PDF alternativo gerado com sucesso');
-                // Remover o elemento temporário
-                document.body.removeChild(simpleContent);
-                // Restaurar a interface
-                if (loadingIndicator) loadingIndicator.classList.add('hidden');
-                if (exportButton) exportButton.classList.remove('hidden');
-            })
-            .catch(error => {
-                console.error('Erro ao gerar PDF alternativo:', error);
-                alert('Não foi possível gerar o PDF. Por favor, tente em outro navegador.');
-                // Remover o elemento temporário
-                if (document.body.contains(simpleContent)) {
-                    document.body.removeChild(simpleContent);
-                }
-                // Restaurar a interface
-                if (loadingIndicator) loadingIndicator.classList.add('hidden');
-                if (exportButton) exportButton.classList.remove('hidden');
-            });
-    } catch (error) {
-        console.error('Erro no método alternativo de exportação:', error);
-        alert('Não foi possível gerar o PDF. Por favor, tente em outro navegador.');
         
         // Restaurar a interface
         const loadingIndicator = document.getElementById('pdf-loading');
