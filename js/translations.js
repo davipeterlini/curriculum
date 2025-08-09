@@ -8,6 +8,8 @@ const translations = {
         'career': 'Carreira',
         'skills': 'Competências',
         'education': 'Formação',
+        'export_pdf': 'Exportar PDF',
+        'generating_pdf': 'Gerando PDF...',
         
         // Overview section
         'overview_title': 'Visão Geral',
@@ -58,6 +60,8 @@ const translations = {
         'career': 'Career',
         'skills': 'Skills',
         'education': 'Education',
+        'export_pdf': 'Export PDF',
+        'generating_pdf': 'Generating PDF...',
         
         // Overview section
         'overview_title': 'Overview',
