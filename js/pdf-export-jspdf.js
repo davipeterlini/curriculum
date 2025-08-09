@@ -12,8 +12,9 @@ function exportToPDF() {
         if (loadingIndicator) loadingIndicator.classList.remove('hidden');
         if (exportButton) exportButton.classList.add('hidden');
         
-        // Obter o idioma atual
+        // Obter o idioma atual e tema
         const currentLanguage = document.documentElement.lang;
+        const currentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
         
         // Criar uma nova janela para o conteúdo de impressão
         const printWindow = window.open('', '_blank', 'width=800,height=600');
@@ -28,23 +29,22 @@ function exportToPDF() {
         // Escrever o conteúdo HTML na nova janela
         printWindow.document.write(`
             <!DOCTYPE html>
-            <html lang="${currentLanguage}">
+            <html lang="${currentLanguage}" ${currentTheme === 'dark' ? 'class="dark"' : ''}>
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>${currentLanguage === 'pt-BR' ? 'Currículo - Davi Peterlini' : 'Resume - Davi Peterlini'}</title>
                 <style>
+                    /* Base styles */
                     body {
                         font-family: Arial, sans-serif;
                         line-height: 1.6;
-                        color: #333;
                         max-width: 210mm;
                         margin: 0 auto;
                         padding: 20mm;
                     }
                     h1, h2, h3 {
                         margin-top: 0;
-                        color: #1e3a8a;
                     }
                     h1 {
                         font-size: 24px;
@@ -53,7 +53,6 @@ function exportToPDF() {
                     }
                     h2 {
                         font-size: 18px;
-                        border-bottom: 1px solid #ddd;
                         padding-bottom: 5px;
                         margin-top: 20px;
                     }
@@ -66,7 +65,6 @@ function exportToPDF() {
                         margin-bottom: 20px;
                     }
                     .role {
-                        color: #3b82f6;
                         font-size: 16px;
                         margin-bottom: 5px;
                     }
@@ -85,7 +83,6 @@ function exportToPDF() {
                         margin-bottom: 0;
                     }
                     .job-company {
-                        color: #3b82f6;
                         font-weight: bold;
                         margin-bottom: 0;
                     }
@@ -109,21 +106,69 @@ function exportToPDF() {
                         font-size: 12px;
                         font-style: italic;
                         margin-top: 30px;
+                    }
+                    
+                    /* Light theme (default) */
+                    body {
+                        color: #333;
+                        background-color: #ffffff;
+                    }
+                    h1, h2, h3 {
+                        color: #1e3a8a;
+                    }
+                    h2 {
+                        border-bottom: 1px solid #ddd;
+                    }
+                    .role, .job-company {
+                        color: #3b82f6;
+                    }
+                    .footer {
                         color: #666;
                     }
+                    
+                    /* Dark theme */
+                    html.dark body {
+                        color: #e5e7eb;
+                        background-color: #1f2937;
+                    }
+                    html.dark h1, html.dark h2, html.dark h3 {
+                        color: #f3f4f6;
+                    }
+                    html.dark h2 {
+                        border-bottom: 1px solid #4b5563;
+                    }
+                    html.dark .role, html.dark .job-company {
+                        color: #60a5fa;
+                    }
+                    html.dark .footer {
+                        color: #9ca3af;
+                    }
+                    
                     @media print {
                         body {
                             padding: 0;
                             font-size: 12px;
+                            background-color: #ffffff !important;
+                            color: #333 !important;
+                        }
+                        h1, h2, h3 {
+                            color: #1e3a8a !important;
                         }
                         h1 {
                             font-size: 18px;
                         }
                         h2 {
                             font-size: 16px;
+                            border-bottom: 1px solid #ddd !important;
                         }
                         h3 {
                             font-size: 14px;
+                        }
+                        .role, .job-company {
+                            color: #3b82f6 !important;
+                        }
+                        .footer {
+                            color: #666 !important;
                         }
                     }
                 </style>
