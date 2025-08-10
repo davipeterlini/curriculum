@@ -35,6 +35,7 @@ function exportToPDF() {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>${currentLanguage === 'pt-BR' ? 'Currículo - Davi Peterlini' : 'Resume - Davi Peterlini'}</title>
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
                 <style>
                     /* Base styles */
                     :root {
@@ -225,6 +226,18 @@ function exportToPDF() {
                         padding-top: 15px;
                     }
                     
+                    .chart-container {
+                        position: relative;
+                        width: 100%;
+                        max-width: 600px;
+                        margin: 0 auto 30px auto;
+                        height: 400px;
+                    }
+                    
+                    .skills-list {
+                        display: none;
+                    }
+                    
                     @media print {
                         body {
                             padding: 0;
@@ -293,7 +306,12 @@ function exportToPDF() {
                 
                 <div class="section">
                     <h2>${document.querySelector('[data-i18n="skills_title"]').textContent}</h2>
-                    ${generateSkillsHTML(currentLanguage)}
+                    <div class="chart-container">
+                        <canvas id="skillsChartPDF"></canvas>
+                    </div>
+                    <div class="skills-list">
+                        ${generateSkillsHTML(currentLanguage)}
+                    </div>
                 </div>
                 
                 <div class="section">
@@ -332,20 +350,109 @@ function exportToPDF() {
         
         // Aguardar o carregamento completo da página
         printWindow.onload = function() {
+            // Criar o gráfico de radar das habilidades
             setTimeout(function() {
                 try {
-                    // Imprimir a página como PDF
-                    printWindow.print();
+                    // Obter dados de habilidades
+                    const langSkillsData = skillsData[currentLanguage];
+                    const categoryNames = Object.keys(langSkillsData);
                     
-                    // Restaurar a interface após um tempo
+                    // Criar um objeto combinado de todas as habilidades
+                    let allSkills = {};
+                    categoryNames.forEach(category => {
+                        allSkills = { ...allSkills, ...langSkillsData[category] };
+                    });
+                    
+                    // Obter o contexto do canvas
+                    const ctx = printWindow.document.getElementById('skillsChartPDF').getContext('2d');
+                    
+                    // Definir cores com base no tema
+                    const isDark = currentTheme === 'dark';
+                    const gridColor = isDark ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+                    const textColor = isDark ? '#e2e8f0' : '#334155';
+                    const backgroundColor = isDark ? 'rgba(59, 130, 246, 0.2)' : 'rgba(59, 130, 246, 0.2)';
+                    const borderColor = isDark ? 'rgba(96, 165, 250, 1)' : 'rgba(59, 130, 246, 1)';
+                    
+                    // Criar o gráfico de radar
+                    new printWindow.Chart(ctx, {
+                        type: 'radar',
+                        data: {
+                            labels: Object.keys(allSkills),
+                            datasets: [{
+                                label: translations[currentLanguage].proficiency || 'Proficiency',
+                                data: Object.values(allSkills),
+                                backgroundColor: backgroundColor,
+                                borderColor: borderColor,
+                                borderWidth: 2,
+                                pointBackgroundColor: borderColor,
+                                pointBorderColor: isDark ? '#1f2937' : '#fff',
+                                pointHoverBackgroundColor: isDark ? '#1f2937' : '#fff',
+                                pointHoverBorderColor: borderColor
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.dataset.label || '';
+                                            if (label) {
+                                                label += ': ';
+                                            }
+                                            if (context.parsed.r !== null) {
+                                                label += context.parsed.r + ' / 10';
+                                            }
+                                            return label;
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                r: {
+                                    angleLines: {
+                                        color: gridColor
+                                    },
+                                    grid: {
+                                        color: gridColor
+                                    },
+                                    pointLabels: {
+                                        color: textColor,
+                                        font: {
+                                            size: 11
+                                        }
+                                    },
+                                    ticks: {
+                                        backdropColor: isDark ? 'rgba(31, 41, 55, 0.75)' : 'rgba(255, 255, 255, 0.75)',
+                                        color: textColor,
+                                        stepSize: 2,
+                                        beginAtZero: true,
+                                        max: 10
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    
+                    // Dar tempo para o gráfico ser renderizado e então imprimir
                     setTimeout(function() {
-                        if (loadingIndicator) loadingIndicator.classList.add('hidden');
-                        if (exportButton) exportButton.classList.remove('hidden');
+                        // Imprimir a página como PDF
+                        printWindow.print();
+                        
+                        // Restaurar a interface após um tempo
+                        setTimeout(function() {
+                            if (loadingIndicator) loadingIndicator.classList.add('hidden');
+                            if (exportButton) exportButton.classList.remove('hidden');
+                        }, 1000);
+                        
+                        console.log('PDF gerado com sucesso');
                     }, 1000);
-                    
-                    console.log('PDF gerado com sucesso');
                 } catch (error) {
-                    console.error('Erro ao imprimir:', error);
+                    console.error('Erro ao gerar gráfico ou imprimir:', error);
                     alert('Erro ao gerar o PDF. Por favor, tente novamente.');
                     
                     if (loadingIndicator) loadingIndicator.classList.add('hidden');
