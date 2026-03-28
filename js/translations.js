@@ -3,7 +3,7 @@ const translations = {
     'pt-BR': {
         // Header
         'title': 'Currículo Interativo - Davi Peterlini',
-        'role': 'Arquiteto de Software Master | Tech Lead',
+        'role': 'Senior AI Platform Engineer | Tech Lead',
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Competências',
@@ -13,13 +13,13 @@ const translations = {
         
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Esta seção apresenta um resumo das minhas qualificações e áreas de foco. Aqui você encontrará uma síntese da minha experiência em liderança, arquitetura de software e inovações com Inteligência Artificial, demonstrando minha capacidade de otimizar processos e impactar positivamente o negócio.',
+        'overview_description': 'Engenheiro de software sênior especializado em plataformas de IA para desenvolvedores. Atuo na interseção entre engenharia de software, plataformas de IA/LLM e Developer Experience (DX), construindo soluções enterprise-grade com LiteLLM, MCP, Langfuse e multi-agent systems.',
         'professional_summary': 'Resumo Profissional',
-        'professional_summary_text': 'Arquiteto de Software Master e Tech Lead com sólida experiência em liderança de equipes, arquitetura de sistemas, desenvolvimento back-end e inovações com Inteligência Artificial.',
+        'professional_summary_text': 'Senior AI Platform Engineer e Tech Lead com experiência sólida em plataformas de IA para desenvolvedores, arquitetura de sistemas distribuídos, desenvolvimento Python/Node.js em produção e inovações com LLMs. Experiência hands-on com Flow LLM Proxy, Flow Coder Extension, MCP Servers e observabilidade de LLMs.',
         'ai_focus': 'Foco em IA',
-        'ai_focus_text': 'Liderança em projetos com abordagem "AI First", integrando IA em agentes conversacionais e otimizando processos com IA Generativa e prompt engineering.',
-        'leadership': 'Liderança e Metodologia',
-        'leadership_text': 'Habilidade comprovada em reestruturação de software, aplicando metodologias ágeis (Scrum, Kanban) e colaborativas para impulsionar a eficiência.',
+        'ai_focus_text': 'Engenharia de IA com LiteLLM (multi-provider: OpenAI, Bedrock, Gemini), MCP (Model Context Protocol), RAG patterns, vector stores, CrewAI para orquestração multi-agent, e otimização de pipelines de IA para desenvolvedores.',
+        'leadership': 'Liderança e Mentoria',
+        'leadership_text': 'Tech Lead com code reviews sistemáticos, mentoria formal de engenheiros plenos e seniores, e liderança da Comunidade de Prática de AI Engineering. Definição de padrões de qualidade com SonarQube, testes e CI/CD.',
         
         // Timeline section
         'timeline_title': 'Linha do Tempo da Carreira',
@@ -45,17 +45,17 @@ const translations = {
         'highlights': 'Destaques Profissionais',
         'highlight1': 'Trabalho de conclusão de curso de Engenharia premiado com bolsa de mestrado na Unicamp.',
         'highlight2': 'Experiência acadêmica com desenvolvimento de software para projeto open source em Redes Definidas por Software (SDN).',
-        
+
         // Footer
-        'footer_year': 'Currículo Interativo gerado em 2024',
-        
+        'footer_year': 'Currículo Interativo gerado em 2026',
+
         // Job details
         'present': 'Presente'
     },
     'en-US': {
         // Header
         'title': 'Interactive Resume - Davi Peterlini',
-        'role': 'Master Software Architect | Tech Lead',
+        'role': 'Senior AI Platform Engineer | Tech Lead',
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',
@@ -65,13 +65,13 @@ const translations = {
         
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'This section presents a summary of my qualifications and focus areas. Here you will find a synthesis of my experience in leadership, software architecture, and innovations with Artificial Intelligence, demonstrating my ability to optimize processes and positively impact business.',
+        'overview_description': 'Senior software engineer specializing in AI platforms for developers. I work at the intersection of software engineering, AI/LLM platforms, and Developer Experience (DX), building enterprise-grade solutions with LiteLLM, MCP, Langfuse, and multi-agent systems.',
         'professional_summary': 'Professional Summary',
-        'professional_summary_text': 'Master Software Architect and Tech Lead with solid experience in team leadership, systems architecture, back-end development, and innovations with Artificial Intelligence.',
+        'professional_summary_text': 'Senior AI Platform Engineer and Tech Lead with solid experience in AI platforms for developers, distributed systems architecture, Python/Node.js development in production, and innovations with LLMs. Hands-on experience with Flow LLM Proxy, Flow Coder Extension, MCP Servers, and LLM observability.',
         'ai_focus': 'AI Focus',
-        'ai_focus_text': 'Leadership in projects with an "AI First" approach, integrating AI in conversational agents and optimizing processes with Generative AI and prompt engineering.',
-        'leadership': 'Leadership and Methodology',
-        'leadership_text': 'Proven ability in software restructuring, applying agile methodologies (Scrum, Kanban) and collaborative approaches to boost efficiency.',
+        'ai_focus_text': 'AI engineering with LiteLLM (multi-provider: OpenAI, Bedrock, Gemini), MCP (Model Context Protocol), RAG patterns, vector stores, CrewAI for multi-agent orchestration, and optimization of AI pipelines for developers.',
+        'leadership': 'Leadership and Mentorship',
+        'leadership_text': 'Tech Lead with systematic code reviews, formal mentorship of mid-level and senior engineers, and leadership of AI Engineering Community of Practice. Quality standards definition with SonarQube, testing, and CI/CD.',
         
         // Timeline section
         'timeline_title': 'Career Timeline',
@@ -99,8 +99,8 @@ const translations = {
         'highlight2': 'Academic experience with software development for an open source project in Software Defined Networks (SDN).',
         
         // Footer
-        'footer_year': 'Interactive Resume generated in 2024',
-        
+        'footer_year': 'Interactive Resume generated in 2026',
+
         // Job details
         'present': 'Present'
     }
@@ -111,14 +111,35 @@ const timelineData = {
     'pt-BR': [
         {
             company: "CI&T",
-            role: "Arquiteto de Software Master | Tech Lead",
+            role: "Senior AI Platform Engineer | Tech Lead (HyperX / Flow Platform)",
             dates: "Janeiro 2024 - Presente",
             details: [
-                "Atuei como Tech Lead no projeto do Flow, liderando a equipe responsável por demandas de Inteligência Artificial.",
-                "Foco em engenharia de IA, incluindo a criação e otimização de prompts e definição de contexto para modelos, melhorando a performance dos agentes conversacionais.",
-                "Contribuí para a abordagem 'AI First', integrando soluções de IA de forma abrangente nas operações da empresa.",
-                "Elevei a eficiência dos chats conversacionais, resultando em uma experiência mais personalizada e eficaz para os clientes.",
-                "Ampliei meu conhecimento em IA e desenvolvimento de software, reforçando a habilidade de liderança e implementação de soluções inovadoras."
+                "<strong>Flow LLM Proxy</strong> — Gateway unificado LiteLLM para múltiplos LLMs:",
+                "• Arquitetura modular com OpenAI (GPT-4o, GPT-4.1), AWS Bedrock (Claude 3.7/4/4.5), Google Gemini 2.x, DeepSeek, Meta Llama 3",
+                "• Autenticação JWT, token caching thread-safe, roteamento de requisições",
+                "• Deploy via Docker Compose com monitoramento integrado",
+                "<strong>Flow Coder Extension</strong> — AI-assisted coding (VS Code + JetBrains):",
+                "• TypeScript, Node.js 20, arquitetura multi-plataforma",
+                "• Integração com OpenAI, Ollama, Together, Bedrock APIs",
+                "• Slash Commands, Context Providers, UI com hot-reload",
+                "• CI/CD com Bitbucket Pipelines e publicação automatizada",
+                "<strong>Flow Coder Service</strong> — Backend Python (FastAPI + MongoDB):",
+                "• Microserviço com Clean Architecture para prompts, métricas, configuração de LLMs",
+                "• Criptografia de API keys com Fernet (AES-128), OAuth2/M2M tokens",
+                "• Streaming via channels, integração com Langfuse",
+                "<strong>MCP CI&T Flow</strong> — Model Context Protocol Server:",
+                "• Servidor MCP com transporte STDIO e SSE",
+                "• Ferramentas: GitHub Code Search, Jira, Azure DevOps, BCP Calculator, Code Interpreter (Docker isolation)",
+                "• TypeScript com tsyringe (DI), testes Vitest",
+                "<strong>Flow Tenant Langfuse</strong> — LLM Observability multi-tenant:",
+                "• Customização Langfuse: PostgreSQL + ClickHouse + Redis + MinIO",
+                "• TypeScript/Node.js, pnpm workspaces, Turbo (monorepo)",
+                "• Worker processes para ingestion e analytics",
+                "<strong>SwarmBox</strong> — Containerized AI Dev Environment:",
+                "• Docker/Podman com detecção automática de runtime",
+                "• Integração Flow LLM Proxy + Claude Code CLI",
+                "<strong>Spikes Técnicos:</strong> CrewAI, LangGraph, AutoGen (multi-agent), RAG patterns (chunking, vector stores: pgvector, Qdrant, Pinecone), LiteLLM evaluation",
+                "<strong>Liderança Técnica:</strong> Code reviews sistemáticos, mentoria formal, Comunidade de Prática de AI Engineering"
             ]
         },
         {
@@ -154,14 +175,35 @@ const timelineData = {
     'en-US': [
         {
             company: "CI&T",
-            role: "Master Software Architect | Tech Lead",
+            role: "Senior AI Platform Engineer | Tech Lead (HyperX / Flow Platform)",
             dates: "January 2024 - Present",
             details: [
-                "Acted as Tech Lead on the Flow project, leading the team responsible for Artificial Intelligence demands.",
-                "Focus on AI engineering, including prompt creation and optimization and context definition for models, improving the performance of conversational agents.",
-                "Contributed to the 'AI First' approach, integrating AI solutions comprehensively into company operations.",
-                "Elevated the efficiency of conversational chats, resulting in a more personalized and effective experience for customers.",
-                "Expanded my knowledge in AI and software development, reinforcing leadership skills and implementation of innovative solutions."
+                "<strong>Flow LLM Proxy</strong> — LiteLLM-based unified gateway for multiple LLMs:",
+                "• Modular architecture with OpenAI (GPT-4o, GPT-4.1), AWS Bedrock (Claude 3.7/4/4.5), Google Gemini 2.x, DeepSeek, Meta Llama 3",
+                "• JWT authentication, thread-safe token caching, request routing",
+                "• Docker Compose deployment with integrated monitoring",
+                "<strong>Flow Coder Extension</strong> — AI-assisted coding (VS Code + JetBrains):",
+                "• TypeScript, Node.js 20, multi-platform architecture",
+                "• Integration with OpenAI, Ollama, Together, Bedrock APIs",
+                "• Slash Commands, Context Providers, UI with hot-reload",
+                "• CI/CD with Bitbucket Pipelines and automated publishing",
+                "<strong>Flow Coder Service</strong> — Python Backend (FastAPI + MongoDB):",
+                "• Clean Architecture microservice for prompts, metrics, LLM configuration",
+                "• API keys encryption with Fernet (AES-128), OAuth2/M2M tokens",
+                "• Streaming via channels, Langfuse integration",
+                "<strong>MCP CI&T Flow</strong> — Model Context Protocol Server:",
+                "• MCP server with STDIO and SSE transport",
+                "• Tools: GitHub Code Search, Jira, Azure DevOps, BCP Calculator, Code Interpreter (Docker isolation)",
+                "• TypeScript with tsyringe (DI), Vitest testing",
+                "<strong>Flow Tenant Langfuse</strong> — Multi-tenant LLM Observability:",
+                "• Langfuse customization: PostgreSQL + ClickHouse + Redis + MinIO",
+                "• TypeScript/Node.js, pnpm workspaces, Turbo (monorepo)",
+                "• Worker processes for data ingestion and analytics",
+                "<strong>SwarmBox</strong> — Containerized AI Development Environment:",
+                "• Docker/Podman with automatic runtime detection",
+                "• Flow LLM Proxy + Claude Code CLI integration",
+                "<strong>Technical Spikes:</strong> CrewAI, LangGraph, AutoGen (multi-agent), RAG patterns (chunking, vector stores: pgvector, Qdrant, Pinecone), LiteLLM evaluation",
+                "<strong>Technical Leadership:</strong> Systematic code reviews, formal mentorship, AI Engineering Community of Practice"
             ]
         },
         {
@@ -199,15 +241,17 @@ const timelineData = {
 // Skills data with translations
 const skillsData = {
     'pt-BR': {
-        'Linguagens': { 'Kotlin': 9, 'Java': 9, 'JavaScript': 7, 'Python': 7, 'TypeScript': 7, 'SQL': 8, 'C++': 6, 'Shell Script': 7 },
-        'Back-End': { 'Spring Boot': 9, 'NodeJS': 6, 'Hibernate': 8, 'Microservices': 8, 'REST APIs': 9 },
-        'Front-End': { 'React': 7, 'HTML5': 8, 'CSS3': 7, 'jQuery': 6, 'Bootstrap': 7 },
-        'DevOps & Ferramentas': { 'Docker': 8, 'AWS': 7, 'Kubernetes': 5, 'Git': 9, 'Jenkins': 8, 'Jira': 9 },
+        'Linguagens': { 'Kotlin': 9, 'Java': 9, 'JavaScript': 7, 'Python': 8, 'TypeScript': 8, 'SQL': 8, 'C++': 6, 'Shell Script': 7 },
+        'Back-End': { 'Spring Boot': 9, 'NodeJS': 7, 'FastAPI': 9, 'Hibernate': 8, 'Microservices': 8, 'REST APIs': 9 },
+        'Front-End': { 'React': 7, 'HTML5': 8, 'CSS3': 7, 'Tailwind CSS': 7, 'jQuery': 6, 'Bootstrap': 7 },
+        'DevOps & Ferramentas': { 'Docker': 8, 'AWS': 7, 'GCP': 7, 'Kubernetes': 5, 'Git': 9, 'Jenkins': 8, 'Jira': 9, 'GitHub Actions': 7 },
+        'AI & Automação': { 'LiteLLM': 9, 'Langfuse': 8, 'MCP (Model Context Protocol)': 8, 'CrewAI': 7, 'RAG Patterns': 6, 'Vector Databases': 6, 'LLM Observability': 8, 'FastAPI': 9 },
     },
     'en-US': {
-        'Languages': { 'Kotlin': 9, 'Java': 9, 'JavaScript': 7, 'Python': 7, 'TypeScript': 7, 'SQL': 8, 'C++': 6, 'Shell Script': 7 },
-        'Back-End': { 'Spring Boot': 9, 'NodeJS': 6, 'Hibernate': 8, 'Microservices': 8, 'REST APIs': 9 },
-        'Front-End': { 'React': 7, 'HTML5': 8, 'CSS3': 7, 'jQuery': 6, 'Bootstrap': 7 },
-        'DevOps & Tools': { 'Docker': 8, 'AWS': 7, 'Kubernetes': 5, 'Git': 9, 'Jenkins': 8, 'Jira': 9 },
+        'Languages': { 'Kotlin': 9, 'Java': 9, 'JavaScript': 7, 'Python': 8, 'TypeScript': 8, 'SQL': 8, 'C++': 6, 'Shell Script': 7 },
+        'Back-End': { 'Spring Boot': 9, 'NodeJS': 7, 'FastAPI': 9, 'Hibernate': 8, 'Microservices': 8, 'REST APIs': 9 },
+        'Front-End': { 'React': 7, 'HTML5': 8, 'CSS3': 7, 'Tailwind CSS': 7, 'jQuery': 6, 'Bootstrap': 7 },
+        'DevOps & Tools': { 'Docker': 8, 'AWS': 7, 'GCP': 7, 'Kubernetes': 5, 'Git': 9, 'Jenkins': 8, 'Jira': 9, 'GitHub Actions': 7 },
+        'AI & Automation': { 'LiteLLM': 9, 'Langfuse': 8, 'MCP (Model Context Protocol)': 8, 'CrewAI': 7, 'RAG Patterns': 6, 'Vector Databases': 6, 'LLM Observability': 8, 'FastAPI': 9 },
     }
 };
