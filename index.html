@@ -69,30 +69,45 @@
         }
         
         .details-content {
-            transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+            transition: max-height 0.6s ease-in-out, opacity 0.5s ease-in-out;
             max-height: 0;
             opacity: 0;
             overflow: hidden;
         }
         
         .details-content.open {
-            max-height: 500px;
+            max-height: 4000px;
             opacity: 1;
+        }
+
+        .timeline-chevron {
+            transition: transform 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .timeline-chevron.open {
+            transform: rotate(180deg);
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 0.5rem;
         }
         
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px;
-            max-height: 400px;
+            height: 340px;
         }
         
         @media (min-width: 768px) {
             .chart-container {
-                height: 400px;
+                height: 480px;
             }
         }
         
@@ -264,7 +279,7 @@
                 <span>&bull;</span>
                 <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">LinkedIn</a>
             </div>
-            <p class="text-slate-400 text-sm" data-i18n="footer_year">Currículo Interativo gerado em 2024</p>
+            <p class="text-slate-400 text-sm" data-i18n="footer_year">Currículo Interativo — 2026</p>
         </div>
     </footer>
 
