@@ -105,6 +105,53 @@ function updateChartTheme(theme) {
     skillsChart.update();
 }
 
+// Render timeline items from timelineData
+function updateTimeline(lang) {
+    const container = document.getElementById('timeline-container');
+    if (!container) return;
+    const data = timelineData[lang];
+    if (!data) return;
+
+    container.innerHTML = '';
+    data.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'timeline-item relative mb-10';
+
+        const detailsHtml = item.details
+            .map(d => `<p class="text-slate-600 dark:text-slate-300 text-sm mb-1 leading-relaxed">${d}</p>`)
+            .join('');
+
+        div.innerHTML = `
+            <div class="timeline-header bg-white dark:bg-slate-800 p-5 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 cursor-pointer">
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-lg text-slate-800 dark:text-white">${item.company}</h3>
+                    <p class="text-blue-600 dark:text-blue-400 font-medium">${item.role}</p>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mt-1">${item.dates}</p>
+                </div>
+                <svg class="timeline-chevron w-5 h-5 text-slate-400 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </div>
+            <div class="details-content">
+                <div class="bg-white dark:bg-slate-800 rounded-b-xl border-x border-b border-slate-200/80 dark:border-slate-700 px-5 py-4">
+                    ${detailsHtml}
+                </div>
+            </div>
+        `;
+
+        const header = div.querySelector('.timeline-header');
+        const content = div.querySelector('.details-content');
+        const chevron = div.querySelector('.timeline-chevron');
+
+        header.addEventListener('click', () => {
+            content.classList.toggle('open');
+            chevron.classList.toggle('open');
+        });
+
+        container.appendChild(div);
+    });
+}
+
 // Active nav section highlight using IntersectionObserver
 function initActiveNavHighlight() {
     const sections = document.querySelectorAll('section[id]');
