@@ -774,7 +774,6 @@ strong.accent { color: var(--accent); font-weight: 600; }
 @media print {
   body { background: white !important; }
   .letter { box-shadow: none !important; }
-  .metric-val { color: #6366f1 !important; }
 }
 </style>
 </head>
@@ -856,49 +855,50 @@ strong.accent { color: var(--accent); font-weight: 600; }
 
   <p>Sou <strong>Davi Peterlini</strong>, Senior AI Engineer com formação em Engenharia de Computação (USF) e mais de 12 anos
   de experiência em desenvolvimento de software, dos quais os últimos 3 com foco exclusivo em
-  <strong class="accent">LLM infrastructure, agentic systems</strong> e AI Developer Tooling. Na CI&amp;T, fui responsável por
-  projetar e operar a plataforma <strong>Flow</strong> — um LLM gateway enterprise que hoje processa
-  <strong class="accent">mais de 500 mil requisições por dia</strong> com 99,9% de uptime, conectando times de engenharia a
-  mais de seis provedores de LLM de forma transparente e segura.</p>
+  <strong class="accent">LLM infrastructure, agentic systems</strong> e AI Developer Tooling. Na CI&amp;T, lidero iniciativas
+  que colocam IA generativa no centro do fluxo de trabalho de engenharia — desde extensões de IDE com code completion contextual
+  até gateways LLM multi-provider e stacks de observabilidade para times de escala enterprise.</p>
+
+  <p>Projetei e opero o <strong>LLM Gateway</strong> da CI&amp;T — um proxy multi-provider construído sobre
+  <strong class="accent">LiteLLM + FastAPI</strong> com model routing inteligente, semantic caching thread-safe via Redis,
+  autenticação corporativa e rate limiting multi-tenant. Em paralelo, implantei o stack de
+  <strong class="accent">LLMOps e observabilidade</strong> baseado em Langfuse e ClickHouse, com distributed tracing,
+  detecção de alucinações, evaluators de qualidade e cost analytics por modelo e usuário.</p>
 
   <div class="hl-box">
-    <div class="hl-label">Impacto mensurável</div>
-    <div class="hl-text">A implementação de <em>semantic caching</em> com Redis resultou em <strong class="accent">45–55% de hit-rate</strong>,
-    gerando uma redução de <strong class="accent">36% nos custos de inferência</strong>. O ciclo de desenvolvimento dos times diminuiu
-    <strong class="accent">35%</strong> (PR cycle time), e o NPS da plataforma chegou a <strong class="accent">72</strong>
-    com adoção por <strong class="accent">500+ engenheiros</strong>.</div>
+    <div class="hl-label">Princípio de engenharia</div>
+    <div class="hl-text">Construir com LLMs em produção exige muito mais do que integrar uma API. Exige
+    <strong class="accent">observabilidade desde o dia zero</strong>, gestão de custos, controle de qualidade e arquitetura
+    preparada para a volatilidade inerente aos modelos de linguagem — esse rigor é o que diferencia um MVP de uma plataforma
+    confiável.</div>
   </div>
 
-  <p>Além do gateway, implementei um stack completo de <strong class="accent">LLMOps</strong> com distributed tracing sobre
-  Langfuse e ClickHouse — hoje processando <strong class="accent">mais de 1 milhão de traces por dia</strong> — incluindo
-  detecção de alucinações, avaliação de qualidade e dashboards operacionais em tempo real. Construí pipelines
-  <strong class="accent">RAG</strong> com indexação vetorial, chunking semântico e reranking, e publiquei servidores
-  <strong class="accent">MCP</strong> (Model Context Protocol) no NPM.</p>
-
-  <p>Na fronteira mais avançada do campo, projetei e implantei <strong class="accent">sistemas multi-agent autônomos</strong>
-  utilizando LangGraph, CrewAI, AutoGen e Google ADK para automação de tarefas complexas de engenharia, revisão de código e
-  geração de documentação — sempre com foco em observabilidade, segurança e controle humano no loop.</p>
+  <p>Desenvolvi <strong class="accent">extensões de IDE com IA</strong> para VS Code e JetBrains — com code completion em
+  tempo real, chat contextual e context providers — e projetei <strong class="accent">workflows multi-agent autônomos</strong>
+  com LangGraph e Agno para automação de code review, geração de testes, documentação e análise de segurança, integrando o
+  protocolo <strong class="accent">MCP</strong> para acesso padronizado a ferramentas e contexto.</p>
 
   <div class="chips-label">Stack principal</div>
   <div class="chips">
-    <span class="chip">Python</span><span class="chip">LiteLLM</span><span class="chip">LangGraph</span>
-    <span class="chip">CrewAI</span><span class="chip">Google ADK</span><span class="chip">Langfuse</span>
-    <span class="chip">ClickHouse</span><span class="chip">Redis</span><span class="chip">FastAPI</span>
-    <span class="chip">Node.js</span><span class="chip">TypeScript</span><span class="chip">MCP Protocol</span>
-    <span class="chip">AWS Bedrock</span><span class="chip">GitHub Actions</span><span class="chip">Docker / K8s</span>
-    <span class="chip">RAG Pipelines</span>
+    <span class="chip">Python</span><span class="chip">TypeScript</span><span class="chip">Node.js</span>
+    <span class="chip">LiteLLM</span><span class="chip">LangGraph</span><span class="chip">Agno</span>
+    <span class="chip">Langfuse</span><span class="chip">ClickHouse</span><span class="chip">Redis</span>
+    <span class="chip">FastAPI</span><span class="chip">MCP Protocol</span><span class="chip">Docker</span>
+    <span class="chip">Podman</span><span class="chip">Kubernetes</span><span class="chip">GCP</span>
+    <span class="chip">Ollama</span>
   </div>
 
-  <p>Liderança técnica, para mim, vai além de arquitetura e código. Fundei a <strong>Comunidade de Prática de AI Engineering</strong>
-  na CI&amp;T (20+ membros ativos), promovendo adoção de LLMs, MCP e sistemas multi-agent em times de engenharia. Reduzi o
-  onboarding de novos engenheiros de <strong class="accent">2 semanas para 3 dias (–70%)</strong> através de documentação viva,
-  assistentes de contexto e ferramentas de IA integradas ao fluxo de trabalho do time.</p>
+  <p>Além do trabalho na CI&amp;T, contribuo com open source: publiquei o <strong>qwen-code</strong> — agente CLI para modelos
+  Qwen3-Coder no NPM — e o <strong>proxy-llm</strong>, roteador inteligente entre LLMs online e locais via Ollama. Fundei
+  também a <strong>Comunidade de Prática de AI Engineering</strong> na CI&amp;T (20+ membros), promovendo adoção de LLMs,
+  MCP e sistemas multi-agent por meio de workshops e ADRs colaborativos.</p>
 
   <div class="hl-box">
     <div class="hl-label">Por que me candidato a esta posição</div>
-    <div class="hl-text">Busco um ambiente onde a IA não seja um projeto paralelo, mas o núcleo da estratégia de produto e engenharia.
-    Quero trabalhar com times que entendam que construir com LLMs em produção exige rigor de engenharia, cultura de observabilidade
-    e visão de longo prazo. Trago a experiência de quem já fez isso em escala, com os erros aprendidos e os padrões consolidados.</div>
+    <div class="hl-text">Busco um ambiente onde a IA não seja um projeto paralelo, mas o núcleo da estratégia de produto e
+    engenharia. Quero trabalhar com times que entendam que construir com LLMs em produção exige rigor de engenharia, cultura de
+    observabilidade e visão de longo prazo. Trago a experiência de quem já fez isso em escala, com os padrões consolidados e
+    as armadilhas já conhecidas.</div>
   </div>
 
   <p>Estou pronto para contribuir desde o primeiro dia — seja projetando a arquitetura de uma nova plataforma de IA, acelerando a
