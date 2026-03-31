@@ -43,7 +43,7 @@ function loadPhotoAsBase64(src, callback) {
 }
 
 // ── Build HTML & trigger print ────────────────────────────────────────────────
-function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportButton) {
+function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator, exportButton) {
     const printWindow = window.open('', '_blank', 'width=900,height=700');
     if (!printWindow) {
         alert(isPT
@@ -161,12 +161,48 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+  /* ── Theme variables ── */
+  :root {
+    /* sidebar */
+    --sb-bg:          ${isDark ? '#0f172a' : '#f1f5f9'};
+    --sb-color:       ${isDark ? '#e2e8f0' : '#1e293b'};
+    --sb-border:      ${isDark ? '#1e3a5f' : '#cbd5e1'};
+    --sb-name:        ${isDark ? '#f8fafc' : '#0f172a'};
+    --sb-role:        ${isDark ? '#94a3b8' : '#475569'};
+    --sb-title:       ${isDark ? '#60a5fa' : '#2563eb'};
+    --sb-contact:     ${isDark ? '#cbd5e1' : '#334155'};
+    --sb-contact-a:   ${isDark ? '#93c5fd' : '#1d4ed8'};
+    --sb-edu-degree:  ${isDark ? '#f1f5f9' : '#0f172a'};
+    --sb-edu-place:   ${isDark ? '#94a3b8' : '#64748b'};
+    --sb-group-name:  ${isDark ? '#64748b' : '#94a3b8'};
+    --sb-highlight:   ${isDark ? '#cbd5e1' : '#334155'};
+    /* main */
+    --main-bg:        ${isDark ? '#1e293b' : '#ffffff'};
+    --main-name:      ${isDark ? '#f8fafc' : '#0f172a'};
+    --main-border:    ${isDark ? '#3b82f6' : '#1d4ed8'};
+    --main-headline:  ${isDark ? '#93c5fd' : '#3b82f6'};
+    --summary-bg:     ${isDark ? '#0f172a' : '#f8fafc'};
+    --summary-color:  ${isDark ? '#cbd5e1' : '#475569'};
+    --section-color:  ${isDark ? '#93c5fd' : '#1d4ed8'};
+    --section-border: ${isDark ? '#1e3a5f' : '#dbeafe'};
+    --exp-border:     ${isDark ? '#334155' : '#f1f5f9'};
+    --exp-company:    ${isDark ? '#f1f5f9' : '#0f172a'};
+    --exp-role:       ${isDark ? '#60a5fa' : '#2563eb'};
+    --exp-dates:      ${isDark ? '#64748b' : '#94a3b8'};
+    --sub-header:     ${isDark ? '#cbd5e1' : '#334155'};
+    --bullet-color:   ${isDark ? '#94a3b8' : '#475569'};
+    --stack-bg:       ${isDark ? '#0f172a' : '#f8fafc'};
+    --stack-color:    ${isDark ? '#64748b' : '#64748b'};
+    --footer-color:   ${isDark ? '#64748b' : '#94a3b8'};
+    --footer-border:  ${isDark ? '#334155' : '#e2e8f0'};
+  }
+
   html, body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-size: 9.5pt;
     line-height: 1.45;
-    color: #1e293b;
-    background: #fff;
+    color: var(--sb-color);
+    background: var(--main-bg);
   }
 
   /* ── Layout ── */
@@ -179,9 +215,10 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
 
   /* ── Sidebar ── */
   .sidebar {
-    background: #0f172a;
-    color: #e2e8f0;
+    background: var(--sb-bg);
+    color: var(--sb-color);
     padding: 20px 13px;
+    border-right: 1px solid var(--sb-border);
   }
 
   .photo-wrap {
@@ -206,13 +243,13 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .name-block .name {
     font-size: 12.5pt;
     font-weight: 700;
-    color: #f8fafc;
+    color: var(--sb-name);
     line-height: 1.2;
   }
 
   .name-block .role-tag {
     font-size: 7pt;
-    color: #94a3b8;
+    color: var(--sb-role);
     margin-top: 4px;
     line-height: 1.4;
   }
@@ -226,22 +263,22 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.09em;
-    color: #60a5fa;
-    border-bottom: 1px solid #1e3a5f;
+    color: var(--sb-title);
+    border-bottom: 1px solid var(--sb-border);
     padding-bottom: 4px;
     margin-bottom: 7px;
   }
 
   .contact-item {
     font-size: 7pt;
-    color: #cbd5e1;
+    color: var(--sb-contact);
     margin-bottom: 4px;
     word-break: break-all;
     line-height: 1.35;
   }
 
   .contact-item a {
-    color: #93c5fd;
+    color: var(--sb-contact-a);
     text-decoration: none;
   }
 
@@ -252,19 +289,19 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .edu-degree {
     font-size: 7.5pt;
     font-weight: 600;
-    color: #f1f5f9;
+    color: var(--sb-edu-degree);
     line-height: 1.3;
   }
 
   .edu-place {
     font-size: 7pt;
-    color: #94a3b8;
+    color: var(--sb-edu-place);
   }
 
   .skill-group-name {
     font-size: 6pt;
     font-weight: 600;
-    color: #64748b;
+    color: var(--sb-group-name);
     text-transform: uppercase;
     letter-spacing: 0.06em;
     margin: 6px 0 3px;
@@ -290,7 +327,7 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
 
   .highlight-item {
     font-size: 7pt;
-    color: #cbd5e1;
+    color: var(--sb-highlight);
     padding-left: 12px;
     position: relative;
     margin-bottom: 5px;
@@ -309,11 +346,11 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   /* ── Main ── */
   .main {
     padding: 20px 20px;
-    background: #fff;
+    background: var(--main-bg);
   }
 
   .main-header {
-    border-bottom: 2px solid #1d4ed8;
+    border-bottom: 2px solid var(--main-border);
     padding-bottom: 9px;
     margin-bottom: 12px;
   }
@@ -321,13 +358,13 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .main-header .full-name {
     font-size: 18pt;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--main-name);
     line-height: 1.1;
   }
 
   .main-header .headline {
     font-size: 8.5pt;
-    color: #3b82f6;
+    color: var(--main-headline);
     font-weight: 500;
     margin-top: 3px;
     line-height: 1.35;
@@ -335,11 +372,11 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
 
   .summary-text {
     font-size: 8pt;
-    color: #475569;
+    color: var(--summary-color);
     margin-bottom: 12px;
     line-height: 1.55;
     padding: 8px 10px;
-    background: #f8fafc;
+    background: var(--summary-bg);
     border-left: 3px solid #3b82f6;
     border-radius: 0 4px 4px 0;
   }
@@ -349,8 +386,8 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #1d4ed8;
-    border-bottom: 1px solid #dbeafe;
+    color: var(--section-color);
+    border-bottom: 1px solid var(--section-border);
     padding-bottom: 3px;
     margin-bottom: 9px;
     margin-top: 12px;
@@ -359,7 +396,7 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .exp-block {
     margin-bottom: 10px;
     padding-bottom: 9px;
-    border-bottom: 1px solid #f1f5f9;
+    border-bottom: 1px solid var(--exp-border);
   }
 
   .exp-block:last-child {
@@ -379,18 +416,18 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .exp-company {
     font-size: 9.5pt;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--exp-company);
   }
 
   .exp-role {
     font-size: 8.5pt;
     font-weight: 500;
-    color: #2563eb;
+    color: var(--exp-role);
   }
 
   .exp-dates {
     font-size: 7pt;
-    color: #94a3b8;
+    color: var(--exp-dates);
     white-space: nowrap;
     font-style: italic;
   }
@@ -398,14 +435,14 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .sub-header {
     font-size: 7.5pt;
     font-weight: 600;
-    color: #334155;
+    color: var(--sub-header);
     margin: 4px 0 1px;
     padding-left: 2px;
   }
 
   .bullet {
     font-size: 7pt;
-    color: #475569;
+    color: var(--bullet-color);
     padding-left: 8px;
     line-height: 1.45;
     margin-bottom: 1px;
@@ -413,10 +450,10 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
 
   .stack-line {
     font-size: 6.5pt;
-    color: #64748b;
+    color: var(--stack-color);
     margin-top: 4px;
     padding: 2px 7px;
-    background: #f8fafc;
+    background: var(--stack-bg);
     border-radius: 3px;
     font-style: italic;
   }
@@ -424,10 +461,10 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   .pdf-footer {
     text-align: center;
     font-size: 6.5pt;
-    color: #94a3b8;
+    color: var(--footer-color);
     margin-top: 14px;
     padding-top: 7px;
-    border-top: 1px solid #e2e8f0;
+    border-top: 1px solid var(--footer-border);
     font-style: italic;
   }
 
@@ -440,7 +477,7 @@ function buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportB
   @media print {
     html, body { width: 210mm; }
     .page { width: 210mm; }
-    .sidebar, .tag, .summary-text {
+    .sidebar, .tag, .summary-text, .stack-line {
       print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
     }
