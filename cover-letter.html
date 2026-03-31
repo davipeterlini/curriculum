@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta de Apresentação — Davi Peterlini</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: { extend: {} }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --text-color: #334155;
+            --card-bg: #ffffff;
+            --accent: #3b82f6;
+            --accent-2: #6366f1;
+            --accent-3: #8b5cf6;
+        }
+        .dark {
+            --bg-color: #0f172a;
+            --text-color: #e2e8f0;
+            --card-bg: #1e293b;
+            --accent: #60a5fa;
+            --accent-2: #818cf8;
+            --accent-3: #a78bfa;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+
+        /* --- Animated gradient hero --- */
+        .hero-gradient {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #0f172a 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse 80% 60% at 20% 40%, rgba(99,102,241,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse 60% 80% at 80% 60%, rgba(59,130,246,0.15) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 50% 80%, rgba(139,92,246,0.12) 0%, transparent 60%);
+            animation: heroShimmer 8s ease-in-out infinite alternate;
+        }
+        @keyframes heroShimmer {
+            0%   { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* --- Grid pattern overlay --- */
+        .grid-pattern {
+            background-image:
+                linear-gradient(rgba(99,102,241,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* --- Glowing badges --- */
+        .badge-glow {
+            box-shadow: 0 0 12px rgba(99,102,241,0.5);
+        }
+
+        /* --- AI circuit lines decorative --- */
+        .circuit-line {
+            stroke: rgba(99,102,241,0.3);
+            stroke-width: 1;
+            fill: none;
+        }
+        .circuit-dot {
+            fill: rgba(99,102,241,0.5);
+        }
+
+        /* --- Animated typing cursor --- */
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+            color: #60a5fa;
+            font-weight: 300;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        /* --- Letter body styles --- */
+        .letter-container {
+            background: var(--card-bg);
+            border-radius: 1.5rem;
+            box-shadow:
+                0 0 0 1px rgba(99,102,241,0.15),
+                0 20px 60px -10px rgba(0,0,0,0.25),
+                0 0 80px -20px rgba(99,102,241,0.1);
+        }
+
+        .letter-paragraph {
+            line-height: 1.85;
+            font-size: 1.0625rem;
+            color: var(--text-color);
+        }
+
+        .highlight-box {
+            border-left: 3px solid var(--accent-2);
+            background: linear-gradient(90deg, rgba(99,102,241,0.07) 0%, transparent 100%);
+            padding: 0.875rem 1.25rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        /* --- Metrics cards --- */
+        .metric-card {
+            background: linear-gradient(135deg, rgba(99,102,241,0.08) 0%, rgba(59,130,246,0.08) 100%);
+            border: 1px solid rgba(99,102,241,0.2);
+            border-radius: 0.875rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px -6px rgba(99,102,241,0.25);
+        }
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa, #818cf8, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* --- Tech stack chips --- */
+        .tech-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            padding: 0.3rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            background: rgba(99,102,241,0.1);
+            border: 1px solid rgba(99,102,241,0.25);
+            color: var(--accent-2);
+            transition: background 0.15s;
+        }
+        .tech-chip:hover {
+            background: rgba(99,102,241,0.18);
+        }
+
+        /* --- Signature line --- */
+        .signature-line {
+            border-top: 1.5px solid rgba(99,102,241,0.2);
+        }
+
+        /* --- Print / PDF styles --- */
+        @media print {
+            header, #pdf-loading { display: none !important; }
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .letter-container { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+            .hero-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%) !important; }
+            .metric-value { -webkit-text-fill-color: #6366f1 !important; }
+        }
+
+        /* Spinner */
+        .spinner {
+            border: 3px solid rgba(99,102,241,0.3);
+            border-radius: 50%;
+            border-top: 3px solid #818cf8;
+            width: 20px; height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block; vertical-align: middle; margin-right: 8px;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* profile photo */
+        .profile-photo {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(99,102,241,0.5);
+            box-shadow: 0 0 20px rgba(99,102,241,0.3);
+        }
+
+        /* --- AI node decoration --- */
+        .ai-node {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: rgba(99,102,241,0.6);
+            display: inline-block;
+        }
+        .ai-node.pulse {
+            animation: nodePulse 2s ease-in-out infinite;
+        }
+        @keyframes nodePulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50%       { transform: scale(1.5); opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- ============================================================
+     HEADER (sticky, matches index.html style)
+     ============================================================ -->
+<header class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm no-print">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div>
+            <a href="index.html" class="flex items-center gap-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors text-sm mb-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Voltar ao Currículo
+            </a>
+            <h1 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white">Davi Peterlini</h1>
+            <p class="text-sm text-blue-600 dark:text-blue-400">Carta de Apresentação</p>
+        </div>
+        <div class="flex items-center gap-3">
+            <!-- Export PDF button -->
+            <button id="export-pdf-btn"
+                onclick="exportCoverLetterPDF()"
+                class="flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full transition-colors text-sm font-medium">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                </svg>
+                Exportar PDF
+            </button>
+            <div id="pdf-loading" class="hidden flex items-center px-4 py-2 bg-indigo-600 text-white rounded-full text-sm">
+                <div class="spinner"></div>
+                Gerando PDF...
+            </div>
+            <!-- Theme toggle -->
+            <button id="theme-toggle"
+                onclick="toggleTheme()"
+                class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                title="Alternar tema">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+
+<!-- ============================================================
+     HERO SECTION
+     ============================================================ -->
+<section class="hero-gradient grid-pattern py-20 px-6 relative" id="cover-letter-hero">
+    <!-- SVG decorative circuit -->
+    <svg class="absolute top-8 left-8 opacity-30 hidden md:block" width="200" height="120" viewBox="0 0 200 120">
+        <path class="circuit-line" d="M10 60 H60 V20 H140 V60 H190"/>
+        <path class="circuit-line" d="M10 90 H40 V60"/>
+        <path class="circuit-line" d="M160 60 V90 H190"/>
+        <circle class="circuit-dot" cx="60" cy="60" r="3"/>
+        <circle class="circuit-dot" cx="140" cy="60" r="3"/>
+        <circle class="circuit-dot" cx="40" cy="90" r="3"/>
+        <circle class="circuit-dot" cx="160" cy="90" r="3"/>
+    </svg>
+    <svg class="absolute bottom-8 right-8 opacity-30 hidden md:block" width="160" height="100" viewBox="0 0 160 100">
+        <path class="circuit-line" d="M10 50 H50 V10 H110 V50 H150"/>
+        <path class="circuit-line" d="M80 50 V90"/>
+        <circle class="circuit-dot" cx="50" cy="50" r="3"/>
+        <circle class="circuit-dot" cx="110" cy="50" r="3"/>
+        <circle class="circuit-dot" cx="80" cy="90" r="3"/>
+    </svg>
+
+    <div class="max-w-4xl mx-auto text-center relative z-10">
+        <div class="flex justify-center mb-6">
+            <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo">
+        </div>
+
+        <!-- Badges row -->
+        <div class="flex flex-wrap justify-center gap-2 mb-6">
+            <span class="badge-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-indigo-900/70 text-indigo-200 border border-indigo-500/40">
+                <span class="ai-node pulse"></span> AI Engineering
+            </span>
+            <span class="badge-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-900/70 text-blue-200 border border-blue-500/40">
+                <span class="ai-node" style="background:rgba(59,130,246,0.8)"></span> LLM Infrastructure
+            </span>
+            <span class="badge-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-purple-900/70 text-purple-200 border border-purple-500/40">
+                <span class="ai-node" style="background:rgba(139,92,246,0.8)"></span> Agentic Systems
+            </span>
+            <span class="badge-glow inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-800/70 text-slate-200 border border-slate-500/40">
+                <span class="ai-node" style="background:rgba(148,163,184,0.8)"></span> Tech Lead
+            </span>
+        </div>
+
+        <h1 class="font-extrabold text-4xl md:text-5xl text-white mb-3 leading-tight">
+            Davi Peterlini
+        </h1>
+        <p class="text-indigo-300 text-lg md:text-xl font-medium mb-2 typing-cursor">Senior AI Engineer | LLM Platform &amp; Agentic Systems</p>
+        <p class="text-slate-400 text-sm">
+            São Paulo, Brasil &nbsp;·&nbsp;
+            <a href="mailto:davipeterlini@gmail.com" class="hover:text-indigo-300 transition-colors">davipeterlini@gmail.com</a>
+            &nbsp;·&nbsp;
+            <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-300 transition-colors">LinkedIn</a>
+        </p>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     METRICS BAR
+     ============================================================ -->
+<section class="bg-white dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 py-8 px-6">
+    <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="metric-card p-4 text-center">
+            <div class="metric-value">500K+</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">req/dia no LLM Gateway</div>
+        </div>
+        <div class="metric-card p-4 text-center">
+            <div class="metric-value">-36%</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">redução de custos de inferência</div>
+        </div>
+        <div class="metric-card p-4 text-center">
+            <div class="metric-value">NPS 72</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">adoção por 500+ devs</div>
+        </div>
+        <div class="metric-card p-4 text-center">
+            <div class="metric-value">1M+</div>
+            <div class="text-xs text-slate-500 dark:text-slate-400 mt-1 font-medium">traces LLMOps / dia</div>
+        </div>
+    </div>
+</section>
+
+
+<!-- ============================================================
+     LETTER BODY
+     ============================================================ -->
+<main class="container mx-auto px-6 py-14 max-w-4xl" id="cover-letter-body">
+
+    <div class="letter-container p-8 md:p-12">
+
+        <!-- Date & salutation -->
+        <div class="mb-8">
+            <p class="text-sm text-slate-400 dark:text-slate-500 mb-6">São Paulo, <span id="letter-date"></span></p>
+
+            <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800 dark:text-white mb-1" style="font-family:'Playfair Display',serif;">
+                Carta de Apresentação
+            </h2>
+            <p class="text-indigo-500 dark:text-indigo-400 text-sm font-medium mb-8">
+                Engenharia de Inteligência Artificial &amp; Plataformas LLM
+            </p>
+
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300 mb-2">Prezado(a) Recrutador(a) / Gestor(a) de Tecnologia,</p>
+        </div>
+
+        <!-- === Paragraph 1 — Opening / context === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Vivemos um momento único na história da tecnologia. A convergência entre modelos de linguagem de grande escala
+                (<strong class="text-indigo-500 dark:text-indigo-400">LLMs</strong>), sistemas agênticos autônomos e infraestrutura de IA em produção
+                está redefinindo a forma como construímos software. Estar no centro dessa transformação — não apenas acompanhando,
+                mas liderando e moldando — é o que me move profissional e intelectualmente.
+            </p>
+        </div>
+
+        <!-- === Paragraph 2 — Who I am === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Sou <strong class="text-slate-700 dark:text-white">Davi Peterlini</strong>, Senior AI Engineer com formação em
+                Engenharia de Computação (USF) e mais de 12 anos de experiência em desenvolvimento de software, dos quais os
+                últimos 3 com foco exclusivo em <strong class="text-indigo-500 dark:text-indigo-400">LLM infrastructure, agentic systems</strong>
+                e AI Developer Tooling. Na CI&amp;T, fui responsável por projetar e operar a plataforma
+                <strong class="text-slate-700 dark:text-white">Flow</strong> — um LLM gateway enterprise que hoje processa
+                <strong class="text-indigo-500 dark:text-indigo-400">mais de 500 mil requisições por dia</strong> com 99,9% de uptime,
+                conectando times de engenharia a mais de seis provedores de LLM (OpenAI, AWS Bedrock/Claude, Google Gemini,
+                DeepSeek, Llama 3) de forma transparente e segura.
+            </p>
+        </div>
+
+        <!-- Highlight box 1 -->
+        <div class="highlight-box mb-7">
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wide">Impacto mensurável</p>
+            <p class="letter-paragraph text-slate-700 dark:text-slate-200 text-[0.95rem]">
+                A implementação de <em>semantic caching</em> com Redis resultou em <strong class="text-indigo-500">45–55% de hit-rate</strong>,
+                gerando uma redução de <strong class="text-indigo-500">36% nos custos de inferência</strong>. O ciclo de desenvolvimento dos
+                times diminuiu <strong class="text-indigo-500">35%</strong> (PR cycle time), e o NPS da plataforma chegou a
+                <strong class="text-indigo-500">72</strong> com adoção por <strong class="text-indigo-500">500+ engenheiros</strong>.
+            </p>
+        </div>
+
+        <!-- === Paragraph 3 — LLMOps & RAG === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Além do gateway, implementei um stack completo de <strong class="text-indigo-500 dark:text-indigo-400">LLMOps</strong>
+                com distributed tracing sobre Langfuse e ClickHouse — hoje processando
+                <strong class="text-indigo-500 dark:text-indigo-400">mais de 1 milhão de traces por dia</strong> — incluindo
+                detecção de alucinações, avaliação de qualidade e dashboards operacionais em tempo real.
+                Construí pipelines <strong class="text-indigo-500 dark:text-indigo-400">RAG</strong> com indexação vetorial,
+                chunking semântico e reranking, e publiquei servidores <strong class="text-indigo-500 dark:text-indigo-400">MCP</strong>
+                (Model Context Protocol) no NPM — tornando ferramentas de IA acessíveis a qualquer desenvolvedor via CLI ou IDE.
+            </p>
+        </div>
+
+        <!-- === Paragraph 4 — Agentic systems === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Na fronteira mais avançada do campo, projetei e implantei <strong class="text-indigo-500 dark:text-indigo-400">sistemas
+                multi-agent autônomos</strong> utilizando LangGraph, CrewAI, AutoGen e Google ADK para automação de tarefas
+                complexas de engenharia, revisão de código e geração de documentação. Cada sistema foi concebido com foco em
+                <em>observabilidade</em>, <em>segurança</em> e <em>controle humano no loop</em> — porque escalar IA de forma
+                responsável é tão importante quanto escalar com performance.
+            </p>
+        </div>
+
+        <!-- Tech stack chips -->
+        <div class="mb-8">
+            <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-wider mb-3">Stack principal</p>
+            <div class="flex flex-wrap gap-2">
+                <span class="tech-chip">Python</span>
+                <span class="tech-chip">LiteLLM</span>
+                <span class="tech-chip">LangGraph</span>
+                <span class="tech-chip">CrewAI</span>
+                <span class="tech-chip">Google ADK</span>
+                <span class="tech-chip">Langfuse</span>
+                <span class="tech-chip">ClickHouse</span>
+                <span class="tech-chip">Redis</span>
+                <span class="tech-chip">FastAPI</span>
+                <span class="tech-chip">Node.js</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">MCP Protocol</span>
+                <span class="tech-chip">AWS Bedrock</span>
+                <span class="tech-chip">GitHub Actions</span>
+                <span class="tech-chip">Docker / K8s</span>
+                <span class="tech-chip">RAG Pipelines</span>
+            </div>
+        </div>
+
+        <!-- === Paragraph 5 — Leadership & culture === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Liderança técnica, para mim, vai além de arquitetura e código. Fundei a
+                <strong class="text-slate-700 dark:text-white">Comunidade de Prática de AI Engineering</strong> na CI&amp;T
+                (20+ membros ativos), que promove adoção de LLMs, MCP e sistemas multi-agent em times de engenharia por meio de
+                workshops, ADRs colaborativos e pair programming com IA. Reduzi o onboarding de novos engenheiros de
+                <strong class="text-indigo-500 dark:text-indigo-400">2 semanas para 3 dias (–70%)</strong> através de
+                documentação viva, assistentes de contexto e ferramentas de IA integradas ao fluxo de trabalho do time.
+            </p>
+        </div>
+
+        <!-- Highlight box 2 -->
+        <div class="highlight-box mb-7">
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wide">Por que me candidato a esta posição</p>
+            <p class="letter-paragraph text-slate-700 dark:text-slate-200 text-[0.95rem]">
+                Busco um ambiente onde a IA não seja um projeto paralelo, mas o núcleo da estratégia de produto e engenharia.
+                Quero trabalhar com times que entendam que construir com LLMs em produção exige rigor de engenharia, cultura de
+                observabilidade e visão de longo prazo — não apenas integrar APIs. Trago a experiência de quem já fez isso em
+                escala, com os erros aprendidos e os padrões consolidados.
+            </p>
+        </div>
+
+        <!-- === Paragraph 6 — Closing === -->
+        <div class="mb-10">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Estou pronto para contribuir desde o primeiro dia — seja projetando a arquitetura de uma nova plataforma de IA,
+                acelerando a adoção de LLMs em times de engenharia ou construindo os fundamentos de observabilidade e qualidade
+                que tornam sistemas de IA confiáveis em produção. Acredito que a melhor IA não é a mais inteligente isoladamente,
+                mas a que está melhor integrada ao fluxo de trabalho humano.
+            </p>
+        </div>
+
+        <!-- Signature -->
+        <div class="signature-line pt-8">
+            <p class="text-slate-600 dark:text-slate-300 mb-6 text-[0.95rem]">
+                Fico à disposição para uma conversa e agradecido pela oportunidade de apresentar meu trabalho.
+            </p>
+
+            <div class="flex items-center gap-5">
+                <img src="assets/profile-photo.png" alt="Davi Peterlini" style="width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid rgba(99,102,241,0.4);">
+                <div>
+                    <p class="font-bold text-slate-800 dark:text-white text-lg">Davi Peterlini</p>
+                    <p class="text-indigo-500 dark:text-indigo-400 text-sm font-medium">Senior AI Engineer | LLM Platform &amp; Agentic Systems</p>
+                    <div class="flex items-center gap-3 mt-1 text-sm text-slate-500 dark:text-slate-400">
+                        <a href="mailto:davipeterlini@gmail.com" class="hover:text-indigo-400 transition-colors">davipeterlini@gmail.com</a>
+                        <span>&bull;</span>
+                        <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-indigo-400 transition-colors">LinkedIn</a>
+                        <span>&bull;</span>
+                        <a href="index.html" class="hover:text-indigo-400 transition-colors">Currículo Online</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /letter-container -->
+
+</main>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer class="bg-slate-800 dark:bg-slate-900 text-white mt-4">
+    <div class="container mx-auto px-6 py-8 text-center">
+        <h3 class="text-xl font-bold mb-2">Davi Peterlini</h3>
+        <div class="space-x-4 mb-4">
+            <a href="mailto:davipeterlini@gmail.com" class="hover:text-blue-400 transition-colors">davipeterlini@gmail.com</a>
+            <span>&bull;</span>
+            <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors">LinkedIn</a>
+            <span>&bull;</span>
+            <a href="index.html" class="hover:text-blue-400 transition-colors">Currículo Interativo</a>
+        </div>
+        <p class="text-slate-400 text-sm">Carta de Apresentação — 2026</p>
+    </div>
+</footer>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+    // --- Theme persistence ---
+    (function() {
+        const saved = localStorage.getItem('theme') || 'light';
+        if (saved === 'dark') document.documentElement.classList.add('dark');
+        updateThemeIcon(saved);
+    })();
+
+    function toggleTheme() {
+        const isDark = document.documentElement.classList.toggle('dark');
+        const theme = isDark ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+        updateThemeIcon(theme);
+    }
+
+    function updateThemeIcon(theme) {
+        const btn = document.getElementById('theme-toggle');
+        if (!btn) return;
+        const moonSVG = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>';
+        const sunSVG  = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
+        btn.innerHTML = theme === 'light' ? moonSVG : sunSVG;
+        btn.title = theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+    }
+
+    // --- Set today's date in letter ---
+    (function() {
+        const d = new Date();
+        const opts = { day: 'numeric', month: 'long', year: 'numeric' };
+        document.getElementById('letter-date').textContent = d.toLocaleDateString('pt-BR', opts);
+    })();
+
+
+    // ============================================================
+    //  PDF EXPORT — prints a faithful replica of the page
+    // ============================================================
+    function exportCoverLetterPDF() {
+        const btn     = document.getElementById('export-pdf-btn');
+        const loading = document.getElementById('pdf-loading');
+        if (btn)     btn.classList.add('hidden');
+        if (loading) loading.classList.remove('hidden');
+
+        const isDark = document.documentElement.classList.contains('dark');
+
+        // Capture current date text
+        const dateText = document.getElementById('letter-date').textContent;
+
+        // Collect tech chips
+        const chips = Array.from(document.querySelectorAll('.tech-chip'))
+            .map(c => c.textContent.trim()).join(' &nbsp;·&nbsp; ');
+
+        const win = window.open('', '_blank', 'width=900,height=700');
+        if (!win) {
+            alert('Por favor, permita pop-ups para gerar o PDF.');
+            if (btn)     btn.classList.remove('hidden');
+            if (loading) loading.classList.add('hidden');
+            return;
+        }
+
+        win.document.write(`<!DOCTYPE html>
+<html lang="pt-BR"${isDark ? ' class="dark"' : ''}>
+<head>
+<meta charset="UTF-8">
+<title>Carta de Apresentação — Davi Peterlini</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: ${isDark ? '#0f172a' : '#f8fafc'};
+  --card: ${isDark ? '#1e293b' : '#ffffff'};
+  --text: ${isDark ? '#e2e8f0' : '#334155'};
+  --muted: ${isDark ? '#94a3b8' : '#64748b'};
+  --accent: ${isDark ? '#818cf8' : '#6366f1'};
+  --border: ${isDark ? 'rgba(99,102,241,0.25)' : 'rgba(99,102,241,0.2)'};
+  --hl-bg: ${isDark ? 'rgba(99,102,241,0.1)' : 'rgba(99,102,241,0.07)'};
+  --metric: ${isDark ? '#a5b4fc' : '#6366f1'};
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { background: var(--bg); }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  max-width: 210mm;
+  margin: 0 auto;
+  padding: 0;
+  font-size: 10.5pt;
+  line-height: 1.65;
+}
+
+/* ---- HERO ---- */
+.hero {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  padding: 36px 40px 28px;
+  text-align: center;
+  position: relative;
+}
+.hero-photo {
+  width: 72px; height: 72px;
+  border-radius: 50%; object-fit: cover;
+  border: 2.5px solid rgba(99,102,241,0.6);
+  margin: 0 auto 12px;
+  display: block;
+}
+.hero-name { font-size: 22pt; font-weight: 800; color: #fff; font-family: 'Playfair Display', serif; margin-bottom: 3px; }
+.hero-role { font-size: 10.5pt; color: #a5b4fc; font-weight: 500; margin-bottom: 6px; }
+.hero-contact { font-size: 8.5pt; color: #94a3b8; }
+.hero-contact a { color: #a5b4fc; text-decoration: none; }
+.badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 10px 0 0; }
+.badge {
+  padding: 2px 10px; border-radius: 9999px; font-size: 7.5pt; font-weight: 600;
+  border: 1px solid rgba(99,102,241,0.4);
+  background: rgba(99,102,241,0.15); color: #c7d2fe;
+}
+
+/* ---- METRICS ---- */
+.metrics {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  background: ${isDark ? '#1e293b' : '#fff'};
+  border-bottom: 1px solid var(--border);
+}
+.metric { padding: 14px 10px; text-align: center; border-right: 1px solid var(--border); }
+.metric:last-child { border-right: none; }
+.metric-val { font-size: 15pt; font-weight: 800; color: var(--metric); }
+.metric-lbl { font-size: 7.5pt; color: var(--muted); margin-top: 2px; }
+
+/* ---- LETTER ---- */
+.letter {
+  background: var(--card);
+  margin: 28px 28px;
+  padding: 32px 36px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.date { font-size: 8.5pt; color: var(--muted); margin-bottom: 18px; }
+.letter-title { font-size: 18pt; font-weight: 800; font-family: 'Playfair Display', serif; color: ${isDark ? '#fff' : '#1e293b'}; margin-bottom: 2px; }
+.letter-subtitle { font-size: 9pt; color: var(--accent); font-weight: 500; margin-bottom: 18px; }
+.salutation { font-size: 10.5pt; color: var(--text); margin-bottom: 14px; }
+p { margin-bottom: 13px; font-size: 10.5pt; line-height: 1.7; color: var(--text); }
+strong.accent { color: var(--accent); font-weight: 600; }
+.hl-box {
+  border-left: 3px solid var(--accent);
+  background: var(--hl-bg);
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  margin: 16px 0;
+}
+.hl-label { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 4px; }
+.hl-text { font-size: 9.5pt; line-height: 1.65; color: ${isDark ? '#e2e8f0' : '#334155'}; }
+
+/* ---- CHIPS ---- */
+.chips-label { font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); margin-bottom: 6px; }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 14px; }
+.chip {
+  padding: 2px 9px; border-radius: 9999px; font-size: 7.5pt; font-weight: 500;
+  background: ${isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.08)'};
+  border: 1px solid var(--border); color: var(--accent);
+}
+
+/* ---- SIGNATURE ---- */
+.sig-line { border-top: 1.5px solid var(--border); padding-top: 18px; margin-top: 20px; }
+.sig-closing { font-size: 10pt; color: var(--text); margin-bottom: 14px; }
+.sig-wrap { display: flex; align-items: center; gap: 14px; }
+.sig-photo { width: 46px; height: 46px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(99,102,241,0.4); }
+.sig-name { font-size: 12pt; font-weight: 700; color: ${isDark ? '#fff' : '#1e293b'}; }
+.sig-role { font-size: 8.5pt; color: var(--accent); font-weight: 500; }
+.sig-contact { font-size: 8pt; color: var(--muted); margin-top: 3px; }
+.sig-contact a { color: var(--muted); text-decoration: none; }
+
+@media print {
+  body { background: white !important; }
+  .letter { box-shadow: none !important; }
+  .metric-val { color: #6366f1 !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <img src="assets/profile-photo.png" alt="Davi Peterlini" class="hero-photo">
+  <div class="hero-name">Davi Peterlini</div>
+  <div class="hero-role">Senior AI Engineer | LLM Platform &amp; Agentic Systems</div>
+  <div class="hero-contact">
+    São Paulo, Brasil &nbsp;·&nbsp;
+    <a href="mailto:davipeterlini@gmail.com">davipeterlini@gmail.com</a>
+    &nbsp;·&nbsp;
+    linkedin.com/in/davi-peterlini-7aa0b737
+  </div>
+  <div class="badges">
+    <span class="badge">AI Engineering</span>
+    <span class="badge">LLM Infrastructure</span>
+    <span class="badge">Agentic Systems</span>
+    <span class="badge">Tech Lead</span>
+  </div>
+</div>
+
+<!-- METRICS -->
+<div class="metrics">
+  <div class="metric"><div class="metric-val">500K+</div><div class="metric-lbl">req/dia no LLM Gateway</div></div>
+  <div class="metric"><div class="metric-val">-36%</div><div class="metric-lbl">redução de custos de inferência</div></div>
+  <div class="metric"><div class="metric-val">NPS 72</div><div class="metric-lbl">adoção por 500+ devs</div></div>
+  <div class="metric"><div class="metric-val">1M+</div><div class="metric-lbl">traces LLMOps / dia</div></div>
+</div>
+
+<!-- LETTER -->
+<div class="letter">
+  <div class="date">São Paulo, ${dateText}</div>
+  <div class="letter-title">Carta de Apresentação</div>
+  <div class="letter-subtitle">Engenharia de Inteligência Artificial &amp; Plataformas LLM</div>
+  <div class="salutation">Prezado(a) Recrutador(a) / Gestor(a) de Tecnologia,</div>
+
+  <p>Vivemos um momento único na história da tecnologia. A convergência entre modelos de linguagem de grande escala
+  (<strong class="accent">LLMs</strong>), sistemas agênticos autônomos e infraestrutura de IA em produção está redefinindo
+  a forma como construímos software. Estar no centro dessa transformação — não apenas acompanhando, mas liderando e moldando —
+  é o que me move profissional e intelectualmente.</p>
+
+  <p>Sou <strong>Davi Peterlini</strong>, Senior AI Engineer com formação em Engenharia de Computação (USF) e mais de 12 anos
+  de experiência em desenvolvimento de software, dos quais os últimos 3 com foco exclusivo em
+  <strong class="accent">LLM infrastructure, agentic systems</strong> e AI Developer Tooling. Na CI&amp;T, fui responsável por
+  projetar e operar a plataforma <strong>Flow</strong> — um LLM gateway enterprise que hoje processa
+  <strong class="accent">mais de 500 mil requisições por dia</strong> com 99,9% de uptime, conectando times de engenharia a
+  mais de seis provedores de LLM de forma transparente e segura.</p>
+
+  <div class="hl-box">
+    <div class="hl-label">Impacto mensurável</div>
+    <div class="hl-text">A implementação de <em>semantic caching</em> com Redis resultou em <strong class="accent">45–55% de hit-rate</strong>,
+    gerando uma redução de <strong class="accent">36% nos custos de inferência</strong>. O ciclo de desenvolvimento dos times diminuiu
+    <strong class="accent">35%</strong> (PR cycle time), e o NPS da plataforma chegou a <strong class="accent">72</strong>
+    com adoção por <strong class="accent">500+ engenheiros</strong>.</div>
+  </div>
+
+  <p>Além do gateway, implementei um stack completo de <strong class="accent">LLMOps</strong> com distributed tracing sobre
+  Langfuse e ClickHouse — hoje processando <strong class="accent">mais de 1 milhão de traces por dia</strong> — incluindo
+  detecção de alucinações, avaliação de qualidade e dashboards operacionais em tempo real. Construí pipelines
+  <strong class="accent">RAG</strong> com indexação vetorial, chunking semântico e reranking, e publiquei servidores
+  <strong class="accent">MCP</strong> (Model Context Protocol) no NPM.</p>
+
+  <p>Na fronteira mais avançada do campo, projetei e implantei <strong class="accent">sistemas multi-agent autônomos</strong>
+  utilizando LangGraph, CrewAI, AutoGen e Google ADK para automação de tarefas complexas de engenharia, revisão de código e
+  geração de documentação — sempre com foco em observabilidade, segurança e controle humano no loop.</p>
+
+  <div class="chips-label">Stack principal</div>
+  <div class="chips">
+    <span class="chip">Python</span><span class="chip">LiteLLM</span><span class="chip">LangGraph</span>
+    <span class="chip">CrewAI</span><span class="chip">Google ADK</span><span class="chip">Langfuse</span>
+    <span class="chip">ClickHouse</span><span class="chip">Redis</span><span class="chip">FastAPI</span>
+    <span class="chip">Node.js</span><span class="chip">TypeScript</span><span class="chip">MCP Protocol</span>
+    <span class="chip">AWS Bedrock</span><span class="chip">GitHub Actions</span><span class="chip">Docker / K8s</span>
+    <span class="chip">RAG Pipelines</span>
+  </div>
+
+  <p>Liderança técnica, para mim, vai além de arquitetura e código. Fundei a <strong>Comunidade de Prática de AI Engineering</strong>
+  na CI&amp;T (20+ membros ativos), promovendo adoção de LLMs, MCP e sistemas multi-agent em times de engenharia. Reduzi o
+  onboarding de novos engenheiros de <strong class="accent">2 semanas para 3 dias (–70%)</strong> através de documentação viva,
+  assistentes de contexto e ferramentas de IA integradas ao fluxo de trabalho do time.</p>
+
+  <div class="hl-box">
+    <div class="hl-label">Por que me candidato a esta posição</div>
+    <div class="hl-text">Busco um ambiente onde a IA não seja um projeto paralelo, mas o núcleo da estratégia de produto e engenharia.
+    Quero trabalhar com times que entendam que construir com LLMs em produção exige rigor de engenharia, cultura de observabilidade
+    e visão de longo prazo. Trago a experiência de quem já fez isso em escala, com os erros aprendidos e os padrões consolidados.</div>
+  </div>
+
+  <p>Estou pronto para contribuir desde o primeiro dia — seja projetando a arquitetura de uma nova plataforma de IA, acelerando a
+  adoção de LLMs em times de engenharia ou construindo os fundamentos de observabilidade e qualidade que tornam sistemas de IA
+  confiáveis em produção.</p>
+
+  <div class="sig-line">
+    <div class="sig-closing">Fico à disposição para uma conversa e agradecido pela oportunidade de apresentar meu trabalho.</div>
+    <div class="sig-wrap">
+      <img src="assets/profile-photo.png" alt="Davi Peterlini" class="sig-photo">
+      <div>
+        <div class="sig-name">Davi Peterlini</div>
+        <div class="sig-role">Senior AI Engineer | LLM Platform &amp; Agentic Systems</div>
+        <div class="sig-contact">
+          <a href="mailto:davipeterlini@gmail.com">davipeterlini@gmail.com</a>
+          &nbsp;·&nbsp; linkedin.com/in/davi-peterlini-7aa0b737
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>`);
+
+        win.document.close();
+
+        win.onload = function() {
+            setTimeout(function() {
+                win.focus();
+                win.print();
+                // Restore button after print dialog closes
+                setTimeout(function() {
+                    if (btn)     btn.classList.remove('hidden');
+                    if (loading) loading.classList.add('hidden');
+                }, 1500);
+            }, 800);
+        };
+
+        // Fallback: restore button even if onload doesn't fire
+        setTimeout(function() {
+            if (btn)     btn.classList.remove('hidden');
+            if (loading) loading.classList.add('hidden');
+        }, 6000);
+    }
+</script>
+</body>
+</html>
