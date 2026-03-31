@@ -1,4 +1,4 @@
-// PDF Export — Modern ATS-friendly resume (2-column layout, print-optimized)
+// PDF Export — 1-column ATS-friendly modern resume
 
 function exportToPDF() {
     const loadingIndicator = document.getElementById('pdf-loading');
@@ -12,7 +12,6 @@ function exportToPDF() {
     const isPT = lang === 'pt-BR';
     const isDark = document.documentElement.classList.contains('dark');
 
-    // Convert photo to base64 so it renders correctly in the popup (no base URL)
     loadPhotoAsBase64('assets/profile-photo.png', function (photoDataUrl) {
         try {
             buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator, exportButton);
@@ -37,7 +36,7 @@ function loadPhotoAsBase64(src, callback) {
         callback(canvas.toDataURL('image/png'));
     };
     img.onerror = function () {
-        callback(''); // photo unavailable — skip gracefully
+        callback('');
     };
     img.src = src;
 }
@@ -54,7 +53,27 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
         return;
     }
 
-    // ── Skill tags per category ───────────────────────────────────────────────
+    // ── Colors ────────────────────────────────────────────────────────────────
+    const C = {
+        bg:           isDark ? '#0f172a' : '#ffffff',
+        text:         isDark ? '#e2e8f0' : '#1e293b',
+        textMuted:    isDark ? '#94a3b8' : '#64748b',
+        accent:       isDark ? '#60a5fa' : '#1d4ed8',
+        accentLight:  isDark ? '#1e3a5f' : '#dbeafe',
+        border:       isDark ? '#334155' : '#e2e8f0',
+        headerBg:     isDark ? '#0f172a' : '#f8fafc',
+        summaryBg:    isDark ? '#1e293b' : '#f1f5f9',
+        summaryBorder:'#3b82f6',
+        name:         isDark ? '#f8fafc' : '#0f172a',
+        company:      isDark ? '#f1f5f9' : '#0f172a',
+        role:         isDark ? '#60a5fa' : '#2563eb',
+        dates:        isDark ? '#64748b' : '#94a3b8',
+        stackBg:      isDark ? '#1e293b' : '#f8fafc',
+        stackColor:   isDark ? '#64748b' : '#64748b',
+        hlStar:       '#f59e0b',
+    };
+
+    // ── Skill tag colors ──────────────────────────────────────────────────────
     const catColors = {
         'Linguagens': '#1d4ed8', 'Languages': '#1d4ed8',
         'Back-End': '#0f766e',
@@ -66,7 +85,7 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
         'Segurança & Qualidade': '#6d28d9', 'Security & Quality': '#6d28d9'
     };
 
-    function skillTags(cat) {
+    function skillTagsHtml(cat) {
         const skills = skillsData[lang][cat] || {};
         return Object.entries(skills)
             .filter(([, v]) => v >= 7)
@@ -77,22 +96,22 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
             .join('');
     }
 
-    function sidebarSkillSection(title, cats) {
-        return `<div class="side-section">
-            <div class="side-title">${title}</div>
-            ${cats.map(cat => `
-                <div class="skill-group-name">${cat}</div>
-                <div class="tag-group">${skillTags(cat)}</div>
-            `).join('')}
-        </div>`;
+    function skillSection(title, cats) {
+        return cats.map(cat => {
+            const tags = skillTagsHtml(cat);
+            if (!tags) return '';
+            return `<div class="skill-group">
+                <span class="skill-cat">${cat}</span>
+                <div class="tag-row">${tags}</div>
+            </div>`;
+        }).join('');
     }
 
     // ── Experience HTML ───────────────────────────────────────────────────────
     function renderExperience() {
         return timelineData[lang].map(job => {
             const lines = job.details.map(d => {
-                const isStack = d.includes('<em>Stack:');
-                if (isStack) return null; // handled separately
+                if (d.includes('<em>Stack:')) return null;
                 if (d.includes('<strong>')) {
                     const clean = d.replace(/<\/?strong>/g, '').replace(/🔹\s*/g, '').trim();
                     return `<div class="sub-header">${clean}</div>`;
@@ -109,7 +128,7 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
 
             return `<div class="exp-block">
                 <div class="exp-header">
-                    <div>
+                    <div class="exp-left">
                         <span class="exp-company">${job.company}</span>
                         <span class="exp-role"> · ${job.role}</span>
                     </div>
@@ -121,37 +140,31 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
         }).join('');
     }
 
-    // ── Labels & data ─────────────────────────────────────────────────────────
-    const coreCategories = isPT
-        ? ['AI & LLM', 'Linguagens', 'Back-End', 'DevOps & Cloud']
-        : ['AI & LLM', 'Languages', 'Back-End', 'DevOps & Cloud'];
-
-    const moreCategories = isPT
-        ? ['Front-End', 'Arquitetura', 'Banco de Dados', 'Segurança & Qualidade']
-        : ['Front-End', 'Architecture', 'Databases', 'Security & Quality'];
+    // ── Labels ────────────────────────────────────────────────────────────────
+    const allCats = isPT
+        ? ['AI & LLM', 'Linguagens', 'Back-End', 'DevOps & Cloud', 'Front-End', 'Arquitetura', 'Banco de Dados', 'Segurança & Qualidade']
+        : ['AI & LLM', 'Languages', 'Back-End', 'DevOps & Cloud', 'Front-End', 'Architecture', 'Databases', 'Security & Quality'];
 
     const L = {
-        docTitle:    isPT ? 'Currículo — Davi Peterlini' : 'Resume — Davi Peterlini',
-        contact:     isPT ? 'Contato'                    : 'Contact',
-        education:   isPT ? 'Formação'                   : 'Education',
-        skills:      isPT ? 'Tecnologias & Ferramentas'  : 'Technologies & Tools',
-        more:        isPT ? 'Mais Competências'           : 'More Skills',
-        highlights:  isPT ? 'Destaques'                  : 'Highlights',
-        experience:  isPT ? 'Experiência Profissional'   : 'Professional Experience',
-        degree:      isPT ? 'Eng. de Computação'         : 'B.Sc. Computer Engineering',
-        masters:     isPT ? 'Mestrado (não concluído)'   : "Master's (not completed)",
-        hl1:         isPT ? 'TCC premiado com bolsa UNICAMP (SDN)' : 'Thesis awarded UNICAMP master\'s scholarship (SDN)',
-        hl2:         isPT ? 'Fundador da CoP AI Engineering na CI&T' : 'Founded AI Engineering CoP at CI&T',
-        hl3:         'Open source: qwen-code (NPM), proxy-llm (GitHub)',
-        footer:      isPT ? 'Currículo gerado automaticamente — 2026' : 'Auto-generated resume — 2026'
+        docTitle:   isPT ? 'Currículo — Davi Peterlini' : 'Resume — Davi Peterlini',
+        experience: isPT ? 'Experiência Profissional'   : 'Professional Experience',
+        skills:     isPT ? 'Tecnologias & Ferramentas'  : 'Technologies & Tools',
+        education:  isPT ? 'Formação'                   : 'Education',
+        highlights: isPT ? 'Destaques'                  : 'Highlights',
+        degree:     isPT ? 'Eng. de Computação'         : 'B.Sc. Computer Engineering',
+        masters:    isPT ? 'Mestrado (não concluído)'   : "Master's (not completed)",
+        hl1:        isPT ? 'TCC premiado com bolsa UNICAMP (SDN)' : "Thesis awarded UNICAMP master's scholarship (SDN)",
+        hl2:        isPT ? 'Fundador da CoP AI Engineering na CI&T' : 'Founded AI Engineering CoP at CI&T',
+        hl3:        'Open source: qwen-code (NPM), proxy-llm (GitHub)',
+        footer:     isPT ? 'Currículo gerado automaticamente — 2026' : 'Auto-generated resume — 2026'
     };
 
-    const summaryText = t['professional_summary_text'] || '';
-    const photoImg = photoDataUrl
-        ? `<img src="${photoDataUrl}" alt="Davi Peterlini">`
+    const summaryText = (t && t['professional_summary_text']) || '';
+    const photoHtml = photoDataUrl
+        ? `<img class="photo" src="${photoDataUrl}" alt="Davi Peterlini">`
         : '';
 
-    // ── Full document ─────────────────────────────────────────────────────────
+    // ── Document ──────────────────────────────────────────────────────────────
     printWindow.document.write(`<!DOCTYPE html>
 <html lang="${lang}">
 <head>
@@ -161,174 +174,222 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  /* ── Theme variables ── */
-  :root {
-    /* sidebar */
-    --sb-bg:          ${isDark ? '#0f172a' : '#f1f5f9'};
-    --sb-color:       ${isDark ? '#e2e8f0' : '#1e293b'};
-    --sb-border:      ${isDark ? '#1e3a5f' : '#cbd5e1'};
-    --sb-name:        ${isDark ? '#f8fafc' : '#0f172a'};
-    --sb-role:        ${isDark ? '#94a3b8' : '#475569'};
-    --sb-title:       ${isDark ? '#60a5fa' : '#2563eb'};
-    --sb-contact:     ${isDark ? '#cbd5e1' : '#334155'};
-    --sb-contact-a:   ${isDark ? '#93c5fd' : '#1d4ed8'};
-    --sb-edu-degree:  ${isDark ? '#f1f5f9' : '#0f172a'};
-    --sb-edu-place:   ${isDark ? '#94a3b8' : '#64748b'};
-    --sb-group-name:  ${isDark ? '#64748b' : '#94a3b8'};
-    --sb-highlight:   ${isDark ? '#cbd5e1' : '#334155'};
-    /* main */
-    --main-bg:        ${isDark ? '#1e293b' : '#ffffff'};
-    --main-name:      ${isDark ? '#f8fafc' : '#0f172a'};
-    --main-border:    ${isDark ? '#3b82f6' : '#1d4ed8'};
-    --main-headline:  ${isDark ? '#93c5fd' : '#3b82f6'};
-    --summary-bg:     ${isDark ? '#0f172a' : '#f8fafc'};
-    --summary-color:  ${isDark ? '#cbd5e1' : '#475569'};
-    --section-color:  ${isDark ? '#93c5fd' : '#1d4ed8'};
-    --section-border: ${isDark ? '#1e3a5f' : '#dbeafe'};
-    --exp-border:     ${isDark ? '#334155' : '#f1f5f9'};
-    --exp-company:    ${isDark ? '#f1f5f9' : '#0f172a'};
-    --exp-role:       ${isDark ? '#60a5fa' : '#2563eb'};
-    --exp-dates:      ${isDark ? '#64748b' : '#94a3b8'};
-    --sub-header:     ${isDark ? '#cbd5e1' : '#334155'};
-    --bullet-color:   ${isDark ? '#94a3b8' : '#475569'};
-    --stack-bg:       ${isDark ? '#0f172a' : '#f8fafc'};
-    --stack-color:    ${isDark ? '#64748b' : '#64748b'};
-    --footer-color:   ${isDark ? '#64748b' : '#94a3b8'};
-    --footer-border:  ${isDark ? '#334155' : '#e2e8f0'};
-  }
-
   html, body {
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     font-size: 9.5pt;
-    line-height: 1.45;
-    color: var(--sb-color);
-    background: var(--main-bg);
+    line-height: 1.5;
+    color: ${C.text};
+    background: ${C.bg};
   }
 
-  /* ── Layout ── */
   .page {
-    display: grid;
-    grid-template-columns: 195px 1fr;
     width: 210mm;
     min-height: 297mm;
+    padding: 14mm 16mm 12mm;
+    background: ${C.bg};
   }
 
-  /* ── Sidebar ── */
-  .sidebar {
-    background: var(--sb-bg);
-    color: var(--sb-color);
-    padding: 20px 13px;
-    border-right: 1px solid var(--sb-border);
-  }
-
-  .photo-wrap {
+  /* ── Header ── */
+  .header {
     display: flex;
-    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid ${C.accent};
     margin-bottom: 12px;
   }
 
-  .photo-wrap img {
-    width: 76px;
-    height: 76px;
+  .photo {
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #3b82f6;
+    border: 2.5px solid ${C.accent};
+    flex-shrink: 0;
   }
 
-  .name-block {
-    text-align: center;
-    margin-bottom: 16px;
-  }
+  .header-info { flex: 1; }
 
-  .name-block .name {
-    font-size: 12.5pt;
+  .header-name {
+    font-size: 20pt;
     font-weight: 700;
-    color: var(--sb-name);
-    line-height: 1.2;
+    color: ${C.name};
+    line-height: 1.1;
   }
 
-  .name-block .role-tag {
-    font-size: 7pt;
-    color: var(--sb-role);
-    margin-top: 4px;
-    line-height: 1.4;
-  }
-
-  .side-section {
-    margin-bottom: 14px;
-  }
-
-  .side-title {
-    font-size: 6.5pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: var(--sb-title);
-    border-bottom: 1px solid var(--sb-border);
-    padding-bottom: 4px;
-    margin-bottom: 7px;
-  }
-
-  .contact-item {
-    font-size: 7pt;
-    color: var(--sb-contact);
-    margin-bottom: 4px;
-    word-break: break-all;
-    line-height: 1.35;
-  }
-
-  .contact-item a {
-    color: var(--sb-contact-a);
-    text-decoration: none;
-  }
-
-  .edu-item {
-    margin-bottom: 7px;
-  }
-
-  .edu-degree {
-    font-size: 7.5pt;
-    font-weight: 600;
-    color: var(--sb-edu-degree);
+  .header-headline {
+    font-size: 9pt;
+    font-weight: 500;
+    color: ${C.role};
+    margin-top: 3px;
     line-height: 1.3;
   }
 
-  .edu-place {
-    font-size: 7pt;
-    color: var(--sb-edu-place);
+  .header-contacts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    margin-top: 7px;
   }
 
-  .skill-group-name {
-    font-size: 6pt;
+  .contact-item {
+    font-size: 7.5pt;
+    color: ${C.textMuted};
+    white-space: nowrap;
+  }
+
+  /* ── Summary ── */
+  .summary {
+    font-size: 8pt;
+    color: ${C.textMuted};
+    line-height: 1.6;
+    padding: 8px 11px;
+    background: ${C.summaryBg};
+    border-left: 3px solid ${C.summaryBorder};
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 14px;
+  }
+
+  /* ── Section titles ── */
+  .section-title {
+    font-size: 7.5pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: ${C.accent};
+    border-bottom: 1px solid ${C.accentLight};
+    padding-bottom: 3px;
+    margin: 14px 0 9px;
+  }
+
+  /* ── Experience ── */
+  .exp-block {
+    margin-bottom: 10px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid ${C.border};
+  }
+
+  .exp-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 3px;
+  }
+
+  .exp-company {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: ${C.company};
+  }
+
+  .exp-role {
+    font-size: 8.5pt;
+    font-weight: 500;
+    color: ${C.role};
+  }
+
+  .exp-dates {
+    font-size: 7pt;
+    color: ${C.dates};
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .sub-header {
+    font-size: 7.5pt;
     font-weight: 600;
-    color: var(--sb-group-name);
+    color: ${C.text};
+    margin: 4px 0 1px 2px;
+  }
+
+  .bullet {
+    font-size: 7.5pt;
+    color: ${C.textMuted};
+    padding-left: 8px;
+    line-height: 1.45;
+    margin-bottom: 1px;
+  }
+
+  .stack-line {
+    font-size: 6.5pt;
+    color: ${C.stackColor};
+    margin-top: 4px;
+    padding: 2px 8px;
+    background: ${C.stackBg};
+    border-radius: 3px;
+    font-style: italic;
+  }
+
+  /* ── Skills ── */
+  .skills-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .skill-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .skill-cat {
+    font-size: 6.5pt;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    margin: 6px 0 3px;
+    color: ${C.textMuted};
+    white-space: nowrap;
+    min-width: 88px;
+    padding-top: 3px;
   }
 
-  .tag-group {
+  .tag-row {
     display: flex;
     flex-wrap: wrap;
     gap: 3px;
-    margin-bottom: 3px;
   }
 
   .tag {
     display: inline-block;
-    font-size: 6.5pt;
+    font-size: 7pt;
     font-weight: 500;
-    padding: 2px 5px;
+    padding: 2px 6px;
     border-radius: 3px;
     border: 1px solid;
     line-height: 1.35;
     white-space: nowrap;
   }
 
+  /* ── Education & Highlights (2-col) ── */
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 24px;
+  }
+
+  .edu-item { margin-bottom: 7px; }
+
+  .edu-degree {
+    font-size: 8pt;
+    font-weight: 600;
+    color: ${C.text};
+    line-height: 1.3;
+  }
+
+  .edu-place {
+    font-size: 7.5pt;
+    color: ${C.textMuted};
+  }
+
   .highlight-item {
-    font-size: 7pt;
-    color: var(--sb-highlight);
-    padding-left: 12px;
+    font-size: 7.5pt;
+    color: ${C.textMuted};
+    padding-left: 13px;
     position: relative;
     margin-bottom: 5px;
     line-height: 1.4;
@@ -338,146 +399,29 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
     content: '★';
     position: absolute;
     left: 0;
-    color: #f59e0b;
+    color: ${C.hlStar};
     font-size: 6.5pt;
     top: 1px;
   }
 
-  /* ── Main ── */
-  .main {
-    padding: 20px 20px;
-    background: var(--main-bg);
-  }
-
-  .main-header {
-    border-bottom: 2px solid var(--main-border);
-    padding-bottom: 9px;
-    margin-bottom: 12px;
-  }
-
-  .main-header .full-name {
-    font-size: 18pt;
-    font-weight: 700;
-    color: var(--main-name);
-    line-height: 1.1;
-  }
-
-  .main-header .headline {
-    font-size: 8.5pt;
-    color: var(--main-headline);
-    font-weight: 500;
-    margin-top: 3px;
-    line-height: 1.35;
-  }
-
-  .summary-text {
-    font-size: 8pt;
-    color: var(--summary-color);
-    margin-bottom: 12px;
-    line-height: 1.55;
-    padding: 8px 10px;
-    background: var(--summary-bg);
-    border-left: 3px solid #3b82f6;
-    border-radius: 0 4px 4px 0;
-  }
-
-  .section-title {
-    font-size: 7.5pt;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--section-color);
-    border-bottom: 1px solid var(--section-border);
-    padding-bottom: 3px;
-    margin-bottom: 9px;
-    margin-top: 12px;
-  }
-
-  .exp-block {
-    margin-bottom: 10px;
-    padding-bottom: 9px;
-    border-bottom: 1px solid var(--exp-border);
-  }
-
-  .exp-block:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-  }
-
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 6px;
-    margin-bottom: 3px;
-    flex-wrap: wrap;
-  }
-
-  .exp-company {
-    font-size: 9.5pt;
-    font-weight: 700;
-    color: var(--exp-company);
-  }
-
-  .exp-role {
-    font-size: 8.5pt;
-    font-weight: 500;
-    color: var(--exp-role);
-  }
-
-  .exp-dates {
-    font-size: 7pt;
-    color: var(--exp-dates);
-    white-space: nowrap;
-    font-style: italic;
-  }
-
-  .sub-header {
-    font-size: 7.5pt;
-    font-weight: 600;
-    color: var(--sub-header);
-    margin: 4px 0 1px;
-    padding-left: 2px;
-  }
-
-  .bullet {
-    font-size: 7pt;
-    color: var(--bullet-color);
-    padding-left: 8px;
-    line-height: 1.45;
-    margin-bottom: 1px;
-  }
-
-  .stack-line {
-    font-size: 6.5pt;
-    color: var(--stack-color);
-    margin-top: 4px;
-    padding: 2px 7px;
-    background: var(--stack-bg);
-    border-radius: 3px;
-    font-style: italic;
-  }
-
+  /* ── Footer ── */
   .pdf-footer {
     text-align: center;
     font-size: 6.5pt;
-    color: var(--footer-color);
+    color: ${C.dates};
     margin-top: 14px;
     padding-top: 7px;
-    border-top: 1px solid var(--footer-border);
+    border-top: 1px solid ${C.border};
     font-style: italic;
   }
 
   /* ── Print ── */
-  @page {
-    size: A4;
-    margin: 0;
-  }
+  @page { size: A4; margin: 0; }
 
   @media print {
     html, body { width: 210mm; }
     .page { width: 210mm; }
-    .sidebar, .tag, .summary-text, .stack-line {
+    .tag, .summary, .stack-line, .header, .skills-grid {
       print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
     }
@@ -489,24 +433,38 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
 <body>
 <div class="page">
 
-  <aside class="sidebar">
-    <div class="photo-wrap">${photoImg}</div>
-
-    <div class="name-block">
-      <div class="name">Davi Peterlini</div>
-      <div class="role-tag">Senior AI Engineer<br>Tech Lead · CI&amp;T</div>
+  <!-- Header -->
+  <header class="header">
+    ${photoHtml}
+    <div class="header-info">
+      <div class="header-name">Davi Peterlini</div>
+      <div class="header-headline">Senior AI Engineer &nbsp;·&nbsp; Tech Lead &nbsp;·&nbsp; Master Architect at CI&amp;T</div>
+      <div class="header-contacts">
+        <span class="contact-item">✉ davipeterlini@gmail.com</span>
+        <span class="contact-item">🔗 linkedin.com/in/davi-peterlini-7aa0b737</span>
+        <span class="contact-item">📦 github.com/davipeterlini</span>
+        <span class="contact-item">📍 São Paulo, Brasil</span>
+      </div>
     </div>
+  </header>
 
-    <div class="side-section">
-      <div class="side-title">${L.contact}</div>
-      <div class="contact-item">✉ davipeterlini@gmail.com</div>
-      <div class="contact-item">🔗 linkedin.com/in/davi-peterlini-7aa0b737</div>
-      <div class="contact-item">📦 github.com/davipeterlini</div>
-      <div class="contact-item">📍 São Paulo, Brasil</div>
-    </div>
+  <!-- Summary -->
+  <div class="summary">${summaryText}</div>
 
-    <div class="side-section">
-      <div class="side-title">${L.education}</div>
+  <!-- Experience -->
+  <div class="section-title">${L.experience}</div>
+  ${renderExperience()}
+
+  <!-- Skills -->
+  <div class="section-title">${L.skills}</div>
+  <div class="skills-grid">
+    ${skillSection('', allCats)}
+  </div>
+
+  <!-- Education + Highlights -->
+  <div class="bottom-grid">
+    <div>
+      <div class="section-title">${L.education}</div>
       <div class="edu-item">
         <div class="edu-degree">${L.degree}</div>
         <div class="edu-place">Univ. São Francisco · 2009–2013</div>
@@ -516,31 +474,15 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
         <div class="edu-place">UNICAMP · SDN · 2014</div>
       </div>
     </div>
-
-    ${sidebarSkillSection(L.skills, coreCategories)}
-    ${sidebarSkillSection(L.more, moreCategories)}
-
-    <div class="side-section">
-      <div class="side-title">${L.highlights}</div>
+    <div>
+      <div class="section-title">${L.highlights}</div>
       <div class="highlight-item">${L.hl1}</div>
       <div class="highlight-item">${L.hl2}</div>
       <div class="highlight-item">${L.hl3}</div>
     </div>
-  </aside>
+  </div>
 
-  <main class="main">
-    <div class="main-header">
-      <div class="full-name">Davi Peterlini</div>
-      <div class="headline">Senior AI Engineer | Tech Lead | Master Architect at CI&T</div>
-    </div>
-
-    <div class="summary-text">${summaryText}</div>
-
-    <div class="section-title">${L.experience}</div>
-    ${renderExperience()}
-
-    <div class="pdf-footer">${L.footer}</div>
-  </main>
+  <div class="pdf-footer">${L.footer}</div>
 </div>
 </body>
 </html>`);

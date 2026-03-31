@@ -192,10 +192,10 @@ const timelineData = {
             dates: "2020 - Presente",
             details: [
                 "Desenvolvimento de projetos pessoais e open source na área de inteligência artificial, ferramentas para desenvolvedores e automação de processos — com foco em sistemas agenticos, LLM tooling e integrações multi-plataforma.",
-                "<strong>🔹 Qwen Code — Agentic CLI Tool (Publicado no NPM):</strong>",
+                "<strong>🔹 Qwen Code — Agentic CLI Tool:</strong>",
                 "CLI agent para terminal otimizado para modelos Qwen3-Coder com suporte multi-protocolo (OpenAI, Anthropic, Gemini APIs), modos interativo e headless, e integração com VS Code, Zed e JetBrains.",
                 "<em>Stack: TypeScript · Node.js 20+ | npmjs.com/package/qwen-code</em>",
-                "<strong>🔹 Proxy LLM — Intelligent Model Routing (Open Source):</strong>",
+                "<strong>🔹 Proxy LLM — Intelligent Model Routing:</strong>",
                 "LLM proxy com roteamento automático baseado em complexidade e sensibilidade de dados: queries simples → modelos cloud, dados sensíveis → modelos locais (Ollama: Phi-4, DeepSeek-R1, Qwen3, Llama 3.2). Compatível com OpenAI API (drop-in replacement) com UI dashboard administrativo.",
                 "<em>Stack: Python · FastAPI · LiteLLM · Ollama · Docker | github.com/davipeterlini/proxy-llm</em>",
                 "<strong>🔹 Multi-Agent Automation System:</strong>",
