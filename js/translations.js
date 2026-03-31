@@ -13,13 +13,15 @@ const translations = {
 
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Senior AI Engineer com atuação em arquitetura, desenvolvimento e liderança técnica de sistemas baseados em LLMs — do design à produção. Na CI&T, lidero iniciativas de IA voltadas à produtividade de times de engenharia: LLM gateway enterprise, observabilidade multi-tenant, extensões de IDE e sistemas multiagentes. Projetos open source publicados no NPM e GitHub.',
-        'professional_summary': 'Resumo Profissional',
-        'professional_summary_text': 'Senior AI Engineer especializado em LLM infrastructure, agentic systems e developer tooling. Experiência consolidada na construção de infraestruturas de LLM (proxy/gateway, model routing, caching, multi-tenant), sistemas multiagentes autônomos, extensões de IDE com IA, servidores MCP e stacks de observabilidade para workloads de IA em ambientes enterprise.',
-        'ai_focus': 'LLM Infrastructure & Agentic AI',
-        'ai_focus_text': 'LLM gateway multi-provider (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) com semantic caching (Redis), intelligent model routing, prompt engineering e RAG pipelines. LLMOps com distributed tracing (Langfuse/ClickHouse), hallucination detection e quality evaluation. MCP servers (STDIO/SSE) e orquestração multi-agent com LangGraph, Agno, AutoGen e Google ADK.',
-        'leadership': 'Tech Lead & AI Engineering Culture',
-        'leadership_text': 'Tech Lead com Architecture Decision Records (ADRs), code reviews sistemáticos e mentoria de engenheiros seniores. Fundador da Comunidade de Prática de AI Engineering na CI&T, promovendo adoção de LLMs, MCP e multi-agent systems. Padrões de qualidade via TDD (pytest/Vitest), CI/CD (GitHub Actions) e pré-commit (flake8, black, mypy, bandit). Processo de onboarding estruturado e documentado para novos engenheiros.',
+        'overview_description': 'Sou Engenheiro de Inteligência Artificial Sênior com atuação em arquitetura, desenvolvimento e liderança técnica de sistemas baseados em LLMs — do design à produção, com foco em qualidade, observabilidade e impacto real.',
+        'professional_summary': 'Infraestrutura de LLM & Sistemas Multiagentes',
+        'professional_summary_text': 'Tenho experiência consolidada na construção de infraestruturas de LLM (proxy/gateway, model routing, caching, multi-tenant), sistemas multiagentes autônomos (orquestração sequencial, paralela e condicional), extensões de IDE com IA, servidores MCP (Model Context Protocol) e stacks completas de observabilidade para workloads de IA em ambientes enterprise.',
+        'ai_focus': 'Integração de Modelos & Segurança',
+        'ai_focus_text': 'Integro modelos avançados (OpenAI, Anthropic Claude, Google Gemini, AWS Bedrock) em pipelines corporativos com ênfase em escalabilidade, governança, rastreabilidade de métricas operacionais e segurança (OWASP LLM Top 10, JWT/OAuth2).',
+        'leadership': 'Profundidade Técnica & Visão Estratégica',
+        'leadership_text': 'Meu trabalho combina profundidade técnica e visão estratégica: projeto arquiteturas de IA robustas e evolutivas, lidero iniciativas de alta complexidade e ambiguidade, e construo ferramentas que times de engenharia adotam voluntariamente — porque tornam o trabalho genuinamente melhor.',
+        'overview_stack_title': 'Stack principal',
+        'overview_skills_title': 'Competências',
 
         // Timeline section
         'timeline_title': 'Linha do Tempo da Carreira',
@@ -88,13 +90,15 @@ const translations = {
 
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'Senior AI Engineer focused on architecture, development, and technical leadership of LLM-based systems — from design to production. At CI&T, I lead AI initiatives focused on engineering team productivity: enterprise LLM gateway, multi-tenant observability, IDE extensions, and multi-agent systems. Open source projects published on NPM and GitHub.',
-        'professional_summary': 'Professional Summary',
-        'professional_summary_text': 'Senior AI Engineer specialized in LLM infrastructure, agentic systems, and developer tooling. Proven experience building LLM infrastructures (proxy/gateway, model routing, caching, multi-tenant), autonomous multi-agent systems, AI-powered IDE extensions, MCP servers, and observability stacks for AI workloads in enterprise environments.',
-        'ai_focus': 'LLM Infrastructure & Agentic AI',
-        'ai_focus_text': 'Multi-provider LLM gateway (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) with semantic caching (Redis), intelligent model routing, prompt engineering, and RAG pipelines. LLMOps with distributed tracing (Langfuse/ClickHouse), hallucination detection, and quality evaluation. MCP servers (STDIO/SSE) and multi-agent orchestration with LangGraph, Agno, AutoGen, and Google ADK.',
-        'leadership': 'Tech Lead & AI Engineering Culture',
-        'leadership_text': 'Tech Lead with Architecture Decision Records (ADRs), systematic code reviews, and mentorship of senior engineers. Founded the AI Engineering Community of Practice at CI&T, promoting adoption of LLMs, MCP, and multi-agent systems across engineering teams. Quality standards via TDD (pytest/Vitest), CI/CD (GitHub Actions), and pre-commit hooks (flake8, black, mypy, bandit). Structured and documented onboarding process for new engineers.',
+        'overview_description': 'I am a Senior Artificial Intelligence Engineer focused on architecture, development, and technical leadership of LLM-based systems — from design to production, with emphasis on quality, observability, and real-world impact.',
+        'professional_summary': 'LLM Infrastructure & Multi-Agent Systems',
+        'professional_summary_text': 'I have consolidated experience building LLM infrastructures (proxy/gateway, model routing, caching, multi-tenant), autonomous multi-agent systems (sequential, parallel, and conditional orchestration), AI-powered IDE extensions, MCP (Model Context Protocol) servers, and full observability stacks for AI workloads in enterprise environments.',
+        'ai_focus': 'Model Integration & Security',
+        'ai_focus_text': 'I integrate advanced models (OpenAI, Anthropic Claude, Google Gemini, AWS Bedrock) into enterprise pipelines with emphasis on scalability, governance, operational metrics traceability, and security (OWASP LLM Top 10, JWT/OAuth2).',
+        'leadership': 'Technical Depth & Strategic Vision',
+        'leadership_text': 'My work combines technical depth and strategic vision: I design robust and evolving AI architectures, lead high-complexity and ambiguous initiatives, and build tools that engineering teams adopt voluntarily — because they genuinely make work better.',
+        'overview_stack_title': 'Main Stack',
+        'overview_skills_title': 'Skills',
 
         // Timeline section
         'timeline_title': 'Career Timeline',
