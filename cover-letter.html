@@ -437,46 +437,48 @@
                 Sou <strong class="text-slate-700 dark:text-white">Davi Peterlini</strong>, Senior AI Engineer com formação em
                 Engenharia de Computação (USF) e mais de 12 anos de experiência em desenvolvimento de software, dos quais os
                 últimos 3 com foco exclusivo em <strong class="text-indigo-500 dark:text-indigo-400">LLM infrastructure, agentic systems</strong>
-                e AI Developer Tooling. Na CI&amp;T, fui responsável por projetar e operar a plataforma
-                <strong class="text-slate-700 dark:text-white">Flow</strong> — um LLM gateway enterprise que hoje processa
-                <strong class="text-indigo-500 dark:text-indigo-400">mais de 500 mil requisições por dia</strong> com 99,9% de uptime,
-                conectando times de engenharia a mais de seis provedores de LLM (OpenAI, AWS Bedrock/Claude, Google Gemini,
-                DeepSeek, Llama 3) de forma transparente e segura.
+                e AI Developer Tooling. Na CI&amp;T, lidero iniciativas que colocam IA generativa no centro do fluxo de trabalho
+                de engenharia — desde extensões de IDE com code completion contextual até gateways LLM multi-provider e stacks
+                de observabilidade para times de escala enterprise.
+            </p>
+        </div>
+
+        <!-- === Paragraph 3 — LLM Gateway & Observability === -->
+        <div class="mb-7">
+            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
+                Projetei e opero o <strong class="text-slate-700 dark:text-white">LLM Gateway</strong> da CI&amp;T — um proxy
+                multi-provider construído sobre <strong class="text-indigo-500 dark:text-indigo-400">LiteLLM + FastAPI</strong>
+                com model routing inteligente, semantic caching thread-safe via Redis, autenticação corporativa e rate limiting
+                multi-tenant. Em paralelo, implantei o stack de
+                <strong class="text-indigo-500 dark:text-indigo-400">LLMOps e observabilidade</strong> baseado em Langfuse e
+                ClickHouse, com distributed tracing, detecção de alucinações, evaluators de qualidade e cost analytics por
+                modelo e usuário — permitindo que times tomem decisões informadas sobre qual modelo usar e quanto custa cada
+                interação em produção.
             </p>
         </div>
 
         <!-- Highlight box 1 -->
         <div class="highlight-box mb-7">
-            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wide">Impacto mensurável</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400 font-medium mb-1 uppercase tracking-wide">Princípio de engenharia</p>
             <p class="letter-paragraph text-slate-700 dark:text-slate-200 text-[0.95rem]">
-                A implementação de <em>semantic caching</em> com Redis resultou em <strong class="text-indigo-500">45–55% de hit-rate</strong>,
-                gerando uma redução de <strong class="text-indigo-500">36% nos custos de inferência</strong>. O ciclo de desenvolvimento dos
-                times diminuiu <strong class="text-indigo-500">35%</strong> (PR cycle time), e o NPS da plataforma chegou a
-                <strong class="text-indigo-500">72</strong> com adoção por <strong class="text-indigo-500">500+ engenheiros</strong>.
+                Construir com LLMs em produção exige muito mais do que integrar uma API. Exige
+                <strong class="text-indigo-500">observabilidade desde o dia zero</strong>, gestão de custos, controle de qualidade
+                e arquitetura preparada para a volatilidade inerente aos modelos de linguagem — latência variável, alucinações
+                e mudanças de comportamento entre versões. Esse rigor é o que diferencia um MVP de uma plataforma confiável.
             </p>
         </div>
 
-        <!-- === Paragraph 3 — LLMOps & RAG === -->
+        <!-- === Paragraph 4 — Agentic systems & IDE === -->
         <div class="mb-7">
             <p class="letter-paragraph text-slate-600 dark:text-slate-300">
-                Além do gateway, implementei um stack completo de <strong class="text-indigo-500 dark:text-indigo-400">LLMOps</strong>
-                com distributed tracing sobre Langfuse e ClickHouse — hoje processando
-                <strong class="text-indigo-500 dark:text-indigo-400">mais de 1 milhão de traces por dia</strong> — incluindo
-                detecção de alucinações, avaliação de qualidade e dashboards operacionais em tempo real.
-                Construí pipelines <strong class="text-indigo-500 dark:text-indigo-400">RAG</strong> com indexação vetorial,
-                chunking semântico e reranking, e publiquei servidores <strong class="text-indigo-500 dark:text-indigo-400">MCP</strong>
-                (Model Context Protocol) no NPM — tornando ferramentas de IA acessíveis a qualquer desenvolvedor via CLI ou IDE.
-            </p>
-        </div>
-
-        <!-- === Paragraph 4 — Agentic systems === -->
-        <div class="mb-7">
-            <p class="letter-paragraph text-slate-600 dark:text-slate-300">
-                Na fronteira mais avançada do campo, projetei e implantei <strong class="text-indigo-500 dark:text-indigo-400">sistemas
-                multi-agent autônomos</strong> utilizando LangGraph, CrewAI, AutoGen e Google ADK para automação de tarefas
-                complexas de engenharia, revisão de código e geração de documentação. Cada sistema foi concebido com foco em
-                <em>observabilidade</em>, <em>segurança</em> e <em>controle humano no loop</em> — porque escalar IA de forma
-                responsável é tão importante quanto escalar com performance.
+                Na fronteira mais avançada do campo, desenvolvi
+                <strong class="text-indigo-500 dark:text-indigo-400">extensões de IDE com IA</strong> para VS Code e JetBrains —
+                com code completion em tempo real, chat contextual, slash commands e context providers — e projetei
+                <strong class="text-indigo-500 dark:text-indigo-400">workflows multi-agent autônomos</strong> com LangGraph e
+                Agno para automação de code review, geração de testes, documentação e análise de segurança. Cada sistema foi
+                concebido com orquestração sequencial e paralela, integrando o protocolo
+                <strong class="text-indigo-500 dark:text-indigo-400">MCP</strong> (Model Context Protocol) para que agentes
+                acessem ferramentas e contexto de forma padronizada.
             </p>
         </div>
 
@@ -485,33 +487,34 @@
             <p class="text-xs text-slate-400 dark:text-slate-500 font-semibold uppercase tracking-wider mb-3">Stack principal</p>
             <div class="flex flex-wrap gap-2">
                 <span class="tech-chip">Python</span>
+                <span class="tech-chip">TypeScript</span>
+                <span class="tech-chip">Node.js</span>
                 <span class="tech-chip">LiteLLM</span>
                 <span class="tech-chip">LangGraph</span>
-                <span class="tech-chip">CrewAI</span>
-                <span class="tech-chip">Google ADK</span>
+                <span class="tech-chip">Agno</span>
                 <span class="tech-chip">Langfuse</span>
                 <span class="tech-chip">ClickHouse</span>
                 <span class="tech-chip">Redis</span>
                 <span class="tech-chip">FastAPI</span>
-                <span class="tech-chip">Node.js</span>
-                <span class="tech-chip">TypeScript</span>
                 <span class="tech-chip">MCP Protocol</span>
-                <span class="tech-chip">AWS Bedrock</span>
-                <span class="tech-chip">GitHub Actions</span>
-                <span class="tech-chip">Docker / K8s</span>
-                <span class="tech-chip">RAG Pipelines</span>
+                <span class="tech-chip">Docker</span>
+                <span class="tech-chip">Podman</span>
+                <span class="tech-chip">Kubernetes</span>
+                <span class="tech-chip">GCP</span>
+                <span class="tech-chip">Ollama</span>
             </div>
         </div>
 
-        <!-- === Paragraph 5 — Leadership & culture === -->
+        <!-- === Paragraph 5 — Open source & Community === -->
         <div class="mb-7">
             <p class="letter-paragraph text-slate-600 dark:text-slate-300">
-                Liderança técnica, para mim, vai além de arquitetura e código. Fundei a
-                <strong class="text-slate-700 dark:text-white">Comunidade de Prática de AI Engineering</strong> na CI&amp;T
-                (20+ membros ativos), que promove adoção de LLMs, MCP e sistemas multi-agent em times de engenharia por meio de
-                workshops, ADRs colaborativos e pair programming com IA. Reduzi o onboarding de novos engenheiros de
-                <strong class="text-indigo-500 dark:text-indigo-400">2 semanas para 3 dias (–70%)</strong> através de
-                documentação viva, assistentes de contexto e ferramentas de IA integradas ao fluxo de trabalho do time.
+                Além do trabalho na CI&amp;T, contribuo ativamente com a comunidade open source: publiquei o
+                <strong class="text-slate-700 dark:text-white">qwen-code</strong> — um agente CLI para modelos Qwen3-Coder
+                disponível no NPM — e o <strong class="text-slate-700 dark:text-white">proxy-llm</strong>, um roteador inteligente
+                que orquestra LLMs online e modelos locais via Ollama. Também fundei a
+                <strong class="text-slate-700 dark:text-white">Comunidade de Prática de AI Engineering</strong> na CI&amp;T,
+                com 20+ membros ativos, promovendo adoção de LLMs, MCP e sistemas multi-agent por meio de workshops, ADRs
+                colaborativos e pair programming com IA.
             </p>
         </div>
 
@@ -522,7 +525,7 @@
                 Busco um ambiente onde a IA não seja um projeto paralelo, mas o núcleo da estratégia de produto e engenharia.
                 Quero trabalhar com times que entendam que construir com LLMs em produção exige rigor de engenharia, cultura de
                 observabilidade e visão de longo prazo — não apenas integrar APIs. Trago a experiência de quem já fez isso em
-                escala, com os erros aprendidos e os padrões consolidados.
+                escala, com os padrões consolidados e as armadilhas já conhecidas.
             </p>
         </div>
 
@@ -697,16 +700,33 @@ body {
   background: rgba(99,102,241,0.15); color: #c7d2fe;
 }
 
-/* ---- METRICS ---- */
-.metrics {
-  display: grid; grid-template-columns: repeat(4,1fr);
+/* ---- INITIATIVES ---- */
+.initiatives {
   background: ${isDark ? '#1e293b' : '#fff'};
   border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
 }
-.metric { padding: 14px 10px; text-align: center; border-right: 1px solid var(--border); }
-.metric:last-child { border-right: none; }
-.metric-val { font-size: 15pt; font-weight: 800; color: var(--metric); }
-.metric-lbl { font-size: 7.5pt; color: var(--muted); margin-top: 2px; }
+.initiatives-label {
+  font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--muted); text-align: center; margin-bottom: 10px;
+}
+.init-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+}
+.init-card {
+  background: ${isDark ? 'rgba(99,102,241,0.08)' : 'rgba(99,102,241,0.05)'};
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 9px 10px;
+}
+.init-tag { font-size: 6.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--accent); margin-bottom: 3px; }
+.init-title { font-size: 8pt; font-weight: 600; color: ${isDark ? '#e2e8f0' : '#1e293b'}; margin-bottom: 3px; }
+.init-desc { font-size: 7pt; color: var(--muted); line-height: 1.5; margin-bottom: 5px; }
+.init-chips { display: flex; flex-wrap: wrap; gap: 3px; }
+.init-chip {
+  font-size: 6pt; padding: 1px 6px; border-radius: 9999px;
+  background: ${isDark ? 'rgba(99,102,241,0.15)' : 'rgba(99,102,241,0.08)'};
+  border: 1px solid var(--border); color: var(--accent);
+}
 
 /* ---- LETTER ---- */
 .letter {
@@ -779,12 +799,47 @@ strong.accent { color: var(--accent); font-weight: 600; }
   </div>
 </div>
 
-<!-- METRICS -->
-<div class="metrics">
-  <div class="metric"><div class="metric-val">500K+</div><div class="metric-lbl">req/dia no LLM Gateway</div></div>
-  <div class="metric"><div class="metric-val">-36%</div><div class="metric-lbl">redução de custos de inferência</div></div>
-  <div class="metric"><div class="metric-val">NPS 72</div><div class="metric-lbl">adoção por 500+ devs</div></div>
-  <div class="metric"><div class="metric-val">1M+</div><div class="metric-lbl">traces LLMOps / dia</div></div>
+<!-- INITIATIVES -->
+<div class="initiatives">
+  <div class="initiatives-label">Iniciativas entregues em produção · CI&amp;T</div>
+  <div class="init-grid">
+    <div class="init-card">
+      <div class="init-tag">AI-Assisted Coding</div>
+      <div class="init-title">Extensão de IDE com IA</div>
+      <div class="init-desc">Code completion em tempo real, chat contextual, slash commands para VS Code &amp; JetBrains.</div>
+      <div class="init-chips"><span class="init-chip">TypeScript</span><span class="init-chip">Node.js</span><span class="init-chip">Python</span></div>
+    </div>
+    <div class="init-card">
+      <div class="init-tag">LLM Gateway</div>
+      <div class="init-title">Proxy Multi-Provider Unificado</div>
+      <div class="init-desc">Model routing inteligente, semantic caching, autenticação corporativa e rate limiting multi-tenant.</div>
+      <div class="init-chips"><span class="init-chip">LiteLLM</span><span class="init-chip">FastAPI</span><span class="init-chip">Redis</span></div>
+    </div>
+    <div class="init-card">
+      <div class="init-tag">LLMOps</div>
+      <div class="init-title">Observability Stack Multi-Tenant</div>
+      <div class="init-desc">Distributed tracing, detecção de alucinações, evaluators de qualidade e cost analytics.</div>
+      <div class="init-chips"><span class="init-chip">Langfuse</span><span class="init-chip">ClickHouse</span><span class="init-chip">K8s</span></div>
+    </div>
+    <div class="init-card">
+      <div class="init-tag">Multi-Agent</div>
+      <div class="init-title">Autonomous Engineering Workflows</div>
+      <div class="init-desc">Code review, geração de testes, documentação e análise de segurança com orquestração sequencial e paralela.</div>
+      <div class="init-chips"><span class="init-chip">LangGraph</span><span class="init-chip">Agno</span><span class="init-chip">MCP</span></div>
+    </div>
+    <div class="init-card">
+      <div class="init-tag">Dev Environment</div>
+      <div class="init-title">Containerized AI Dev Environment</div>
+      <div class="init-desc">Setup single-command com proxies LLM, servidores MCP e workspaces persistentes.</div>
+      <div class="init-chips"><span class="init-chip">Docker</span><span class="init-chip">Podman</span><span class="init-chip">MCP Tools</span></div>
+    </div>
+    <div class="init-card">
+      <div class="init-tag">Open Source</div>
+      <div class="init-title">qwen-code &amp; proxy-llm</div>
+      <div class="init-desc">CLI agent terminal para Qwen3-Coder (NPM) e roteador inteligente entre LLMs online e locais.</div>
+      <div class="init-chips"><span class="init-chip">NPM</span><span class="init-chip">Ollama</span><span class="init-chip">GitHub</span></div>
+    </div>
+  </div>
 </div>
 
 <!-- LETTER -->
