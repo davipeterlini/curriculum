@@ -3,7 +3,7 @@ const translations = {
     'pt-BR': {
         // Header
         'title': 'Currículo Interativo - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead at CI&T | LLM Infrastructure · Multi-Agent · MCP · LLMOps',
+        'role': 'Senior AI Engineer | Tech Lead at CI&T | Master Architect',
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Competências',
@@ -13,7 +13,7 @@ const translations = {
 
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Sou Engenheiro de Inteligência Artificial Sênior com atuação em arquitetura, desenvolvimento e liderança técnica de sistemas baseados em LLMs — do design à produção, com foco em qualidade, observabilidade e impacto real.',
+        'overview_description': 'Sou Engenheiro de Inteligência Artificial Sênior especializado em infraestrutura de LLMs, sistemas multiagentes autônomos e Model Context Protocol (MCP) — construindo e liderando tecnicamente plataformas enterprise de IA, do design à produção, com foco em qualidade, observabilidade e impacto real.',
         'professional_summary': 'Infraestrutura de LLM & Sistemas Multiagentes',
         'professional_summary_text': 'Tenho experiência consolidada na construção de infraestruturas de LLM (proxy/gateway, model routing, caching, multi-tenant), sistemas multiagentes autônomos (orquestração sequencial, paralela e condicional), extensões de IDE com IA, servidores MCP (Model Context Protocol) e stacks completas de observabilidade para workloads de IA em ambientes enterprise.',
         'ai_focus': 'Integração de Modelos & Segurança',
@@ -82,7 +82,7 @@ const translations = {
     'en-US': {
         // Header
         'title': 'Interactive Resume - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead at CI&T | LLM Infrastructure · Multi-Agent · MCP · LLMOps',
+        'role': 'Senior AI Engineer | Tech Lead at CI&T | Master Architect',
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',
@@ -92,7 +92,7 @@ const translations = {
 
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'I am a Senior Artificial Intelligence Engineer focused on architecture, development, and technical leadership of LLM-based systems — from design to production, with emphasis on quality, observability, and real-world impact.',
+        'overview_description': 'I am a Senior Artificial Intelligence Engineer specialized in LLM infrastructure, autonomous multi-agent systems, and Model Context Protocol (MCP) — building and technically leading enterprise AI platforms, from design to production, with emphasis on quality, observability, and real-world impact.',
         'professional_summary': 'LLM Infrastructure & Multi-Agent Systems',
         'professional_summary_text': 'I have consolidated experience building LLM infrastructures (proxy/gateway, model routing, caching, multi-tenant), autonomous multi-agent systems (sequential, parallel, and conditional orchestration), AI-powered IDE extensions, MCP (Model Context Protocol) servers, and full observability stacks for AI workloads in enterprise environments.',
         'ai_focus': 'Model Integration & Security',
