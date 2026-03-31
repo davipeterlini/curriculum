@@ -210,8 +210,8 @@ const timelineData = {
                 "<strong>🔹 LifeTrek — Health Platform com AI:</strong>",
                 "Backend NestJS com PostgreSQL, chat médico via RAG com Gemini AI, upload de documentos (S3), assinaturas Stripe e autenticação OAuth/OIDC.",
                 "<em>Stack: NestJS · React 18 · PostgreSQL · Drizzle · Stripe · Google Gemini · Kubernetes</em>",
-                "<strong>🔹 Finanza AI — Análise Financeira com IA:</strong>",
-                "Plataforma de análise financeira pessoal com integração Pluggy API (instituições BR) e insights gerados por LLM (Google Gemini) com visualizações interativas.",
+                "<strong>🔹 Finanza AI — Plataforma de Gestão Financeira com IA:</strong>",
+                "Plataforma de gestão financeira pessoal com integração Pluggy API (instituições BR) e insights gerados por LLM (Google Gemini) com visualizações interativas.",
                 "<em>Stack: React 19 · Vite · Pluggy SDK · Google Generative AI · Vitest</em>"
             ]
         },
@@ -266,10 +266,10 @@ const timelineData = {
             dates: "2020 - Present",
             details: [
                 "Personal and open source projects in artificial intelligence, developer tooling, and process automation — focused on agentic systems, LLM tooling, and multi-platform integrations.",
-                "<strong>🔹 Qwen Code — Agentic CLI Tool (Published on NPM):</strong>",
+                "<strong>🔹 Qwen Code — Agentic CLI Tool:</strong>",
                 "Terminal CLI agent optimized for Qwen3-Coder models with multi-protocol support (OpenAI, Anthropic, Gemini APIs), interactive and headless modes, and VS Code / Zed / JetBrains integration.",
                 "<em>Stack: TypeScript · Node.js 20+ | npmjs.com/package/qwen-code</em>",
-                "<strong>🔹 Proxy LLM — Intelligent Model Routing (Open Source):</strong>",
+                "<strong>🔹 Proxy LLM — Intelligent Model Routing:</strong>",
                 "LLM proxy with automatic routing based on complexity and data sensitivity: simple queries → cloud models, sensitive data → local models (Ollama: Phi-4, DeepSeek-R1, Qwen3, Llama 3.2). OpenAI API compatible (drop-in replacement) with administrative UI dashboard.",
                 "<em>Stack: Python · FastAPI · LiteLLM · Ollama · Docker | github.com/davipeterlini/proxy-llm</em>",
                 "<strong>🔹 Multi-Agent Automation System:</strong>",
@@ -284,8 +284,8 @@ const timelineData = {
                 "<strong>🔹 LifeTrek — Health Platform with AI:</strong>",
                 "NestJS backend with PostgreSQL, medical chat via RAG with Gemini AI, document upload (S3), Stripe subscriptions, and OAuth/OIDC authentication.",
                 "<em>Stack: NestJS · React 18 · PostgreSQL · Drizzle · Stripe · Google Gemini · Kubernetes</em>",
-                "<strong>🔹 Finanza AI — Financial Analysis with LLM:</strong>",
-                "Personal finance platform integrating Pluggy API (Brazilian institutions) with LLM-generated insights (Google Gemini) and interactive visualizations.",
+                "<strong>🔹 Finanza AI — AI-Powered Financial Management Platform:</strong>",
+                "Personal financial management platform integrating Pluggy API (Brazilian institutions) with LLM-generated insights (Google Gemini) and interactive visualizations.",
                 "<em>Stack: React 19 · Vite · Pluggy SDK · Google Generative AI · Vitest</em>"
             ]
         },
