@@ -13,13 +13,13 @@ const translations = {
 
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Senior AI Engineer com foco em LLM infrastructure, agentic systems e AI Developer Tooling. Na CI&T, lidero a plataforma Flow — gateway LLM enterprise com 500K+ req/dia, 36% redução de custos e NPS 72 com 500+ devs. Construo soluções production-ready com LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse) e orquestração multi-agent (LangGraph, CrewAI, Google ADK). Projetos open source publicados no NPM e GitHub.',
+        'overview_description': 'Senior AI Engineer com foco em LLM infrastructure, agentic systems e AI Developer Tooling. Na CI&T, lidero a plataforma Flow — gateway LLM enterprise com roteamento inteligente, semantic caching e controle de custos de inferência. Construo soluções production-ready com LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse) e orquestração multi-agent (LangGraph, Agno, Google ADK). Projetos open source publicados no NPM e GitHub.',
         'professional_summary': 'Resumo Profissional',
-        'professional_summary_text': 'Senior AI Engineer especializado em LLM infrastructure e agentic systems. Projetei e opero um LLM gateway enterprise (500K+ req/dia, 99.9% uptime), pipelines RAG, servidores MCP, LLMOps com distributed tracing (1M+ traces/dia) e sistemas multi-agent autônomos. Histórico comprovado de redução de custos de inferência (–36%), aceleração de ciclos de desenvolvimento (–35% PR cycle time) e adoção massiva por devs (80%, NPS 72).',
+        'professional_summary_text': 'Senior AI Engineer especializado em LLM infrastructure e agentic systems. Projetei e opero um LLM gateway enterprise multi-provider, pipelines RAG, servidores MCP, LLMOps com distributed tracing e sistemas multi-agent autônomos. Experiência consolidada em redução de custos de inferência, aceleração de ciclos de desenvolvimento e construção de ferramentas de IA adotadas por times de engenharia.',
         'ai_focus': 'LLM Infrastructure & Agentic AI',
-        'ai_focus_text': 'LLM gateway multi-provider (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) com semantic caching (Redis, 45–55% hit-rate), intelligent model routing, prompt engineering e RAG pipelines. LLMOps com distributed tracing (Langfuse/ClickHouse), hallucination detection e quality evaluation. MCP servers (STDIO/SSE) e orquestração multi-agent com LangGraph, CrewAI, AutoGen e Google ADK.',
+        'ai_focus_text': 'LLM gateway multi-provider (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) com semantic caching (Redis), intelligent model routing, prompt engineering e RAG pipelines. LLMOps com distributed tracing (Langfuse/ClickHouse), hallucination detection e quality evaluation. MCP servers (STDIO/SSE) e orquestração multi-agent com LangGraph, Agno, AutoGen e Google ADK.',
         'leadership': 'Tech Lead & AI Engineering Culture',
-        'leadership_text': 'Tech Lead com Architecture Decision Records (ADRs), code reviews sistemáticos e mentoria de engenheiros seniores. Fundador da Comunidade de Prática de AI Engineering na CI&T (20+ membros). Padrões de qualidade via TDD (pytest/Vitest), CI/CD (GitHub Actions) e pré-commit (flake8, black, mypy, bandit). Onboarding reduzido de 2 semanas para 3 dias (–70%).',
+        'leadership_text': 'Tech Lead com Architecture Decision Records (ADRs), code reviews sistemáticos e mentoria de engenheiros seniores. Fundador da Comunidade de Prática de AI Engineering na CI&T, promovendo adoção de LLMs, MCP e multi-agent systems. Padrões de qualidade via TDD (pytest/Vitest), CI/CD (GitHub Actions) e pré-commit (flake8, black, mypy, bandit). Processo de onboarding estruturado e documentado para novos engenheiros.',
 
         // Timeline section
         'timeline_title': 'Linha do Tempo da Carreira',
@@ -44,7 +44,7 @@ const translations = {
         'masters_details': 'UNICAMP - Software Defined Networks (SDN) | 2014',
         'highlights': 'Destaques Profissionais',
         'highlight1': 'TCC de Engenharia premiado com bolsa de mestrado na UNICAMP — pesquisa em Software Defined Networks (SDN) e redes open source.',
-        'highlight2': 'Fundador da Comunidade de Prática de AI Engineering na CI&T (20+ membros), promovendo adoção de LLMs, MCP e multi-agent systems em times de engenharia.',
+        'highlight2': 'Fundador da Comunidade de Prática de AI Engineering na CI&T, promovendo adoção de LLMs, MCP e multi-agent systems em times de engenharia.',
 
         // Footer
         'footer_year': 'Currículo Interativo — 2026',
@@ -65,9 +65,9 @@ const translations = {
 
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'Senior AI Engineer focused on LLM infrastructure, agentic systems, and AI Developer Tooling. At CI&T, I lead the Flow platform — an enterprise LLM gateway handling 500K+ req/day with 36% cost reduction and NPS 72 across 500+ devs. I build production-ready solutions with LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse), and multi-agent orchestration (LangGraph, CrewAI, Google ADK). Open source projects published on NPM and GitHub.',
+        'overview_description': 'Senior AI Engineer focused on LLM infrastructure, agentic systems, and AI Developer Tooling. At CI&T, I lead the Flow platform — an enterprise LLM gateway with intelligent routing, semantic caching, and inference cost control. I build production-ready solutions with LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse), and multi-agent orchestration (LangGraph, Agno, Google ADK). Open source projects published on NPM and GitHub.',
         'professional_summary': 'Professional Summary',
-        'professional_summary_text': 'Senior AI Engineer specialized in LLM infrastructure and agentic systems. Designed and operate an enterprise LLM gateway (500K+ req/day, 99.9% uptime), RAG pipelines, MCP servers, LLMOps with distributed tracing (1M+ traces/day), and autonomous multi-agent systems. Proven track record of reducing inference costs (–36%), accelerating development cycles (–35% PR cycle time), and driving developer adoption at scale (80%, NPS 72).',
+        'professional_summary_text': 'Senior AI Engineer specialized in LLM infrastructure and agentic systems. Designed and operate an enterprise multi-provider LLM gateway, RAG pipelines, MCP servers, LLMOps with distributed tracing, and autonomous multi-agent systems. Proven experience in inference cost reduction, development cycle acceleration, and building AI developer tools adopted by engineering teams.',
         'ai_focus': 'LLM Infrastructure & Agentic AI',
         'ai_focus_text': 'Multi-provider LLM gateway (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) with semantic caching (Redis, 45–55% hit-rate), intelligent model routing, prompt engineering, and RAG pipelines. LLMOps with distributed tracing (Langfuse/ClickHouse), hallucination detection, and quality evaluation. MCP servers (STDIO/SSE) and multi-agent orchestration with LangGraph, CrewAI, AutoGen, and Google ADK.',
         'leadership': 'Tech Lead & AI Engineering Culture',
