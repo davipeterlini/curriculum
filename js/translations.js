@@ -3,7 +3,7 @@ const translations = {
     'pt-BR': {
         // Header
         'title': 'Currículo Interativo - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead at CI&T | Master Architect',
+        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Competências',
@@ -82,7 +82,7 @@ const translations = {
     'en-US': {
         // Header
         'title': 'Interactive Resume - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead at CI&T | Master Architect',
+        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',

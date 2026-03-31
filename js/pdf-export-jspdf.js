@@ -531,7 +531,7 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
   <main class="main">
     <div class="main-header">
       <div class="full-name">Davi Peterlini</div>
-      <div class="headline">Senior AI Engineer · Tech Lead · LLM Infrastructure · Multi-Agent · MCP · LLMOps</div>
+      <div class="headline">Senior AI Engineer | Tech Lead | Master Architect at CI&T</div>
     </div>
 
     <div class="summary-text">${summaryText}</div>
