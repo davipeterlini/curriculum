@@ -128,34 +128,39 @@
 
         <!-- Overview Section -->
         <section id="overview" class="scroll-mt-20 mb-12">
-            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
-                <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo flex-shrink-0">
-                <div class="text-center sm:text-left">
-                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2" data-i18n="overview_title">Visão Geral</h2>
-                    <p class="text-sm text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="overview_description">
-                        Engenheiro de IA Sênior especializado em infraestrutura de LLMs, sistemas multiagentes e Model Context Protocol — construindo plataformas enterprise de IA do design à produção.
-                    </p>
-                </div>
+            <!-- Profile Photo - Centered -->
+            <div class="flex justify-center mb-6">
+                <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo">
             </div>
 
-            <div class="grid md:grid-cols-3 gap-4 mb-6">
+            <!-- Overview Title & Description -->
+            <div class="max-w-3xl mx-auto text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-3" data-i18n="overview_title">Visão Geral</h2>
+                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="overview_description">
+                    Engenheiro de IA Sênior especializado em infraestrutura de LLMs, sistemas multiagentes e Model Context Protocol — construindo plataformas enterprise de IA do design à produção.
+                </p>
+            </div>
+
+            <!-- 3 Highlight Cards -->
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
                 <div class="card">
                     <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="professional_summary">Infraestrutura de LLM & Multi-Agentes</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="professional_summary_text">Experiência em proxy/gateway, model routing, caching, sistemas multiagentes autônomos, servidores MCP e observabilidade para IA.</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="professional_summary_text">Experiência em proxy/gateway, model routing, caching, sistemas multiagentes autônomos, servidores MCP e observabilidade para IA.</p>
                 </div>
                 <div class="card">
                     <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="ai_focus">Integração & Segurança</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ai_focus_text">Integração de OpenAI, Anthropic, Google, AWS Bedrock com governança, rastreabilidade e segurança (OWASP LLM Top 10, JWT/OAuth2).</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="ai_focus_text">Integração de OpenAI, Anthropic, Google, AWS Bedrock com governança, rastreabilidade e segurança (OWASP LLM Top 10, JWT/OAuth2).</p>
                 </div>
                 <div class="card">
                     <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="leadership">Liderança Técnica</h3>
-                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="leadership_text">Arquiteturas robustas, iniciativas de alta complexidade e ferramentas que times adotam voluntariamente.</p>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="leadership_text">Arquiteturas robustas, iniciativas de alta complexidade e ferramentas que times adotam voluntariamente.</p>
                 </div>
             </div>
 
-            <div class="mb-4">
-                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3" data-i18n="overview_stack_title">Stack Principal</p>
-                <div class="flex flex-wrap gap-2">
+            <!-- Stack Principal -->
+            <div class="mb-6">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3 text-center" data-i18n="overview_stack_title">Stack Principal</p>
+                <div class="flex flex-wrap justify-center gap-2">
                     <span class="skill-tag primary">LiteLLM</span>
                     <span class="skill-tag primary">LangGraph</span>
                     <span class="skill-tag primary">CrewAI</span>
@@ -171,9 +176,10 @@
                 </div>
             </div>
 
+            <!-- Competências -->
             <div>
-                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3" data-i18n="overview_skills_title">Competências</p>
-                <div class="flex flex-wrap gap-2">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3 text-center" data-i18n="overview_skills_title">Competências</p>
+                <div class="flex flex-wrap justify-center gap-2">
                     <span class="skill-tag">Engenharia de IA</span>
                     <span class="skill-tag">Infraestrutura de LLMs</span>
                     <span class="skill-tag">Sistemas Multiagentes</span>
