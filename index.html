@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Currículo Interativo - Davi Peterlini</title>
+    <meta name="description" content="Currículo de Davi Peterlini - Senior AI Engineer especializado em LLM infrastructure, multi-agent systems e MCP">
+    <meta name="keywords" content="AI Engineer, LLM, Machine Learning, Python, TypeScript, GCP">
+    <meta name="author" content="Davi Peterlini">
+    <title>Davi Peterlini — Senior AI Engineer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -11,457 +14,286 @@
             theme: {
                 extend: {
                     colors: {
-                        // Custom colors for dark mode
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' }
                     }
                 }
             }
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <!-- Carregue a biblioteca html2pdf de uma CDN confiável -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
+        body { font-family: 'Inter', sans-serif; }
+        :root { --bg-color: #ffffff; --text-color: #1e293b; --muted-color: #64748b; --card-bg: #f8fafc; --card-border: #e2e8f0; }
+        .dark { --bg-color: #0f172a; --text-color: #e2e8f0; --muted-color: #94a3b8; --card-bg: #1e293b; --card-border: #334155; }
+        body { background-color: var(--bg-color); color: var(--text-color); }
         
-        /* Light mode styles */
-        :root {
-            --bg-color: #f8fafc;
-            --text-color: #334155;
-            --card-bg: #ffffff;
-            --card-border: rgba(226, 232, 240, 0.8);
-            --timeline-dot-bg: #3b82f6;
-            --timeline-dot-border: #bfdbfe;
-            --timeline-line: #bfdbfe;
-        }
+        .section-divider { border-top: 1px solid var(--card-border); margin: 3rem 0; }
+        .skill-tag { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; background: var(--card-bg); border: 1px solid var(--card-border); }
+        .skill-tag.primary { background: rgba(59, 130, 246, 0.1); border-color: rgba(59, 130, 246, 0.2); color: #2563eb; }
+        .dark .skill-tag.primary { color: #60a5fa; }
         
-        /* Dark mode styles */
-        .dark {
-            --bg-color: #0f172a;
-            --text-color: #e2e8f0;
-            --card-bg: #1e293b;
-            --card-border: rgba(51, 65, 85, 0.8);
-            --timeline-dot-bg: #3b82f6;
-            --timeline-dot-border: #1e3a8a;
-            --timeline-line: #1e3a8a;
-        }
+        .timeline-item { position: relative; padding-left: 1.5rem; margin-bottom: 1.5rem; border-left: 2px solid var(--card-border); }
+        .timeline-item::before { content: ''; position: absolute; left: -0.375rem; top: 0.25rem; width: 0.75rem; height: 0.75rem; border-radius: 50%; background: #3b82f6; }
         
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-        }
+        .details-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+        .details-content.open { max-height: 2000px; }
+        .timeline-header { cursor: pointer; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+        .timeline-chevron { transition: transform 0.3s ease; flex-shrink: 0; }
+        .timeline-chevron.open { transform: rotate(180deg); }
         
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            left: -2.5rem;
-            top: 0.25rem;
-            background-color: var(--timeline-dot-bg);
-            border: 3px solid var(--timeline-dot-border);
-        }
+        .chart-container { position: relative; width: 100%; height: 300px; }
+        @media (min-width: 768px) { .chart-container { height: 400px; } }
         
-        .details-content {
-            transition: max-height 0.6s ease-in-out, opacity 0.5s ease-in-out;
-            max-height: 0;
-            opacity: 0;
-            overflow: hidden;
-        }
+        .profile-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 3px solid var(--card-border); }
+        @media (min-width: 640px) { .profile-photo { width: 160px; height: 160px; } }
         
-        .details-content.open {
-            max-height: 4000px;
-            opacity: 1;
-        }
-
-        .timeline-chevron {
-            transition: transform 0.3s ease;
-            flex-shrink: 0;
-        }
-
-        .timeline-chevron.open {
-            transform: rotate(180deg);
-        }
-
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.5rem;
-        }
+        .btn-icon { display: inline-flex; align-items: center; justify-content: center; padding: 0.5rem; border-radius: 9999px; background: var(--card-bg); border: 1px solid var(--card-border); transition: all 0.2s; }
+        .btn-icon:hover { background: var(--primary-100); border-color: var(--primary-300); }
+        .dark .btn-icon:hover { background: rgba(59, 130, 246, 0.2); border-color: var(--primary-700); }
         
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 340px;
-        }
+        .nav-link { color: var(--muted-color); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .nav-link:hover { color: #2563eb; }
+        .nav-link.active { color: #2563eb; font-weight: 500; }
         
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 480px;
-            }
-        }
+        .card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 0.75rem; padding: 1rem; }
+        .card-link { display: block; text-decoration: none; color: inherit; transition: all 0.2s; }
+        .card-link:hover { border-color: #3b82f6; box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15); }
         
-        .profile-photo {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--timeline-dot-border);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        @media (min-width: 640px) {
-            .profile-photo {
-                width: 180px;
-                height: 180px;
-            }
-        }
+        .spinner { border: 3px solid rgba(59, 130, 246, 0.3); border-radius: 50%; border-top-color: #3b82f6; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; }
+        @keyframes spin { to { transform: rotate(360deg); } }
         
-        /* PDF loading spinner */
-        .spinner {
-            border: 3px solid rgba(59, 130, 246, 0.3);
-            border-radius: 50%;
-            border-top: 3px solid rgba(59, 130, 246, 1);
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-            display: inline-block;
-            vertical-align: middle;
-            margin-right: 8px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; color: black; }
+            .card { break-inside: avoid; }
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <header id="header" class="bg-white/80 dark:bg-slate-800/80 backdrop-blur-lg sticky top-0 z-50 shadow-sm">
-        <div class="container mx-auto px-4 sm:px-6 py-4 flex justify-between items-center gap-2 overflow-hidden">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
             <div class="min-w-0">
-                <h1 class="text-xl md:text-2xl font-bold text-slate-800 dark:text-white truncate">Davi Peterlini</h1>
-                <p class="text-xs sm:text-sm md:text-base text-blue-600 dark:text-blue-400 truncate" data-i18n="role">Senior AI Engineer | LLM Platform & Agentic Systems</p>
+                <h1 class="text-lg font-bold text-slate-900 dark:text-white truncate">Davi Peterlini</h1>
+                <p class="text-xs text-blue-600 dark:text-blue-400 truncate">Senior AI Engineer | LLM Platform & Agentic Systems</p>
             </div>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="#overview" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" data-i18n="overview">Visão Geral</a>
-                <a href="#timeline" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" data-i18n="career">Carreira</a>
-                <a href="#skills" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" data-i18n="skills">Competências</a>
-                <a href="#education" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" data-i18n="education">Formação</a>
-                <a href="#links" class="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" data-i18n="links">Links</a>
-                <button id="export-pdf-btn" class="flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full transition-colors">
-                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                    <span data-i18n="export_pdf">Exportar PDF</span>
+            <nav class="hidden md:flex items-center gap-4">
+                <a href="#overview" class="nav-link" data-i18n="overview">Visão Geral</a>
+                <a href="#timeline" class="nav-link" data-i18n="career">Carreira</a>
+                <a href="#skills" class="nav-link" data-i18n="skills">Skills</a>
+                <a href="#education" class="nav-link" data-i18n="education">Formação</a>
+                <a href="#contact" class="nav-link" data-i18n="contact">Contato</a>
+                <div class="h-4 w-px bg-slate-300 dark:bg-slate-700"></div>
+                <button id="theme-toggle" class="btn-icon" title="Toggle theme">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>
                 </button>
-                <div id="pdf-loading" class="hidden flex items-center px-4 py-2 bg-blue-600 text-white rounded-full">
-                    <div class="spinner"></div>
-                    <span data-i18n="generating_pdf">Gerando PDF...</span>
-                </div>
-                <button id="language-toggle" class="ml-4 p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Switch to English">🇺🇸</button>
-                <button id="theme-toggle" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Switch to Dark Mode">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
+                <button id="language-toggle" class="btn-icon text-sm" title="Switch language">🇺🇸</button>
+                <button id="export-pdf-btn" class="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md transition-colors">
+                    <span data-i18n="export_pdf">PDF</span>
                 </button>
-                <!-- Pages dropdown -->
-                <div class="relative" id="pages-menu-wrapper">
-                    <button id="pages-menu-btn" onclick="togglePagesMenu()" class="p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Mais páginas">
-                        <svg class="w-5 h-5 text-slate-600 dark:text-slate-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                        </svg>
-                    </button>
-                    <div id="pages-dropdown" class="hidden absolute right-0 mt-2 w-56 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-slate-200 dark:border-slate-700 overflow-hidden z-50">
-                        <a href="cover-letter.html" class="flex items-center gap-3 px-4 py-3 text-sm text-slate-700 dark:text-slate-200 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                            <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            Carta de Apresentação
-                        </a>
-                    </div>
+                <div id="pdf-loading" class="hidden px-3 py-1.5 text-sm text-white bg-blue-600 rounded-md">
+                    <span class="spinner"></span>
                 </div>
             </nav>
-            <div class="md:hidden flex items-center">
-                <button id="export-pdf-btn-mobile" class="mr-2 p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition-colors" title="Exportar PDF">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                    </svg>
-                </button>
-                <button id="language-toggle-mobile" class="mr-2 p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Switch to English">🇺🇸</button>
-                <button id="theme-toggle-mobile" class="mr-2 p-2 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors" title="Switch to Dark Mode">
-                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-                    </svg>
-                </button>
-                <button id="menu-btn" class="text-slate-800 dark:text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                </button>
-            </div>
+            <button id="menu-btn" class="md:hidden p-2 text-slate-600 dark:text-slate-300">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#overview" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" data-i18n="overview">Visão Geral</a>
-            <a href="#timeline" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" data-i18n="career">Carreira</a>
-            <a href="#skills" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" data-i18n="skills">Competências</a>
-            <a href="#education" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" data-i18n="education">Formação</a>
-            <a href="#links" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400" data-i18n="links">Links</a>
-            <div class="border-t border-slate-200 dark:border-slate-700 mt-2 pt-2">
-                <a href="cover-letter.html" class="flex items-center gap-2 py-2 text-slate-600 dark:text-slate-300 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">
-                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                    </svg>
-                    Carta de Apresentação
-                </a>
-            </div>
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 px-4 py-3 space-y-2">
+            <a href="#overview" class="block nav-link" data-i18n="overview">Visão Geral</a>
+            <a href="#timeline" class="block nav-link" data-i18n="career">Carreira</a>
+            <a href="#skills" class="block nav-link" data-i18n="skills">Skills</a>
+            <a href="#education" class="block nav-link" data-i18n="education">Formação</a>
+            <a href="#contact" class="block nav-link" data-i18n="contact">Contato</a>
         </div>
     </header>
 
-    <main class="container mx-auto px-4 sm:px-6 py-8 sm:py-12">
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 py-8">
 
-        <section id="overview" class="mb-16 scroll-mt-24">
-            <div class="flex flex-col items-center mb-8">
-                <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo mb-6">
-                <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-4 text-center" data-i18n="overview_title">Visão Geral</h2>
-            </div>
-            <div class="max-w-3xl mx-auto mb-10 text-slate-600 dark:text-slate-300 text-base leading-relaxed">
-                <p data-i18n="overview_description">Sou Engenheiro de Inteligência Artificial Sênior com atuação em arquitetura, desenvolvimento e liderança técnica de plataformas enterprise baseadas em LLMs — do design à produção, dominando infraestruturas de proxy/gateway, model routing, caching multi-tenant, sistemas multiagentes autônomos (orquestração sequencial, paralela e condicional), servidores MCP, extensões de IDE com IA e stacks completas de observabilidade; integro modelos avançados como OpenAI, Anthropic Claude, Google Gemini e AWS Bedrock em pipelines corporativos com governança, rastreabilidade e segurança (OWASP LLM Top 10, JWT/OAuth2), combinando profundidade técnica e visão estratégica para construir ferramentas que times de engenharia adotam voluntariamente — porque tornam o trabalho genuinamente melhor.</p>
-            </div>
-
-            <!-- Stack principal -->
-            <div class="max-w-4xl mx-auto mb-6">
-                <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 text-center" data-i18n="overview_stack_title">Stack principal</p>
-                <div class="flex flex-wrap justify-center gap-2">
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">LiteLLM</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">LangGraph</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">CrewAI</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">MCP</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Python</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">TypeScript</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">FastAPI</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Langfuse</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Redis</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">ClickHouse</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">Docker</span>
-                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 rounded-full text-sm font-medium">GCP</span>
+        <!-- Overview Section -->
+        <section id="overview" class="scroll-mt-20 mb-12">
+            <div class="flex flex-col sm:flex-row items-center sm:items-start gap-6 mb-8">
+                <img src="assets/profile-photo.png" alt="Davi Peterlini" class="profile-photo flex-shrink-0">
+                <div class="text-center sm:text-left">
+                    <h2 class="text-2xl font-bold text-slate-900 dark:text-white mb-2" data-i18n="overview_title">Visão Geral</h2>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 max-w-2xl" data-i18n="overview_description">
+                        Engenheiro de IA Sênior especializado em infraestrutura de LLMs, sistemas multiagentes e Model Context Protocol — construindo plataformas enterprise de IA do design à produção.
+                    </p>
                 </div>
             </div>
 
-            <!-- Competências -->
-            <div class="max-w-4xl mx-auto">
-                <p class="text-xs font-semibold uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-3 text-center" data-i18n="overview_skills_title">Competências</p>
-                <div class="flex flex-wrap justify-center gap-2">
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Engenharia de IA</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Infraestrutura de LLMs</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Sistemas Multiagentes</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Model Context Protocol</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Arquitetura de Software</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Liderança Técnica</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Developer Experience</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Observabilidade</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Cloud Computing</span>
-                    <span class="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm">Segurança em IA</span>
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="card">
+                    <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="professional_summary">Infraestrutura de LLM & Multi-Agentes</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="professional_summary_text">Experiência em proxy/gateway, model routing, caching, sistemas multiagentes autônomos, servidores MCP e observabilidade para IA.</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="ai_focus">Integração & Segurança</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="ai_focus_text">Integração de OpenAI, Anthropic, Google, AWS Bedrock com governança, rastreabilidade e segurança (OWASP LLM Top 10, JWT/OAuth2).</p>
+                </div>
+                <div class="card">
+                    <h3 class="text-sm font-semibold text-slate-900 dark:text-white mb-2" data-i18n="leadership">Liderança Técnica</h3>
+                    <p class="text-xs text-slate-600 dark:text-slate-400" data-i18n="leadership_text">Arquiteturas robustas, iniciativas de alta complexidade e ferramentas que times adotam voluntariamente.</p>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3" data-i18n="overview_stack_title">Stack Principal</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag primary">LiteLLM</span>
+                    <span class="skill-tag primary">LangGraph</span>
+                    <span class="skill-tag primary">CrewAI</span>
+                    <span class="skill-tag primary">MCP</span>
+                    <span class="skill-tag primary">Python</span>
+                    <span class="skill-tag primary">TypeScript</span>
+                    <span class="skill-tag primary">FastAPI</span>
+                    <span class="skill-tag primary">Langfuse</span>
+                    <span class="skill-tag primary">Redis</span>
+                    <span class="skill-tag primary">ClickHouse</span>
+                    <span class="skill-tag primary">Docker</span>
+                    <span class="skill-tag primary">GCP</span>
+                </div>
+            </div>
+
+            <div>
+                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-500 mb-3" data-i18n="overview_skills_title">Competências</p>
+                <div class="flex flex-wrap gap-2">
+                    <span class="skill-tag">Engenharia de IA</span>
+                    <span class="skill-tag">Infraestrutura de LLMs</span>
+                    <span class="skill-tag">Sistemas Multiagentes</span>
+                    <span class="skill-tag">Arquitetura de Software</span>
+                    <span class="skill-tag">Liderança Técnica</span>
+                    <span class="skill-tag">Developer Experience</span>
+                    <span class="skill-tag">Observabilidade</span>
+                    <span class="skill-tag">Cloud Computing</span>
+                    <span class="skill-tag">Segurança em IA</span>
                 </div>
             </div>
         </section>
 
-        <section id="timeline" class="mb-16 scroll-mt-24">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-4 text-center" data-i18n="timeline_title">Linha do Tempo da Carreira</h2>
-             <p class="max-w-3xl mx-auto text-center text-slate-600 dark:text-slate-300 mb-12" data-i18n="timeline_description">
-                Explore minha trajetória profissional de forma interativa. Cada item representa uma etapa importante da minha carreira. Clique em cada cargo para expandir e ver mais detalhes sobre as responsabilidades, projetos e tecnologias envolvidas.
-            </p>
-            <div id="timeline-container" class="relative max-w-2xl mx-auto border-l-2 border-blue-300 dark:border-blue-800 pl-6 sm:pl-10">
-                <!-- Timeline items will be inserted here by JavaScript -->
-            </div>
+        <div class="section-divider"></div>
+
+        <!-- Timeline Section -->
+        <section id="timeline" class="scroll-mt-20 mb-12">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center" data-i18n="timeline_title">Carreira</h2>
+            <div id="timeline-container"></div>
         </section>
 
-        <section id="skills" class="mb-16 scroll-mt-24">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-4 text-center" data-i18n="skills_title">Painel de Competências</h2>
-             <p class="max-w-3xl mx-auto text-center text-slate-600 dark:text-slate-300 mb-8" data-i18n="skills_description">
-                Esta é uma visualização interativa das minhas habilidades técnicas. O gráfico de radar abaixo mostra um panorama geral das minhas competências. Use os botões de filtro para focar em áreas específicas, como linguagens de programação, back-end, front-end ou ferramentas de DevOps, e veja como o gráfico se atualiza dinamicamente.
-            </p>
-            <div id="skills-filters" class="flex flex-wrap justify-center gap-2 mb-8">
-                <!-- Skill filter buttons will be inserted here by JavaScript -->
-            </div>
-            <div class="bg-white dark:bg-slate-800 p-4 sm:p-6 rounded-xl shadow-lg border border-slate-200/80 dark:border-slate-700">
+        <div class="section-divider"></div>
+
+        <!-- Skills Section -->
+        <section id="skills" class="scroll-mt-20 mb-12">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-2 text-center" data-i18n="skills_title">Skills</h2>
+            <p class="text-sm text-slate-600 dark:text-slate-400 text-center mb-6" data-i18n="skills_description">Visualização das habilidades técnicas por categoria.</p>
+            <div id="skills-filters" class="flex flex-wrap justify-center gap-2 mb-6"></div>
+            <div class="card">
                 <div class="chart-container">
                     <canvas id="skillsChart"></canvas>
                 </div>
             </div>
         </section>
 
-        <section id="education" class="scroll-mt-24">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-4 text-center" data-i18n="education_title">Formação e Destaques</h2>
-             <p class="max-w-3xl mx-auto text-center text-slate-600 dark:text-slate-300 mb-8" data-i18n="education_description">
-                Aqui estão minhas qualificações acadêmicas e reconhecimentos profissionais. Esta seção destaca a base educacional que sustenta minha carreira e alguns dos marcos importantes que obtive ao longo do caminho.
-            </p>
-            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700">
-                    <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400 mb-2" data-i18n="bachelor">Bacharelado em Engenharia de Computação</h3>
-                    <p class="text-slate-600 dark:text-slate-300" data-i18n="university">Universidade São Francisco | 2009 - 2013</p>
+        <div class="section-divider"></div>
+
+        <!-- Education Section -->
+        <section id="education" class="scroll-mt-20 mb-12">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center" data-i18n="education_title">Formação</h2>
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="card">
+                    <h3 class="font-semibold text-blue-600 dark:text-blue-400 mb-1" data-i18n="bachelor">Engenharia de Computação</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="university">Universidade São Francisco | 2009-2013</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700">
-                    <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400 mb-2" data-i18n="masters">Mestrado (Não Concluído)</h3>
-                    <p class="text-slate-600 dark:text-slate-300" data-i18n="masters_details">UNICAMP - Software Define Network | 2014</p>
+                <div class="card">
+                    <h3 class="font-semibold text-amber-600 dark:text-amber-400 mb-1" data-i18n="certification_title">Google Cloud Professional Cloud Architect</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="certification_details">Em andamento | Previsão: 2026</p>
                 </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700">
-                    <h3 class="font-bold text-lg text-amber-600 dark:text-amber-400 mb-2" data-i18n="certification_title">Google Cloud Professional Cloud Architect</h3>
-                    <p class="text-slate-600 dark:text-slate-300" data-i18n="certification_details">Em andamento — Google Cloud | Previsão: 2026</p>
-                </div>
-                <div class="bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 md:col-span-2">
-                    <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400 mb-2" data-i18n="highlights">Destaques Profissionais</h3>
-                    <ul class="list-disc list-inside text-slate-600 dark:text-slate-300 space-y-2">
-                        <li data-i18n="highlight1">Trabalho de conclusão de curso de Engenharia premiado com bolsa de mestrado na Unicamp.</li>
-                        <li data-i18n="highlight2">Fundador da Comunidade de Prática de AI Engineering na CI&T, promovendo adoção de LLMs, MCP e multi-agent systems em times de engenharia.</li>
+                <div class="card md:col-span-2">
+                    <h3 class="font-semibold text-slate-900 dark:text-white mb-3" data-i18n="highlights">Destaques</h3>
+                    <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex gap-2"><span class="text-blue-500">•</span><span data-i18n="highlight1">TCC premiado com bolsa de mestrado na UNICAMP — pesquisa em SDN</span></li>
+                        <li class="flex gap-2"><span class="text-blue-500">•</span><span data-i18n="highlight2">Fundador da CoP AI Engineering na CI&T (20+ membros)</span></li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="links" class="mt-16 scroll-mt-24">
-            <h2 class="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white mb-4 text-center" data-i18n="links_title">Contato & Links</h2>
-            <p class="max-w-3xl mx-auto text-center text-slate-600 dark:text-slate-300 mb-10" data-i18n="links_description">
-                Formas de entrar em contato, perfis profissionais e projetos públicos.
-            </p>
+        <div class="section-divider"></div>
 
-            <!-- Contact & Profile Links -->
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto mb-10">
-
-                <!-- Email -->
-                <a href="mailto:davipeterlini@gmail.com" class="flex items-center gap-4 bg-white dark:bg-slate-800 p-5 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all group">
-                    <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-full bg-red-100 dark:bg-red-900/30">
-                        <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" data-i18n="link_email_label">E-mail</p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="link_email_desc">davipeterlini@gmail.com</p>
+        <!-- Contact Section -->
+        <section id="contact" class="scroll-mt-20">
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-6 text-center" data-i18n="contact_title">Contato</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-8">
+                <a href="mailto:davipeterlini@gmail.com" class="card card-link">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-red-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <div>
+                            <p class="font-medium text-sm text-slate-900 dark:text-white" data-i18n="link_email_label">E-mail</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">davipeterlini@gmail.com</p>
+                        </div>
                     </div>
                 </a>
-
-                <!-- LinkedIn -->
-                <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white dark:bg-slate-800 p-5 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all group">
-                    <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/30">
-                        <svg class="w-5 h-5 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" data-i18n="link_linkedin_label">LinkedIn</p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="link_linkedin_desc">linkedin.com/in/davi-peterlini</p>
+                <a href="https://linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" class="card card-link">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-blue-600 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        <div>
+                            <p class="font-medium text-sm text-slate-900 dark:text-white">LinkedIn</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">/in/davi-peterlini</p>
+                        </div>
                     </div>
                 </a>
-
-                <!-- GitHub -->
-                <a href="https://github.com/davipeterlini" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white dark:bg-slate-800 p-5 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-lg transition-all group">
-                    <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-full bg-slate-100 dark:bg-slate-700">
-                        <svg class="w-5 h-5 text-slate-700 dark:text-slate-200" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors" data-i18n="link_github_label">GitHub</p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="link_github_desc">github.com/davipeterlini</p>
+                <a href="https://github.com/davipeterlini" target="_blank" class="card card-link">
+                    <div class="flex items-center gap-3">
+                        <svg class="w-5 h-5 text-slate-700 dark:text-slate-200 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+                        <div>
+                            <p class="font-medium text-sm text-slate-900 dark:text-white">GitHub</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">@davipeterlini</p>
+                        </div>
                     </div>
                 </a>
-
-                <!-- Future IT Labs -->
-                <a href="https://futureitlabs.com/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 bg-white dark:bg-slate-800 p-5 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700 hover:border-cyan-400 dark:hover:border-cyan-500 hover:shadow-lg transition-all group">
-                    <div class="flex-shrink-0 w-11 h-11 flex items-center justify-center rounded-full bg-cyan-100 dark:bg-cyan-900/30">
-                        <svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                    </div>
-                    <div>
-                        <p class="font-semibold text-slate-800 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors" data-i18n="link_futureitlabs_label">Future IT Labs</p>
-                        <p class="text-sm text-slate-500 dark:text-slate-400" data-i18n="link_futureitlabs_desc">futureitlabs.com</p>
-                    </div>
-                </a>
-
             </div>
 
-            <!-- Community -->
-            <div class="max-w-4xl mx-auto bg-white dark:bg-slate-800 p-6 rounded-xl shadow-md border border-slate-200/80 dark:border-slate-700">
-                <h3 class="font-bold text-lg text-blue-600 dark:text-blue-400 mb-4" data-i18n="community_title">Comunidade & Presença</h3>
-                <ul class="space-y-3">
-                    <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
-                        <span class="mt-0.5 text-blue-500">🔹</span>
-                        <span data-i18n="community_cop">Fundador da CoP AI Engineering na CI&amp;T (20+ membros)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
-                        <span class="mt-0.5 text-blue-500">🔹</span>
-                        <span data-i18n="community_mcp">Participante ativo do MCP Discord (Anthropic working groups)</span>
-                    </li>
-                    <li class="flex items-start gap-3 text-slate-600 dark:text-slate-300">
-                        <span class="mt-0.5 text-blue-500">🔹</span>
-                        <span data-i18n="community_ai_br">Membro da AI Brazilian Community</span>
-                    </li>
+            <div class="card">
+                <h3 class="font-semibold text-slate-900 dark:text-white mb-3" data-i18n="community_title">Comunidade</h3>
+                <ul class="space-y-2 text-sm text-slate-600 dark:text-slate-400">
+                    <li class="flex gap-2"><span class="text-blue-500">•</span><span data-i18n="community_cop">Fundador da CoP AI Engineering na CI&T</span></li>
+                    <li class="flex gap-2"><span class="text-blue-500">•</span><span data-i18n="community_mcp">Participante ativo do MCP Discord (Anthropic working groups)</span></li>
+                    <li class="flex gap-2"><span class="text-blue-500">•</span><span data-i18n="community_ai_br">Membro da AI Brazilian Community</span></li>
                 </ul>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-slate-800 dark:bg-slate-900 text-white mt-16">
-        <div class="container mx-auto px-6 py-10 text-center">
-            <h3 class="text-xl font-bold mb-1">Davi Peterlini</h3>
-            <p class="text-slate-400 text-sm mb-4">Senior AI Engineer | Tech Lead | Master Architect at CI&T</p>
-            <div class="flex flex-wrap justify-center gap-x-5 gap-y-2 mb-6 text-sm">
-                <a href="mailto:davipeterlini@gmail.com" class="hover:text-blue-400 transition-colors flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-                    davipeterlini@gmail.com
-                </a>
-                <a href="https://www.linkedin.com/in/davi-peterlini-7aa0b737/" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                    LinkedIn
-                </a>
-                <a href="https://github.com/davipeterlini" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
-                    GitHub
-                </a>
-                <a href="https://www.npmjs.com/package/qwen-code" target="_blank" rel="noopener noreferrer" class="hover:text-blue-400 transition-colors flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M0 0v24h24V0H0zm13.333 20H10.667V10.667H8v9.333H4V4h9.333v16zm6.667 0h-2.667v-5.333H16V20h-2.667V4H20v16z"/></svg>
-                    qwen-code
-                </a>
-            </div>
-            <p class="text-slate-400 text-sm" data-i18n="footer_year">Currículo Interativo — 2026</p>
-        </div>
+    <footer class="border-t border-slate-200 dark:border-slate-800 mt-12 py-8 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p class="font-medium text-slate-700 dark:text-slate-300 mb-1">Davi Peterlini</p>
+        <p class="text-xs mb-3">Senior AI Engineer | Tech Lead | Master Architect at CI&T</p>
+        <p data-i18n="footer_year">© 2026</p>
     </footer>
 
-    <!-- Pages dropdown logic -->
-    <script>
-        function togglePagesMenu() {
-            const dd = document.getElementById('pages-dropdown');
-            dd.classList.toggle('hidden');
-        }
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            const wrapper = document.getElementById('pages-menu-wrapper');
-            if (wrapper && !wrapper.contains(e.target)) {
-                document.getElementById('pages-dropdown').classList.add('hidden');
-            }
-        });
-    </script>
-
-    <!-- Load translations first -->
     <script src="js/translations.js"></script>
-    <!-- Then load the main app script -->
     <script src="js/app.js"></script>
-    <!-- Load PDF export script -->
     <script src="js/pdf-export-jspdf.js"></script>
-    
+
     <script>
-        // Sync mobile toggle buttons with desktop ones
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('language-toggle-mobile').addEventListener('click', function() {
+            document.getElementById('language-toggle-mobile')?.addEventListener('click', function() {
                 document.getElementById('language-toggle').click();
             });
-            
-            document.getElementById('theme-toggle-mobile').addEventListener('click', function() {
+            document.getElementById('theme-toggle-mobile')?.addEventListener('click', function() {
                 document.getElementById('theme-toggle').click();
+            });
+            document.getElementById('menu-btn')?.addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                });
             });
         });
     </script>

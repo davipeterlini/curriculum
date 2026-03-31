@@ -151,8 +151,7 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
         skills:     isPT ? 'Tecnologias & Ferramentas'  : 'Technologies & Tools',
         education:  isPT ? 'Formação'                   : 'Education',
         highlights: isPT ? 'Destaques'                  : 'Highlights',
-        degree:     isPT ? 'Eng. de Computação'         : 'B.Sc. Computer Engineering',
-        masters:    isPT ? 'Mestrado (não concluído)'   : "Master's (not completed)",
+        degree:     isPT ? 'Engenharia de Computação'   : 'B.Sc. Computer Engineering',
         hl1:        isPT ? 'TCC premiado com bolsa UNICAMP (SDN)' : "Thesis awarded UNICAMP master's scholarship (SDN)",
         hl2:        isPT ? 'Fundador da CoP AI Engineering na CI&T' : 'Founded AI Engineering CoP at CI&T',
         hl3:        'Open source: qwen-code (NPM), proxy-llm (GitHub)',
@@ -467,11 +466,11 @@ function buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator,
       <div class="section-title">${L.education}</div>
       <div class="edu-item">
         <div class="edu-degree">${L.degree}</div>
-        <div class="edu-place">Univ. São Francisco · 2009–2013</div>
+        <div class="edu-place">Universidade São Francisco · 2009–2013</div>
       </div>
       <div class="edu-item">
-        <div class="edu-degree">${L.masters}</div>
-        <div class="edu-place">UNICAMP · SDN · 2014</div>
+        <div class="edu-degree">Google Cloud Professional Cloud Architect</div>
+        <div class="edu-place">Em andamento · Previsão: 2026</div>
       </div>
     </div>
     <div>

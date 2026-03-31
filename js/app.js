@@ -3,71 +3,49 @@
 document.addEventListener('DOMContentLoaded', function() {
     const defaultLanguage = 'pt-BR';
     const defaultTheme = 'light';
-    
+
     let currentLanguage = localStorage.getItem('language') || defaultLanguage;
     let currentTheme = localStorage.getItem('theme') || defaultTheme;
-    
+
     setLanguage(currentLanguage);
     setTheme(currentTheme);
-    
-    // Language switcher (desktop + mobile sync)
+
     document.getElementById('language-toggle').addEventListener('click', function() {
         currentLanguage = currentLanguage === 'pt-BR' ? 'en-US' : 'pt-BR';
         localStorage.setItem('language', currentLanguage);
         setLanguage(currentLanguage);
     });
-    
-    // Theme switcher (desktop + mobile sync)
+
     document.getElementById('theme-toggle').addEventListener('click', function() {
         currentTheme = currentTheme === 'light' ? 'dark' : 'light';
         localStorage.setItem('theme', currentTheme);
         setTheme(currentTheme);
     });
-    
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('hidden');
-    });
 
-    document.querySelectorAll('#mobile-menu a').forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden');
-        });
-    });
-    
-    // Initialize skills chart
     initializeSkillsChart(currentLanguage);
-
-    // Active nav section highlight on scroll
     initActiveNavHighlight();
 });
 
-// Set the language for the entire application
 function setLanguage(lang) {
     document.documentElement.lang = lang;
     document.title = translations[lang].title;
-    
+
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[lang][key]) {
             element.textContent = translations[lang][key];
         }
     });
-    
+
     updateTimeline(lang);
     updateSkillsChart(lang);
-    
+
     const flag = lang === 'pt-BR' ? '🇺🇸' : '🇧🇷';
     const title = lang === 'pt-BR' ? 'Switch to English' : 'Mudar para Português';
-    ['language-toggle', 'language-toggle-mobile'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.textContent = flag; el.setAttribute('title', title); }
-    });
+    const el = document.getElementById('language-toggle');
+    if (el) { el.textContent = flag; el.setAttribute('title', title); }
 }
 
-// Set the theme for the entire application
 function setTheme(theme) {
     if (theme === 'dark') {
         document.documentElement.classList.add('dark');
@@ -75,21 +53,16 @@ function setTheme(theme) {
         document.documentElement.classList.remove('dark');
     }
 
-    const moonSVG = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>';
-    const sunSVG = '<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>';
+    const moonSVG = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/></svg>';
+    const sunSVG = '<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"/></svg>';
     const icon = theme === 'light' ? moonSVG : sunSVG;
-    const titleAttr = theme === 'light' ? 'Switch to Dark Mode' : 'Switch to Light Mode';
+    const titleAttr = theme === 'light' ? 'Dark mode' : 'Light mode';
+    const el = document.getElementById('theme-toggle');
+    if (el) { el.innerHTML = icon; el.setAttribute('title', titleAttr); }
 
-    ['theme-toggle', 'theme-toggle-mobile'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.innerHTML = icon; el.setAttribute('title', titleAttr); }
-    });
-
-    // Update chart colors for dark/light mode
     updateChartTheme(theme);
 }
 
-// Update chart colors when theme changes
 function updateChartTheme(theme) {
     if (!skillsChart) return;
     const isDark = theme === 'dark';
@@ -105,7 +78,6 @@ function updateChartTheme(theme) {
     skillsChart.update();
 }
 
-// Render timeline items from timelineData
 function updateTimeline(lang) {
     const container = document.getElementById('timeline-container');
     if (!container) return;
@@ -115,29 +87,27 @@ function updateTimeline(lang) {
     container.innerHTML = '';
     data.forEach(item => {
         const div = document.createElement('div');
-        div.className = 'timeline-item relative mb-3';
+        div.className = 'timeline-item';
 
         const detailsHtml = item.details
-            .map(d => `<p class="text-slate-600 dark:text-slate-300 text-sm mb-1 leading-relaxed">${d}</p>`)
+            .map(d => `<p class="text-sm text-slate-600 dark:text-slate-400 mb-2">${d}</p>`)
             .join('');
 
         div.innerHTML = `
-            <div class="timeline-header bg-white dark:bg-slate-800 px-4 py-3 rounded-xl shadow-sm border border-slate-200/80 dark:border-slate-700 cursor-pointer">
+            <div class="timeline-header">
                 <div class="flex-1 min-w-0">
-                    <div class="flex items-baseline justify-between gap-2 flex-wrap">
-                        <h3 class="font-bold text-base text-slate-800 dark:text-white leading-snug">${item.company}</h3>
-                        <span class="text-slate-400 dark:text-slate-500 text-xs whitespace-nowrap shrink-0">${item.dates}</span>
+                    <div class="flex items-baseline justify-between gap-2 flex-wrap mb-1">
+                        <h3 class="font-semibold text-slate-900 dark:text-white">${item.company}</h3>
+                        <span class="text-xs text-slate-500 dark:text-slate-400 whitespace-nowrap">${item.dates}</span>
                     </div>
-                    <p class="text-blue-600 dark:text-blue-400 text-sm font-medium mt-0.5">${item.role}</p>
+                    <p class="text-sm text-blue-600 dark:text-blue-400 font-medium">${item.role}</p>
                 </div>
-                <svg class="timeline-chevron w-4 h-4 text-slate-400 ml-3 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="timeline-chevron w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                 </svg>
             </div>
-            <div class="details-content">
-                <div class="bg-white dark:bg-slate-800 rounded-b-xl border-x border-b border-slate-200/80 dark:border-slate-700 px-4 py-3">
-                    ${detailsHtml}
-                </div>
+            <div class="details-content mt-2 pl-4 border-l-2 border-slate-200 dark:border-slate-700">
+                ${detailsHtml}
             </div>
         `;
 
@@ -154,19 +124,16 @@ function updateTimeline(lang) {
     });
 }
 
-// Active nav section highlight using IntersectionObserver
 function initActiveNavHighlight() {
     const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+    const navLinks = document.querySelectorAll('nav a[href^="#"]');
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 navLinks.forEach(link => {
                     const isActive = link.getAttribute('href') === '#' + entry.target.id;
-                    link.classList.toggle('text-blue-600', isActive);
-                    link.classList.toggle('dark:text-blue-400', isActive);
-                    link.classList.toggle('font-semibold', isActive);
+                    link.classList.toggle('active', isActive);
                 });
             }
         });
@@ -175,12 +142,12 @@ function initActiveNavHighlight() {
     sections.forEach(section => observer.observe(section));
 }
 
-// Initialize the skills chart
 let skillsChart;
 function initializeSkillsChart(lang) {
     const ctx = document.getElementById('skillsChart').getContext('2d');
     const langSkillsData = skillsData[lang];
     const categoryNames = Object.keys(langSkillsData);
+    
     let allSkills = {};
     categoryNames.forEach(category => {
         allSkills = { ...allSkills, ...langSkillsData[category] };
@@ -198,8 +165,8 @@ function initializeSkillsChart(lang) {
             datasets: [{
                 label: translations[lang].proficiency,
                 data: Object.values(allSkills),
-                backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                borderColor: 'rgba(59, 130, 246, 1)',
+                backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                borderColor: 'rgba(59, 130, 246, 0.8)',
                 borderWidth: 2,
                 pointBackgroundColor: 'rgba(59, 130, 246, 1)',
                 pointBorderColor: '#fff',
@@ -210,18 +177,13 @@ function initializeSkillsChart(lang) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            layout: {
-                padding: 20
-            },
+            layout: { padding: 10 },
             plugins: {
                 legend: { display: false },
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) label += ': ';
-                            if (context.parsed.r !== null) label += context.parsed.r + ' / 10';
-                            return label;
+                            return context.parsed.r + ' / 10';
                         }
                     }
                 }
@@ -230,10 +192,7 @@ function initializeSkillsChart(lang) {
                 r: {
                     angleLines: { color: gridColor },
                     grid: { color: gridColor },
-                    pointLabels: {
-                        font: { size: 11 },
-                        color: labelColor
-                    },
+                    pointLabels: { font: { size: 10 }, color: labelColor },
                     ticks: {
                         backdropColor: backdropColor,
                         color: labelColor,
@@ -249,76 +208,62 @@ function initializeSkillsChart(lang) {
     createFilterButtons(lang);
 }
 
-// Update the skills chart when language changes
 function updateSkillsChart(lang) {
     if (!skillsChart) return;
-    
-    // Get the appropriate skills data based on language
+
     const langSkillsData = skillsData[lang];
-    
-    // Get category names based on language
     const categoryNames = Object.keys(langSkillsData);
     
-    // Create a combined object of all skills
     let allSkills = {};
     categoryNames.forEach(category => {
         allSkills = { ...allSkills, ...langSkillsData[category] };
     });
-    
-    // Update chart data
+
     skillsChart.data.labels = Object.keys(allSkills);
     skillsChart.data.datasets[0].data = Object.values(allSkills);
     skillsChart.data.datasets[0].label = translations[lang].proficiency;
     skillsChart.update();
-    
-    // Recreate filter buttons
+
     createFilterButtons(lang);
 }
 
-// Create filter buttons for skills
 function createFilterButtons(lang) {
     const filterButtonsContainer = document.getElementById('skills-filters');
     filterButtonsContainer.innerHTML = '';
-    
-    // Get the appropriate skills data based on language
+
     const langSkillsData = skillsData[lang];
-    
-    // Get category names based on language
     const categoryNames = Object.keys(langSkillsData);
     
-    // Create a combined object of all skills
     let allSkills = {};
     categoryNames.forEach(category => {
         allSkills = { ...allSkills, ...langSkillsData[category] };
     });
-    
-    // Create buttons
+
     const categories = [translations[lang].all, ...categoryNames];
     categories.forEach(category => {
         const button = document.createElement('button');
         button.textContent = category;
-        button.className = 'px-4 py-2 text-sm font-medium rounded-full transition-colors';
+        button.className = 'px-3 py-1.5 text-xs font-medium rounded-full transition-colors border';
         if (category === translations[lang].all) {
-            button.classList.add('bg-blue-600', 'text-white', 'dark:bg-blue-700');
+            button.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'dark:bg-blue-700', 'dark:border-blue-700');
         } else {
-            button.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-700', 'dark:text-slate-200', 'dark:border-slate-600', 'dark:hover:bg-slate-600');
+            button.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-800', 'dark:text-slate-300', 'dark:border-slate-600', 'dark:hover:bg-slate-700');
         }
         button.dataset.filter = category;
         filterButtonsContainer.appendChild(button);
     });
-    
-    // Add event listeners to filter buttons
+
     filterButtonsContainer.addEventListener('click', (e) => {
         if (e.target.tagName === 'BUTTON') {
             const filter = e.target.dataset.filter;
-            
+
             document.querySelectorAll('#skills-filters button').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white', 'dark:bg-blue-700');
-                btn.classList.add('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-700', 'dark:text-slate-200', 'dark:border-slate-600', 'dark:hover:bg-slate-600');
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'dark:bg-blue-700', 'dark:border-blue-700');
+                btn.classList.add('bg-white', 'text-slate-700', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-800', 'dark:text-slate-300', 'dark:border-slate-600', 'dark:hover:bg-slate-700');
             });
-            
-            e.target.classList.add('bg-blue-600', 'text-white', 'dark:bg-blue-700');
-            e.target.classList.remove('bg-white', 'text-slate-700', 'border', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-700', 'dark:text-slate-200', 'dark:border-slate-600', 'dark:hover:bg-slate-600');
+
+            e.target.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'dark:bg-blue-700', 'dark:border-blue-700');
+            e.target.classList.remove('bg-white', 'text-slate-700', 'border-slate-300', 'hover:bg-slate-100', 'dark:bg-slate-800', 'dark:text-slate-300', 'dark:border-slate-600', 'dark:hover:bg-slate-700');
 
             let filteredData;
             if (filter === translations[lang].all) {
