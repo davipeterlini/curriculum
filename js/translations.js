@@ -306,10 +306,10 @@ const skillsData = {
             'GitHub Actions': 8, 'Bitbucket Pipelines': 7, 'Git': 9, 'Jenkins': 7
         },
         'AI & LLM': {
-            'LiteLLM': 9, 'Langfuse': 9, 'MCP (Model Context Protocol)': 9,
-            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 7,
-            'Google ADK': 7, 'RAG Patterns': 7, 'LLM Observability': 9,
-            'Temporal': 7, 'Playwright': 7, 'AutoGen': 6
+            'LiteLLM': 9, 'Langfuse / LLMOps': 9, 'MCP (Model Context Protocol)': 9,
+            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8,
+            'Google ADK': 7, 'RAG Pipelines': 8, 'Agentic Systems': 9,
+            'LLM Observability': 9, 'AutoGen': 6, 'OpenAI / Anthropic / Gemini': 9
         },
         'Arquitetura': {
             'Clean Architecture': 9, 'Hexagonal Architecture': 8,
@@ -321,7 +321,7 @@ const skillsData = {
             'ClickHouse': 8, 'Drizzle ORM': 7, 'MinIO': 7
         },
         'Segurança & Qualidade': {
-            'JWT/OAuth2/OIDC': 9, 'OWASP LLM Top 10': 8,
+            'JWT/OAuth2/OIDC': 9, 'OWASP LLM Top 10': 9,
             'TDD (pytest/Vitest)': 8, 'SonarQube': 8,
             'AES-256': 7, 'Container Security': 7
         }
@@ -344,10 +344,10 @@ const skillsData = {
             'GitHub Actions': 8, 'Bitbucket Pipelines': 7, 'Git': 9, 'Jenkins': 7
         },
         'AI & LLM': {
-            'LiteLLM': 9, 'Langfuse': 9, 'MCP (Model Context Protocol)': 9,
-            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 7,
-            'Google ADK': 7, 'RAG Patterns': 7, 'LLM Observability': 9,
-            'Temporal': 7, 'Playwright': 7, 'AutoGen': 6
+            'LiteLLM': 9, 'Langfuse / LLMOps': 9, 'MCP (Model Context Protocol)': 9,
+            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8,
+            'Google ADK': 7, 'RAG Pipelines': 8, 'Agentic Systems': 9,
+            'LLM Observability': 9, 'AutoGen': 6, 'OpenAI / Anthropic / Gemini': 9
         },
         'Architecture': {
             'Clean Architecture': 9, 'Hexagonal Architecture': 8,
@@ -359,7 +359,7 @@ const skillsData = {
             'ClickHouse': 8, 'Drizzle ORM': 7, 'MinIO': 7
         },
         'Security & Quality': {
-            'JWT/OAuth2/OIDC': 9, 'OWASP LLM Top 10': 8,
+            'JWT/OAuth2/OIDC': 9, 'OWASP LLM Top 10': 9,
             'TDD (pytest/Vitest)': 8, 'SonarQube': 8,
             'AES-256': 7, 'Container Security': 7
         }
