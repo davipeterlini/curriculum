@@ -3,7 +3,7 @@ const translations = {
     'pt-BR': {
         // Header
         'title': 'Currículo Interativo - Davi Peterlini',
-        'role': 'Senior AI Engineer | LLM Platform & Agentic Systems',
+        'role': 'Senior AI Engineer | Tech Lead at CI&T | LLM Infrastructure · Multi-Agent · MCP · LLMOps',
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Competências',
@@ -13,9 +13,9 @@ const translations = {
 
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Senior AI Engineer com foco em LLM infrastructure, agentic systems e AI Developer Tooling. Na CI&T, lidero a plataforma Flow — gateway LLM enterprise com roteamento inteligente, semantic caching e controle de custos de inferência. Construo soluções production-ready com LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse) e orquestração multi-agent (LangGraph, Agno, Google ADK). Projetos open source publicados no NPM e GitHub.',
+        'overview_description': 'Senior AI Engineer com atuação em arquitetura, desenvolvimento e liderança técnica de sistemas baseados em LLMs — do design à produção. Na CI&T, lidero iniciativas de IA voltadas à produtividade de times de engenharia: LLM gateway enterprise, observabilidade multi-tenant, extensões de IDE e sistemas multiagentes. Projetos open source publicados no NPM e GitHub.',
         'professional_summary': 'Resumo Profissional',
-        'professional_summary_text': 'Senior AI Engineer especializado em LLM infrastructure e agentic systems. Projetei e opero um LLM gateway enterprise multi-provider, pipelines RAG, servidores MCP, LLMOps com distributed tracing e sistemas multi-agent autônomos. Experiência consolidada em redução de custos de inferência, aceleração de ciclos de desenvolvimento e construção de ferramentas de IA adotadas por times de engenharia.',
+        'professional_summary_text': 'Senior AI Engineer especializado em LLM infrastructure, agentic systems e developer tooling. Experiência consolidada na construção de infraestruturas de LLM (proxy/gateway, model routing, caching, multi-tenant), sistemas multiagentes autônomos, extensões de IDE com IA, servidores MCP e stacks de observabilidade para workloads de IA em ambientes enterprise.',
         'ai_focus': 'LLM Infrastructure & Agentic AI',
         'ai_focus_text': 'LLM gateway multi-provider (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) com semantic caching (Redis), intelligent model routing, prompt engineering e RAG pipelines. LLMOps com distributed tracing (Langfuse/ClickHouse), hallucination detection e quality evaluation. MCP servers (STDIO/SSE) e orquestração multi-agent com LangGraph, Agno, AutoGen e Google ADK.',
         'leadership': 'Tech Lead & AI Engineering Culture',
@@ -55,7 +55,7 @@ const translations = {
     'en-US': {
         // Header
         'title': 'Interactive Resume - Davi Peterlini',
-        'role': 'Senior AI Engineer | LLM Platform & Agentic Systems',
+        'role': 'Senior AI Engineer | Tech Lead at CI&T | LLM Infrastructure · Multi-Agent · MCP · LLMOps',
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',
@@ -65,9 +65,9 @@ const translations = {
 
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'Senior AI Engineer focused on LLM infrastructure, agentic systems, and AI Developer Tooling. At CI&T, I lead the Flow platform — an enterprise LLM gateway with intelligent routing, semantic caching, and inference cost control. I build production-ready solutions with LiteLLM, RAG pipelines, MCP servers, LLMOps (Langfuse), and multi-agent orchestration (LangGraph, Agno, Google ADK). Open source projects published on NPM and GitHub.',
+        'overview_description': 'Senior AI Engineer focused on architecture, development, and technical leadership of LLM-based systems — from design to production. At CI&T, I lead AI initiatives focused on engineering team productivity: enterprise LLM gateway, multi-tenant observability, IDE extensions, and multi-agent systems. Open source projects published on NPM and GitHub.',
         'professional_summary': 'Professional Summary',
-        'professional_summary_text': 'Senior AI Engineer specialized in LLM infrastructure and agentic systems. Designed and operate an enterprise multi-provider LLM gateway, RAG pipelines, MCP servers, LLMOps with distributed tracing, and autonomous multi-agent systems. Proven experience in inference cost reduction, development cycle acceleration, and building AI developer tools adopted by engineering teams.',
+        'professional_summary_text': 'Senior AI Engineer specialized in LLM infrastructure, agentic systems, and developer tooling. Proven experience building LLM infrastructures (proxy/gateway, model routing, caching, multi-tenant), autonomous multi-agent systems, AI-powered IDE extensions, MCP servers, and observability stacks for AI workloads in enterprise environments.',
         'ai_focus': 'LLM Infrastructure & Agentic AI',
         'ai_focus_text': 'Multi-provider LLM gateway (OpenAI, AWS Bedrock/Claude, Google Gemini, DeepSeek, Llama 3) with semantic caching (Redis), intelligent model routing, prompt engineering, and RAG pipelines. LLMOps with distributed tracing (Langfuse/ClickHouse), hallucination detection, and quality evaluation. MCP servers (STDIO/SSE) and multi-agent orchestration with LangGraph, Agno, AutoGen, and Google ADK.',
         'leadership': 'Tech Lead & AI Engineering Culture',
@@ -110,7 +110,7 @@ const translations = {
 const timelineData = {
     'pt-BR': [
         {
-            company: "CI&T — Flow Platform (HyperX)",
+            company: "CI&T",
             role: "Senior AI Engineer | Tech Lead",
             dates: "Janeiro 2021 - Presente",
             details: [
@@ -184,7 +184,7 @@ const timelineData = {
     ],
     'en-US': [
         {
-            company: "CI&T — Flow Platform (HyperX)",
+            company: "CI&T",
             role: "Senior AI Engineer | Tech Lead",
             dates: "January 2021 - Present",
             details: [
