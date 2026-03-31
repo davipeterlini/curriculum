@@ -47,6 +47,8 @@ const translations = {
         'highlights': 'Destaques Profissionais',
         'highlight1': 'TCC de Engenharia premiado com bolsa de mestrado na UNICAMP — pesquisa em Software Defined Networks (SDN) e redes open source.',
         'highlight2': 'Fundador da Comunidade de Prática de AI Engineering na CI&T, promovendo adoção de LLMs, MCP e multi-agent systems em times de engenharia.',
+        'certification_title': 'Google Cloud Professional Cloud Architect',
+        'certification_details': 'Em andamento — Google Cloud | Previsão: 2026',
 
         // Links & Contact section
         'links': 'Links',
@@ -124,6 +126,8 @@ const translations = {
         'highlights': 'Professional Highlights',
         'highlight1': 'Engineering thesis awarded a master\'s scholarship at UNICAMP — research in Software Defined Networks (SDN) and open source networks.',
         'highlight2': 'Founder of the AI Engineering Community of Practice at CI&T, promoting adoption of LLMs, MCP, and multi-agent systems across engineering teams.',
+        'certification_title': 'Google Cloud Professional Cloud Architect',
+        'certification_details': 'In progress — Google Cloud | Expected: 2026',
 
         // Links & Contact section
         'links': 'Links',
@@ -328,10 +332,15 @@ const skillsData = {
             'GitHub Actions': 8, 'Bitbucket Pipelines': 7, 'Git': 9, 'Jenkins': 7
         },
         'AI & LLM': {
+            'Large Language Models': 9, 'Multi-Agent Systems': 9, 'LLM Infrastructure': 9,
             'LiteLLM': 9, 'Langfuse / LLMOps': 9, 'MCP (Model Context Protocol)': 9,
-            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8,
-            'Google ADK': 7, 'RAG Pipelines': 8, 'Agentic Systems': 9,
-            'LLM Observability': 9, 'AutoGen': 6, 'OpenAI / Anthropic / Gemini': 9
+            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8, 'Agno': 8,
+            'Google ADK': 7, 'RAG Pipelines': 8, 'AI Developer Tools': 8,
+            'LLM Observability': 9, 'Generative AI': 9, 'OpenAI / Anthropic / Gemini': 9
+        },
+        'Liderança': {
+            'Liderança Técnica': 9, 'Developer Experience (DX)': 9,
+            'System Design': 8, 'Arquitetura de Software': 9
         },
         'Arquitetura': {
             'Clean Architecture': 9, 'Hexagonal Architecture': 8,
@@ -366,10 +375,15 @@ const skillsData = {
             'GitHub Actions': 8, 'Bitbucket Pipelines': 7, 'Git': 9, 'Jenkins': 7
         },
         'AI & LLM': {
+            'Large Language Models': 9, 'Multi-Agent Systems': 9, 'LLM Infrastructure': 9,
             'LiteLLM': 9, 'Langfuse / LLMOps': 9, 'MCP (Model Context Protocol)': 9,
-            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8,
-            'Google ADK': 7, 'RAG Pipelines': 8, 'Agentic Systems': 9,
-            'LLM Observability': 9, 'AutoGen': 6, 'OpenAI / Anthropic / Gemini': 9
+            'Prompt Engineering': 9, 'CrewAI': 8, 'LangGraph': 8, 'Agno': 8,
+            'Google ADK': 7, 'RAG Pipelines': 8, 'AI Developer Tools': 8,
+            'LLM Observability': 9, 'Generative AI': 9, 'OpenAI / Anthropic / Gemini': 9
+        },
+        'Leadership': {
+            'Technical Leadership': 9, 'Developer Experience (DX)': 9,
+            'System Design': 8, 'Software Architecture': 9
         },
         'Architecture': {
             'Clean Architecture': 9, 'Hexagonal Architecture': 8,

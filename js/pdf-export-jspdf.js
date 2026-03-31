@@ -10,11 +10,12 @@ function exportToPDF() {
     const lang = document.documentElement.lang;
     const t = translations[lang];
     const isPT = lang === 'pt-BR';
+    const isDark = document.documentElement.classList.contains('dark');
 
     // Convert photo to base64 so it renders correctly in the popup (no base URL)
     loadPhotoAsBase64('assets/profile-photo.png', function (photoDataUrl) {
         try {
-            buildAndPrintPDF(lang, t, isPT, photoDataUrl, loadingIndicator, exportButton);
+            buildAndPrintPDF(lang, t, isPT, isDark, photoDataUrl, loadingIndicator, exportButton);
         } catch (err) {
             console.error('Erro na exportação PDF:', err);
             alert(isPT ? 'Erro ao gerar o PDF.' : 'Error generating PDF.');
