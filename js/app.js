@@ -22,6 +22,44 @@ document.addEventListener('DOMContentLoaded', function() {
         setTheme(currentTheme);
     });
 
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    }
+
+    // Sync mobile buttons with desktop
+    const langToggleMobile = document.getElementById('language-toggle-mobile');
+    const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+    const exportMobile = document.getElementById('export-pdf-btn-mobile');
+    
+    if (langToggleMobile) {
+        langToggleMobile.addEventListener('click', function() {
+            document.getElementById('language-toggle').click();
+        });
+    }
+    if (themeToggleMobile) {
+        themeToggleMobile.addEventListener('click', function() {
+            document.getElementById('theme-toggle').click();
+        });
+    }
+    if (exportMobile) {
+        exportMobile.addEventListener('click', function() {
+            const desktopBtn = document.getElementById('export-pdf-btn');
+            if (desktopBtn) desktopBtn.click();
+        });
+    }
+
     initializeSkillsChart(currentLanguage);
     initActiveNavHighlight();
 });

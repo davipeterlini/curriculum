@@ -2,8 +2,8 @@
 const translations = {
     'pt-BR': {
         // Header
-        'title': 'Davi Peterlini — Senior AI Engineer',
-        'role': 'Senior AI Engineer | LLM Platform & Agentic Systems',
+        'title': 'Currículo Interativo - Davi Peterlini',
+        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Skills',
@@ -65,8 +65,8 @@ const translations = {
     },
     'en-US': {
         // Header
-        'title': 'Davi Peterlini — Senior AI Engineer',
-        'role': 'Senior AI Engineer | LLM Platform & Agentic Systems',
+        'title': 'Interactive Resume - Davi Peterlini',
+        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',
