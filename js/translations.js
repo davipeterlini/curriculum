@@ -1,9 +1,10 @@
 // Translations for the curriculum
+// AUTO-GENERATED — edite curriculo-davi-peterlini.md e rode: node scripts/md-to-web.js
 const translations = {
     'pt-BR': {
         // Header
-        'title': 'Currículo Interativo - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
+        'title': "Currículo Interativo - Davi Peterlini",
+        'role': "AI Platform Architect | LLMOps | Agentic AI | Developer Experience",
         'overview': 'Visão Geral',
         'career': 'Carreira',
         'skills': 'Skills',
@@ -14,13 +15,13 @@ const translations = {
 
         // Overview section
         'overview_title': 'Visão Geral',
-        'overview_description': 'Engenheiro de IA Sênior especializado em infraestrutura de LLMs, sistemas multiagentes e Model Context Protocol — construindo plataformas enterprise de IA do design à produção.',
-        'professional_summary': 'Infraestrutura de LLM & Multi-Agentes',
-        'professional_summary_text': 'Experiência em proxy/gateway, model routing, caching, sistemas multiagentes autônomos, servidores MCP e observabilidade para IA.',
-        'ai_focus': 'Integração & Segurança',
-        'ai_focus_text': 'Integração de OpenAI, Anthropic, Google, AWS Bedrock com governança, rastreabilidade e segurança (OWASP LLM Top 10, JWT/OAuth2).',
-        'leadership': 'Liderança Técnica',
-        'leadership_text': 'Arquiteturas robustas, iniciativas de alta complexidade e ferramentas que times adotam voluntariamente.',
+        'overview_description': "Arquiteto especializado na construção de plataformas de IA de produção — da camada de infraestrutura de LLMs à experiência do desenvolvedor. Projetei e implementei toda a espinha dorsal de IA da CI&T: AI Gateway multi-cloud (15+ modelos, 6 providers), pipeline de LLMOps com observabilidade end-to-end (OpenTelemetry → LangFuse), e ecossistema completo de AI coding assistants.",
+        'professional_summary': "AI Platform Engineering",
+        'professional_summary_text': "LLM Gateway multi-provider com model auto-selection, tenant governance, rate limiting, caching de tokens e resiliência em produção. Suporte a OpenAI, Azure, Bedrock, Gemini, Mistral, DeepSeek, Grok.",
+        'ai_focus': "LLMOps & AI Observability",
+        'ai_focus_text': "Pipeline OTEL end-to-end com 8 serviços event-driven (Azure EventHub). LangFuse multi-tenant forkado, traces automáticos de sessões de agentes, ClickHouse analytics e instaladores cross-platform.",
+        'leadership': "Agentic AI & Developer Experience",
+        'leadership_text': "MCP servers, multi-agent orchestration (Agno, CrewAI), Flow Coder completo (extensão IDE + CLI + marketplace de plugins) e estratégia de plataforma composável para 6k+ devs.",
         'overview_stack_title': 'Stack Principal',
         'overview_skills_title': 'Competências',
 
@@ -39,13 +40,13 @@ const translations = {
 
         // Education section
         'education_title': 'Formação',
-        'bachelor': 'Engenharia de Computação',
-        'university': 'Universidade São Francisco | 2009-2013',
+        'bachelor': "Engenharia de Computação",
+        'university': "Universidade São Francisco | 2009-2013",
         'highlights': 'Destaques',
-        'highlight1': 'TCC premiado com bolsa de mestrado na UNICAMP — pesquisa em SDN',
-        'highlight2': 'Fundador da CoP AI Engineering na CI&T (20+ membros)',
-        'certification_title': 'Google Cloud Professional Cloud Architect',
-        'certification_details': 'Em andamento | Previsão: 2026',
+        'highlight1': "TCC premiado com bolsa de mestrado na UNICAMP — pesquisa em SDN",
+        'highlight2': "Fundador da CoP AI Engineering na CI&T (20+ membros)",
+        'certification_title': "Google Cloud Professional Cloud Architect",
+        'certification_details': "Em andamento | Previsão: 2026",
 
         // Contact section
         'contact_title': 'Contato',
@@ -53,20 +54,20 @@ const translations = {
         'link_linkedin_label': 'LinkedIn',
         'link_github_label': 'GitHub',
         'community_title': 'Comunidade',
-        'community_cop': 'Fundador da CoP AI Engineering na CI&T',
-        'community_mcp': 'Participante ativo do MCP Discord (Anthropic working groups)',
-        'community_ai_br': 'Membro da AI Brazilian Community',
+        'community_cop': "Fundador da CoP AI Engineering na CI&T",
+        'community_mcp': "Participante ativo do MCP Discord (Anthropic working groups)",
+        'community_ai_br': "Membro da AI Brazilian Community",
 
         // Footer
-        'footer_year': '© 2026',
+        'footer_year': "© 2026",
 
         // Job details
         'present': 'Presente'
     },
     'en-US': {
         // Header
-        'title': 'Interactive Resume - Davi Peterlini',
-        'role': 'Senior AI Engineer | Tech Lead | Master Architect at CI&T',
+        'title': "Interactive Resume - Davi Peterlini",
+        'role': "AI Platform Architect | LLMOps | Agentic AI | Developer Experience",
         'overview': 'Overview',
         'career': 'Career',
         'skills': 'Skills',
@@ -77,13 +78,13 @@ const translations = {
 
         // Overview section
         'overview_title': 'Overview',
-        'overview_description': 'Senior AI Engineer specialized in LLM infrastructure, multi-agent systems, and Model Context Protocol — building enterprise AI platforms from design to production.',
-        'professional_summary': 'LLM Infrastructure & Multi-Agents',
-        'professional_summary_text': 'Experience in proxy/gateway, model routing, caching, autonomous multi-agent systems, MCP servers, and AI observability.',
-        'ai_focus': 'Integration & Security',
-        'ai_focus_text': 'Integration of OpenAI, Anthropic, Google, AWS Bedrock with governance, traceability, and security (OWASP LLM Top 10, JWT/OAuth2).',
-        'leadership': 'Technical Leadership',
-        'leadership_text': 'Robust architectures, high-complexity initiatives, and tools that teams adopt voluntarily.',
+        'overview_description': "Architect specialized in building production AI platforms — from LLM infrastructure to developer experience. Designed and implemented CI&T's entire AI backbone: multi-cloud AI Gateway (15+ models, 6 providers), LLMOps pipeline with end-to-end observability (OpenTelemetry → LangFuse), and a full AI coding assistant ecosystem.",
+        'professional_summary': "AI Platform Engineering",
+        'professional_summary_text': "Multi-provider LLM Gateway with model auto-selection, tenant governance, rate limiting, token caching and production resilience. Supports OpenAI, Azure, Bedrock, Gemini, Mistral, DeepSeek, Grok.",
+        'ai_focus': "LLMOps & AI Observability",
+        'ai_focus_text': "End-to-end OTEL pipeline with 8 event-driven services (Azure EventHub). Multi-tenant forked LangFuse, automatic agent session traces, ClickHouse analytics and cross-platform installers.",
+        'leadership': "Agentic AI & Developer Experience",
+        'leadership_text': "MCP servers, multi-agent orchestration (Agno, CrewAI), full Flow Coder product (IDE extension + CLI + plugin marketplace) and composable platform strategy for 6k+ devs.",
         'overview_stack_title': 'Main Stack',
         'overview_skills_title': 'Skills',
 
@@ -102,13 +103,13 @@ const translations = {
 
         // Education section
         'education_title': 'Education',
-        'bachelor': 'Computer Engineering',
-        'university': 'São Francisco University | 2009-2013',
+        'bachelor': "Computer Engineering",
+        'university': "São Francisco University | 2009-2013",
         'highlights': 'Highlights',
-        'highlight1': 'Awarded thesis with master\'s scholarship at UNICAMP — SDN research',
-        'highlight2': 'Founder of AI Engineering CoP at CI&T (20+ members)',
-        'certification_title': 'Google Cloud Professional Cloud Architect',
-        'certification_details': 'In progress | Expected: 2026',
+        'highlight1': "Awarded thesis with master's scholarship at UNICAMP — SDN research",
+        'highlight2': "Founder of AI Engineering CoP at CI&T (20+ members)",
+        'certification_title': "Google Cloud Professional Cloud Architect",
+        'certification_details': "In progress | Expected: 2026",
 
         // Contact section
         'contact_title': 'Contact',
@@ -116,12 +117,12 @@ const translations = {
         'link_linkedin_label': 'LinkedIn',
         'link_github_label': 'GitHub',
         'community_title': 'Community',
-        'community_cop': 'Founder of AI Engineering CoP at CI&T',
-        'community_mcp': 'Active member of MCP Discord (Anthropic working groups)',
-        'community_ai_br': 'Member of AI Brazilian Community',
+        'community_cop': "Founder of AI Engineering CoP at CI&T",
+        'community_mcp': "Active member of MCP Discord (Anthropic working groups)",
+        'community_ai_br': "Member of AI Brazilian Community",
 
         // Footer
-        'footer_year': '© 2026',
+        'footer_year': "© 2026",
 
         // Job details
         'present': 'Present'
@@ -132,30 +133,29 @@ const translations = {
 const timelineData = {
     'pt-BR': [
         {
-            company: "CI&T — Flow AI Platform",
-            role: "Senior AI Engineer | Tech Lead",
-            dates: "Jan 2021 - Presente",
+            company: "CI&T — Flow AIMS Platform",
+            role: "Arquiteto Master | AI Platform Architect",
+            dates: "2022 - Presente",
             details: [
-                "Tech Lead em iniciativas de IA, liderando desenvolvimento de plataforma enterprise para produtividade de engenharia.",
-                "<strong>AI-Assisted Coding Extension:</strong> IDE extension com code completion, chat contextual, slash commands (TypeScript, Node, Python, VS Code, JetBrains).",
-                "<strong>LLM Gateway:</strong> Proxy unificado para OpenAI, Anthropic, Google, AWS Bedrock com autenticação corporativa, caching, model routing, rate limiting (Python, FastAPI, LiteLLM, Redis, GCP).",
-                "<strong>LLM Observability:</strong> Distributed tracing, quality metrics, cost analytics, dashboards (Langfuse, PostgreSQL, ClickHouse, Kubernetes).",
-                "<strong>Multi-Agent Systems:</strong> Automação de code review, testes, documentação com orquestração sequencial/paralela (LangGraph, Python, MCP).",
-                "<strong>AI Dev Environment:</strong> Ambiente containerizado com ferramentas de IA, proxies LLM, servidores MCP (Docker, Podman)."
+                "Responsável pela arquitetura e implementação da plataforma de IA do produto Flow AIMS — plataforma de developer experience da CI&T com 6k+ devs. Lidero frentes simultâneas de infraestrutura de LLMs, observabilidade de agentes, produto de AI coding e estratégia de plataforma.",
+                "<strong>AI Platform Engineering — LLM Gateway:</strong> AI Gateway NestJS (v3.87+) com model auto-selection baseado em tenant rules, suporte a 15+ modelos de 6 providers (OpenAI, Azure, Bedrock, Gemini, Mistral, DeepSeek, Grok), rate limiting, cache de tokens M2M thread-safe e gestão de segredos multi-cloud (GCP, AWS, Azure). Flow LLM Proxy Python/LiteLLM com 95% de cobertura de testes.",
+                "<strong>LLMOps & AI Observability:</strong> Pipeline event-driven de 8 serviços NestJS (Azure EventHub) para métricas de adoção de AI coding. Biblioteca npm flow-ai-obs com offline buffer para captura automática de sessões Claude Code como traces no LangFuse. Fork multi-tenant do LangFuse + gateway NestJS dedicado + testes de queries ClickHouse. Instaladores cross-platform (bash/PowerShell) com obfuscação de credenciais.",
+                "<strong>Agentic AI Systems & MCP:</strong> mcp-ciandt-flow — MCP server com 5+ ferramentas integradas (Jira, GitHub, Azure DevOps, Code Interpreter). Multi-Agent Factory com 10 agentes especializados e integração Claude Code. Copilot Natura em produção (FastAPI/WebSockets/GCP) — assistente de IA para força de vendas Natura com copilot-langfuse (plugin observabilidade não-invasivo). Experimentos Agno Framework e CrewAI com LLM-as-a-Judge.",
+                "<strong>AI Developer Experience & Tooling:</strong> Flow Coder — suíte completa: extensão IDE (VS Code + JetBrains), framework, serviço backend FastAPI, CLI de onboarding (npm: @ciandt-flow/cli) com 10 plugins Claude Code no marketplace. Swarmbox — ambiente containerizado Docker/Podman para AI coding.",
+                "<strong>AI Product Strategy:</strong> Reposicionamento do Flow de ferramenta SDLC para plataforma composável. 16 Flow Technical Standards (FTS), 44 soluções catalogadas, PRDs completos (Findr, BCP Calculator, Flow Efficiency Dashboard), ADRs por domínio, prototipagem React/Vite para validação com stakeholders."
             ]
         },
         {
-            company: "Projetos Pessoais & Open Source",
-            role: "AI Engineer & Full-Stack Developer",
-            dates: "2020 - Presente",
+            company: "CI&T — Projetos & POCs de IA",
+            role: "AI Engineer",
+            dates: "2023 - Presente",
             details: [
-                "<strong>Qwen Code:</strong> CLI agent para terminal com multi-protocolo (OpenAI, Anthropic, Gemini), integração VS Code/Zed/JetBrains (TypeScript, Node.js).",
-                "<strong>Proxy LLM:</strong> Roteamento inteligente: cloud models para queries simples, modelos locais (Ollama) para dados sensíveis, UI dashboard (Python, FastAPI, LiteLLM).",
-                "<strong>Multi-Agent Automation:</strong> Automação de processos: NF, exames, faturas, monitoramento de energia com document intelligence (TypeScript, Python, Playwright, MCP).",
-                "<strong>ADK Multi-Agent System:</strong> 5 agentes especialistas com workflows sequenciais/paralelos/condicionais, SSE streaming, deploy GCP (Google ADK, Gemini, Docker).",
-                "<strong>Shannon (Open Source):</strong> Agente de pentest com SAST, OWASP Top 10, geração de PoCs (Python, Temporal, Anthropic Claude, AWS Bedrock).",
-                "<strong>LifeTrek:</strong> Plataforma de saúde com RAG, chat médico, assinaturas (NestJS, PostgreSQL, Google Gemini, Stripe, Kubernetes).",
-                "<strong>Finanza AI:</strong> Gestão financeira com Pluggy API e insights via LLM (React, Vite, Pluggy, Google Gemini)."
+                "<strong>Taskflow:</strong> Aplicação web de gerenciamento de tarefas com IA (React 19, Vite, TailwindCSS, Gemini) — Kanban, smart task breakdown, Pomodoro timer, 51 testes.",
+                "<strong>Flow Coder CLI:</strong> Coding assistant com REPL interativo, Plan Mode e Agent Mode, integração MCP, scaffold de projetos e publicação como pacote npm.",
+                "<strong>Qwen Code Flow Proxy:</strong> Fork do Qwen Code CLI integrado ao Flow LLM Proxy — permite usar o CLI apontando para os modelos da plataforma Flow.",
+                "<strong>Multi-Agent Factory:</strong> 10 agentes especializados (PM, Architect, Backend/Frontend Dev, QA, DevOps…) que simulam empresa digital completa com Claude Code em YOLO mode.",
+                "<strong>Flow Spark:</strong> Template de microsserviços agenticos (devbox, just, SOPS, Helm, Claude Code) — scaffolding padrão para novos produtos agentic da CI&T.",
+                "<strong>Code Review Graph (OSS):</strong> Contribuições ao grafo de conhecimento incremental para code review por agentes: suporte a Jupyter, Lua, Perl/XS, arrow functions, arquiteturas de modelo customizadas."
             ]
         },
         {
@@ -181,30 +181,29 @@ const timelineData = {
     ],
     'en-US': [
         {
-            company: "CI&T — Flow AI Platform",
-            role: "Senior AI Engineer | Tech Lead",
-            dates: "Jan 2021 - Present",
+            company: "CI&T — Flow AIMS Platform",
+            role: "Master Architect | AI Platform Architect",
+            dates: "2022 - Present",
             details: [
-                "Tech Lead for AI initiatives, leading enterprise platform development for engineering productivity.",
-                "<strong>AI-Assisted Coding Extension:</strong> IDE extension with code completion, contextual chat, slash commands (TypeScript, Node, Python, VS Code, JetBrains).",
-                "<strong>LLM Gateway:</strong> Unified proxy for OpenAI, Anthropic, Google, AWS Bedrock with corporate auth, caching, model routing, rate limiting (Python, FastAPI, LiteLLM, Redis, GCP).",
-                "<strong>LLM Observability:</strong> Distributed tracing, quality metrics, cost analytics, dashboards (Langfuse, PostgreSQL, ClickHouse, Kubernetes).",
-                "<strong>Multi-Agent Systems:</strong> Automation for code review, testing, documentation with sequential/parallel orchestration (LangGraph, Python, MCP).",
-                "<strong>AI Dev Environment:</strong> Containerized environment with AI tools, LLM proxies, MCP servers (Docker, Podman)."
+                "Responsible for the architecture and implementation of the AI platform for Flow AIMS — CI&T's developer experience platform serving 6k+ devs. Leading simultaneous workstreams: LLM infrastructure, agent observability, AI coding product and platform strategy.",
+                "<strong>AI Platform Engineering — LLM Gateway:</strong> NestJS AI Gateway (v3.87+) with tenant rules-based model auto-selection, supporting 15+ models from 6 providers (OpenAI, Azure, Bedrock, Gemini, Mistral, DeepSeek, Grok), rate limiting, thread-safe M2M token cache and multi-cloud secret management (GCP, AWS, Azure). Python/LiteLLM Flow LLM Proxy with 95% test coverage.",
+                "<strong>LLMOps & AI Observability:</strong> 8-service event-driven pipeline (Azure EventHub) for AI coding adoption metrics. npm library flow-ai-obs with offline buffer for automatic capture of Claude Code sessions as LangFuse traces. Multi-tenant LangFuse fork + dedicated NestJS gateway + ClickHouse query tests. Cross-platform installers (bash/PowerShell) with credential obfuscation.",
+                "<strong>Agentic AI Systems & MCP:</strong> mcp-ciandt-flow — MCP server with 5+ integrated tools (Jira, GitHub, Azure DevOps, Code Interpreter). Multi-Agent Factory with 10 specialized agents and Claude Code integration. Copilot Natura in production (FastAPI/WebSockets/GCP) — AI assistant for Natura's sales force with non-invasive observability plugin (copilot-langfuse). Agno Framework and CrewAI experiments with LLM-as-a-Judge.",
+                "<strong>AI Developer Experience & Tooling:</strong> Flow Coder — full suite: IDE extension (VS Code + JetBrains), framework, FastAPI backend service, onboarding CLI (npm: @ciandt-flow/cli) with 10 Claude Code plugins in the marketplace. Swarmbox — Docker/Podman containerized environment for AI coding.",
+                "<strong>AI Product Strategy:</strong> Flow repositioning from SDLC tool to composable platform. 16 Flow Technical Standards (FTS), 44 catalogued solutions, full PRDs (Findr, BCP Calculator, Flow Efficiency Dashboard), domain ADRs, React/Vite prototyping for stakeholder validation."
             ]
         },
         {
-            company: "Personal Projects & Open Source",
-            role: "AI Engineer & Full-Stack Developer",
-            dates: "2020 - Present",
+            company: "CI&T — AI Projects & POCs",
+            role: "AI Engineer",
+            dates: "2023 - Present",
             details: [
-                "<strong>Qwen Code:</strong> Terminal CLI agent with multi-protocol support (OpenAI, Anthropic, Gemini), VS Code/Zed/JetBrains integration (TypeScript, Node.js).",
-                "<strong>Proxy LLM:</strong> Intelligent routing: cloud models for simple queries, local models (Ollama) for sensitive data, admin UI (Python, FastAPI, LiteLLM).",
-                "<strong>Multi-Agent Automation:</strong> Process automation: invoices, exams, bills, energy monitoring with document intelligence (TypeScript, Python, Playwright, MCP).",
-                "<strong>ADK Multi-Agent System:</strong> 5 specialist agents with sequential/parallel/conditional workflows, SSE streaming, GCP deploy (Google ADK, Gemini, Docker).",
-                "<strong>Shannon (Open Source):</strong> Pentest agent with SAST, OWASP Top 10, PoC generation (Python, Temporal, Anthropic Claude, AWS Bedrock).",
-                "<strong>LifeTrek:</strong> Health platform with RAG, medical chat, subscriptions (NestJS, PostgreSQL, Google Gemini, Stripe, Kubernetes).",
-                "<strong>Finanza AI:</strong> Financial management with Pluggy API and LLM insights (React, Vite, Pluggy, Google Gemini)."
+                "<strong>Taskflow:</strong> AI-powered task management web app (React 19, Vite, TailwindCSS, Gemini) — Kanban, smart task breakdown, Pomodoro timer, 51 tests.",
+                "<strong>Flow Coder CLI:</strong> Coding assistant with interactive REPL, Plan Mode and Agent Mode, MCP integration, project scaffolding and npm package publishing.",
+                "<strong>Qwen Code Flow Proxy:</strong> Fork of Qwen Code CLI integrated with Flow LLM Proxy — allows using the CLI pointing to Flow platform models.",
+                "<strong>Multi-Agent Factory:</strong> 10 specialized agents (PM, Architect, Backend/Frontend Dev, QA, DevOps…) simulating a complete digital company with Claude Code in YOLO mode.",
+                "<strong>Flow Spark:</strong> Agentic microservice template (devbox, just, SOPS, Helm, Claude Code) — standard scaffolding for new agentic products at CI&T.",
+                "<strong>Code Review Graph (OSS):</strong> Contributions to incremental knowledge graph for agent-driven code review: Jupyter, Lua, Perl/XS, arrow functions, custom model architectures."
             ]
         },
         {
@@ -233,39 +232,77 @@ const timelineData = {
 // Skills data with translations
 const skillsData = {
     'pt-BR': {
-        'Linguagens': {
-            'Python': 9, 'TypeScript': 9, 'JavaScript': 8, 'SQL': 8
+            Linguagens: {
+                Python: 9,
+                TypeScript: 9,
+                JavaScript: 8,
+                'Bash/Shell': 7
+            },
+            'AI & LLMOps': {
+                'LLM Gateway': 10,
+                LLMOps: 9,
+                LangFuse: 9,
+                MCP: 9,
+                'Agentic AI': 9,
+                LiteLLM: 9,
+                'Multi-Agent': 8,
+                OpenTelemetry: 8
+            },
+            'Back-End': {
+                NestJS: 9,
+                FastAPI: 8,
+                'Node.js': 9,
+                'REST APIs': 9
+            },
+            'Cloud & DevOps': {
+                GCP: 8,
+                Azure: 8,
+                Docker: 9,
+                Kubernetes: 7,
+                'CI/CD': 8
+            },
+            'Banco de Dados': {
+                MongoDB: 9,
+                PostgreSQL: 8,
+                Redis: 8,
+                ClickHouse: 7
+            }
         },
-        'AI & LLM': {
-            'LLM Infrastructure': 9, 'Multi-Agent Systems': 9, 'LiteLLM': 9,
-            'LangGraph': 8, 'MCP': 9, 'RAG': 8, 'Langfuse': 9, 'CrewAI': 8
-        },
-        'Back-End': {
-            'FastAPI': 9, 'NestJS': 8, 'Node.js': 8, 'REST APIs': 9
-        },
-        'Cloud & DevOps': {
-            'GCP': 8, 'Docker': 9, 'Kubernetes': 7, 'GitHub Actions': 8
-        },
-        'Banco de Dados': {
-            'PostgreSQL': 9, 'Redis': 9, 'MongoDB': 8, 'ClickHouse': 8
-        }
-    },
     'en-US': {
-        'Languages': {
-            'Python': 9, 'TypeScript': 9, 'JavaScript': 8, 'SQL': 8
-        },
-        'AI & LLM': {
-            'LLM Infrastructure': 9, 'Multi-Agent Systems': 9, 'LiteLLM': 9,
-            'LangGraph': 8, 'MCP': 9, 'RAG': 8, 'Langfuse': 9, 'CrewAI': 8
-        },
-        'Back-End': {
-            'FastAPI': 9, 'NestJS': 8, 'Node.js': 8, 'REST APIs': 9
-        },
-        'Cloud & DevOps': {
-            'GCP': 8, 'Docker': 9, 'Kubernetes': 7, 'GitHub Actions': 8
-        },
-        'Databases': {
-            'PostgreSQL': 9, 'Redis': 9, 'MongoDB': 8, 'ClickHouse': 8
+            Languages: {
+                Python: 9,
+                TypeScript: 9,
+                JavaScript: 8,
+                'Bash/Shell': 7
+            },
+            'AI & LLMOps': {
+                'LLM Gateway': 10,
+                LLMOps: 9,
+                LangFuse: 9,
+                MCP: 9,
+                'Agentic AI': 9,
+                LiteLLM: 9,
+                'Multi-Agent': 8,
+                OpenTelemetry: 8
+            },
+            'Back-End': {
+                NestJS: 9,
+                FastAPI: 8,
+                'Node.js': 9,
+                'REST APIs': 9
+            },
+            'Cloud & DevOps': {
+                GCP: 8,
+                Azure: 8,
+                Docker: 9,
+                Kubernetes: 7,
+                'CI/CD': 8
+            },
+            Databases: {
+                MongoDB: 9,
+                PostgreSQL: 8,
+                Redis: 8,
+                ClickHouse: 7
+            }
         }
-    }
 };
